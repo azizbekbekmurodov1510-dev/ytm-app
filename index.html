@@ -76,7 +76,7 @@ input:focus,select:focus{border-color:#3b82f6}
   <div id="v-adm" class="hide">
     <div id="admLogin" class="card">
       <h2 style="font-size:16px">Admin kirish</h2>
-      <label>PIN kod (2026)</label>
+      <label>PIN kod</label>
       <input id="pinIn" type="password" inputmode="numeric" placeholder="••••">
       <button class="btn" onclick="loginAdm()">Kirish</button>
     </div>
@@ -168,7 +168,7 @@ function renderPass(){
 }
 
 function loginAdm(){
-  if(document.getElementById('pinIn').value==='2026'){
+  if(document.getElementById('pinIn').value==='0708'){
     document.getElementById('admLogin').classList.add('hide');
     document.getElementById('admPanel').classList.remove('hide');
     renderAdm();
