@@ -3,212 +3,177 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#0f172a">
+<meta name="theme-color" content="#06161d">
 <title>YTM — Yoshlar tashabbuslari markazi</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif}
-body{background:#0f172a;color:#f8fafc;min-height:100vh;padding-bottom:75px}
-.hdr{background:linear-gradient(135deg,#1e3a8a,#0f172a);padding:18px 16px;border-bottom:1px solid #1e293b;position:sticky;top:0;z-index:10}
-.hdr h1{font-size:18px;font-weight:700;color:#fff}
-.hdr p{font-size:12px;color:#94a3b8;margin-top:2px}
-.wrap{padding:16px;max-width:480px;margin:auto}
-.card{background:#1e293b;border-radius:16px;padding:16px;margin-bottom:14px;border:1px solid #334155}
-label{display:block;font-size:12px;color:#cbd5e1;margin:10px 0 5px}
-input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #475569;background:#0f172a;color:#fff;font-size:14px;outline:none}
-input:focus,select:focus{border-color:#3b82f6}
-.btn{width:100%;padding:13px;border:none;border-radius:12px;background:#2563eb;color:#fff;font-weight:600;font-size:15px;margin-top:14px;cursor:pointer}
-.btn:active{opacity:.85}
-.btn-sec{background:#334155;margin-top:8px}
-.btn-ok{background:#059669}
-.pass{background:linear-gradient(135deg,#1d4ed8,#0f172a);border:2px dashed #60a5fa;border-radius:18px;padding:18px;text-align:center}
-.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;background:#3b82f6;color:#fff;margin-bottom:8px}
-.code-box{background:#0f172a;padding:12px;border-radius:12px;font-family:monospace;font-size:20px;letter-spacing:2px;color:#38bdf8;margin:12px 0;border:1px solid #334155}
-.nav{position:fixed;bottom:0;left:0;right:0;background:#1e293b;border-top:1px solid #334155;display:flex;justify-content:space-around;padding:8px 0;z-index:20}
-.nav button{background:none;border:none;color:#94a3b8;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 12px}
-.nav button.act{color:#60a5fa;font-weight:700}
-.hide{display:none}
-.item{background:#0f172a;padding:12px;border-radius:12px;margin-top:8px;border:1px solid #334155;font-size:13px}
-.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:#06161d;color:#f1f5f9;min-height:100vh;padding-bottom:84px}
+.hdr{position:sticky;top:0;z-index:20;background:rgba(6,22,29,.94);backdrop-filter:blur(12px);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #0e2c38}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.logo{width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.brand-txt{min-width:0}
+.brand h1{font-size:13.5px;font-weight:700;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand p{font-size:11px;color:#8fa8b5;margin-top:1px}
+.adm-btn{background:#0e2733;border:1px solid #1b4354;color:#e2e8f0;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer;flex-shrink:0}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 16px 6px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{background:#091f28;border:1px solid #153644;color:#cbd5e1;padding:7px 14px;border-radius:20px;font-size:11.5px;font-weight:700;letter-spacing:.3px;white-space:nowrap;cursor:pointer;transition:.15s}
+.chip.act{background:#10b981;border-color:#10b981;color:#032b24}
+.wrap{padding:8px 16px;max-width:480px;margin:auto}
+.hero{position:relative;border-radius:20px;height:186px;padding:16px;margin-bottom:18px;border:1px solid #1d4959;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 28px rgba(0,0,0,.45);background:#0c2b38}
+.hero-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,22,29,.25) 0%,rgba(6,22,29,.65) 55%,rgba(6,22,29,.94) 100%);z-index:1}
+.hero-top,.hero-btm{position:relative;z-index:2}
+.pill{display:inline-flex;align-items:center;gap:5px;background:rgba(13,65,62,.82);backdrop-filter:blur(6px);border:1px solid rgba(45,212,191,.35);color:#5eead4;font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px}
+.hero-btm{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+.hero-txt h2{font-size:17px;font-weight:800;line-height:1.22;color:#fff;margin-bottom:4px}
+.hero-txt p{font-size:11px;color:#cbd5e1}
+.cta{background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;border:none;padding:9px 15px;border-radius:14px;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:0 4px 14px rgba(249,115,22,.42);flex-shrink:0}
+.sec-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.sec-hdr h3{font-size:14.5px;font-weight:700;color:#f8fafc}
+.sec-hdr span{font-size:11.5px;color:#10b981;font-weight:600}
+.t-card{background:#091f28;border:1px solid #133340;border-radius:18px;padding:15px;margin-bottom:12px;transition:.15s;cursor:pointer}
+.t-card:active{transform:scale(.99);border-color:#10b981}
+.t-top{display:flex;align-items:center;gap:12px;margin-bottom:9px}
+.t-ico{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.t-title{font-size:13.5px;font-weight:800;letter-spacing:.4px;color:#f1f5f9}
+.t-desc{font-size:12.5px;color:#94a3b8;line-height:1.45}
+.card{background:#091f28;border:1px solid #133340;border-radius:18px;padding:16px;margin-bottom:14px}
+label{display:block;font-size:12px;color:#cbd5e1;margin:11px 0 5px;font-weight:600}
+input,select{width:100%;padding:12px;border-radius:12px;border:1px solid #1b4354;background:#06161d;color:#fff;font-size:14px;outline:none}
+input:focus,select:focus{border-color:#10b981}
+.btn{width:100%;padding:13px;border:none;border-radius:13px;background:linear-gradient(135deg,#10b981,#059669);color:#032b24;font-weight:800;font-size:14.5px;margin-top:16px;cursor:pointer}
+.ticket{background:linear-gradient(145deg,#0c2d3a,#06161d);border:2px dashed #10b981;border-radius:20px;padding:20px;text-align:center}
+.t-badge{display:inline-block;background:#10b981;color:#032b24;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:800;margin-bottom:10px}
+.code-box{background:#06161d;padding:13px;border-radius:12px;font-family:monospace;font-size:21px;letter-spacing:2px;color:#2dd4bf;margin:14px 0;border:1px solid #1b4354}
 .stat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
-.stat div{background:#0f172a;padding:12px;border-radius:12px;text-align:center;border:1px solid #334155}
-.stat b{font-size:20px;color:#38bdf8;display:block}
+.stat div{background:#091f28;padding:12px;border-radius:14px;text-align:center;border:1px solid #133340}
+.stat b{font-size:22px;color:#2dd4bf;display:block}
+.item{background:#06161d;padding:12px;border-radius:12px;margin-top:9px;border:1px solid #133340;font-size:13px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(6,22,29,.97);backdrop-filter:blur(12px);border-top:1px solid #0e2c38;display:flex;justify-content:space-around;padding:7px 0 9px;z-index:30}
+.nav button{background:none;border:none;color:#7a93a0;font-size:11px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:2px 18px}
+.nav .ico-pill{width:54px;height:28px;border-radius:16px;display:flex;align-items:center;justify-content:center;transition:.2s}
+.nav button.act{color:#34d399}
+.nav button.act .ico-pill{background:#10b981;color:#fff}
+.hide{display:none}
 </style>
 </head>
 <body>
-
 <div class="hdr">
-  <h1>YTM — Yoshlar tashabbuslari markazi</h1>
-  <p>Tadbirlar va elektron ruxsatnoma tizimi</p>
+  <div class="brand">
+    <div class="logo">
+      <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
+        <polygon points="20,2 36,11 36,29 20,38 4,29 4,11" fill="#0b2834" stroke="#e2e8f0" stroke-width="2.2"/>
+        <path d="M11 24 L17 18 L21 21 L29 13" stroke="#10b981" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M24 13 H29 V18" stroke="#f97316" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="brand-txt">
+      <h1>YTM — Yoshlar tashabbuslari markazi</h1>
+      <p>Mobil ro‘yxatdan o‘tish ilovasi</p>
+    </div>
+  </div>
+  <button class="adm-btn" onclick="tab('adm')">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Admin
+  </button>
 </div>
 
 <div class="wrap">
-  <!-- 1. RO'YXATDAN O'TISH -->
-  <div id="v-reg">
+  <div id="v-home">
+    <div class="chips">
+      <button class="chip act" onclick="setTrack('ALL',this)">Barchasi</button>
+      <button class="chip" onclick="setTrack('YTM//TECH',this)">YTM//TECH</button>
+      <button class="chip" onclick="setTrack('YTM//BIZNES',this)">YTM//BIZNES</button>
+      <button class="chip" onclick="setTrack('YTM//KREATIV',this)">YTM//KREATIV</button>
+      <button class="chip" onclick="setTrack('YTM//VOLONTYOR',this)">YTM//VOLONTYOR</button>
+      <button class="chip" onclick="setTrack('YTM//KARYERA',this)">YTM//KARYERA</button>
+    </div>
+    <div class="hero" style="margin-top:8px">
+      <svg class="hero-art" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+        <defs><linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#134e4a"/><stop offset="50%" stop-color="#1e3a5f"/><stop offset="100%" stop-color="#432818"/></linearGradient></defs>
+        <rect width="400" height="200" fill="url(#bgG)"/><rect x="20" y="20" width="110" height="75" rx="6" fill="#0f293a" stroke="#2dd4bf" stroke-opacity=".35"/><rect x="28" y="30" width="42" height="24" rx="3" fill="#0ea5e9" fill-opacity=".35"/><rect x="76" y="30" width="44" height="24" rx="3" fill="#f97316" fill-opacity=".35"/>
+        <line x1="155" y1="15" x2="155" y2="185" stroke="#38bdf8" stroke-opacity=".25" stroke-width="3"/><line x1="255" y1="15" x2="255" y2="185" stroke="#f97316" stroke-opacity=".25" stroke-width="3"/><rect x="170" y="68" width="210" height="10" rx="3" fill="#0c2433"/><circle cx="205" cy="48" r="11" fill="#fb923c" fill-opacity=".6"/><rect x="192" y="61" width="26" height="32" rx="8" fill="#0284c7" fill-opacity=".65"/><circle cx="295" cy="44" r="11" fill="#fde047" fill-opacity=".55"/><rect x="282" y="57" width="26" height="35" rx="8" fill="#10b981" fill-opacity=".6"/><rect x="65" y="112" width="270" height="14" rx="4" fill="#7c2d12" fill-opacity=".7"/>
+      </svg>
+      <div class="hero-ov"></div>
+      <div class="hero-top"><span class="pill">YTM 2026 • 5 ta faol tadbir</span></div>
+      <div class="hero-btm">
+        <div class="hero-txt"><h2>Kelajak tashabbuslarini bugundan boshlang</h2><p><b id="heroCnt">0</b> ta yosh ishtirokchi ro‘yxatdan o‘tgan</p></div>
+        <button class="cta" onclick="tab('reg')">Qatnashish →</button>
+      </div>
+    </div>
+    <div class="sec-hdr"><h3>5 ta asosiy yo‘nalish</h3><span>5 ta yo‘nalish</span></div>
+    <div id="trackList"></div>
+  </div>
+
+  <div id="v-reg" class="hide">
     <div class="card">
-      <h2 style="font-size:16px;margin-bottom:4px">Tadbirga ro‘yxatdan o‘tish</h2>
-      <p style="font-size:12px;color:#94a3b8">Ma’lumotlarni kiriting va QR/ID ruxsatnoma oling</p>
+      <h2 style="font-size:17px;margin-bottom:4px">Tadbirga ro‘yxatdan o‘tish</h2>
+      <p style="font-size:12px;color:#94a3b8">Ma’lumotlarni to‘ldiring va elektron chipta oling</p>
       <form id="regForm">
-        <label>F.I.Sh (To‘liq ism-sharif)</label>
-        <input id="fn" required placeholder="Masalan: Aliyev Sardor">
-        <label>Telefon raqam</label>
-        <input id="ph" type="tel" required placeholder="+998 90 123 45 67">
-        <label>Yo‘nalish</label>
-        <select id="tr">
-          <option value="TECH">TECH — IT va Startaplar</option>
-          <option value="BIZNES">BIZNES — Tadbirkorlik</option>
-          <option value="KREATIV">KREATIV — Media va Dizayn</option>
-          <option value="VOLONTYOR">VOLONTYOR — Ijtimoiy loyihalar</option>
-          <option value="KARYERA">KARYERA — Ta’lim va Bandlik</option>
-        </select>
-        <label>Hudud / Tuman</label>
-        <input id="rg" required placeholder="Masalan: Toshkent sh.">
-        <button class="btn" type="submit">Ruxsatnoma olish</button>
+        <label>F.I.Sh (To‘liq ism-sharif)</label><input id="fn" required placeholder="Masalan: Karimov Jasur">
+        <label>Telefon raqam</label><input id="ph" type="tel" required placeholder="+998 90 123 45 67">
+        <label>Yo‘nalishni tanlang</label>
+        <select id="tr"><option value="YTM//TECH">YTM//TECH — Raqamli texnologiyalar va AI</option><option value="YTM//BIZNES">YTM//BIZNES — Tadbirkorlik va Startaplar</option><option value="YTM//KREATIV">YTM//KREATIV — Dizayn va Vizual san’at</option><option value="YTM//VOLONTYOR">YTM//VOLONTYOR — Ijtimoiy loyihalar</option><option value="YTM//KARYERA">YTM//KARYERA — Ta’lim va Bandlik</option></select>
+        <label>Hudud / Tuman</label><input id="rg" required placeholder="Masalan: Toshkent sh.">
+        <button class="btn" type="submit">Chipta olish</button>
       </form>
     </div>
   </div>
 
-  <!-- 2. MENING RUXSATNOMAM -->
-  <div id="v-pass" class="hide">
-    <div id="passBox"></div>
-  </div>
+  <div id="v-pass" class="hide"><div id="passBox"></div></div>
 
-  <!-- 3. ADMIN PANEL -->
   <div id="v-adm" class="hide">
     <div id="admLogin" class="card">
-      <h2 style="font-size:16px">Admin kirish</h2>
-      <label>PIN kod</label>
-      <input id="pinIn" type="password" inputmode="numeric" placeholder="••••">
+      <h2 style="font-size:17px">Admin panelga kirish</h2>
+      <p style="font-size:12px;color:#94a3b8;margin-top:3px">Boshqaruv va CSV eksport uchun PIN kodni kiriting</p>
+      <label>Admin PIN kod</label><input id="pinIn" type="password" inputmode="numeric" placeholder="••••">
       <button class="btn" onclick="loginAdm()">Kirish</button>
     </div>
-
     <div id="admPanel" class="hide">
-      <div class="stat">
-        <div><b id="stAll">0</b><span style="font-size:11px;color:#94a3b8">Jami ishtirokchi</span></div>
-        <div><b id="stIn">0</b><span style="font-size:11px;color:#94a3b8">Tasdiqlangan</span></div>
-      </div>
+      <div class="stat"><div><b id="stAll">0</b><span style="font-size:11px;color:#94a3b8">Jami ishtirokchi</span></div><div><b id="stIn">0</b><span style="font-size:11px;color:#94a3b8">Tasdiqlangan</span></div></div>
       <div class="card">
-        <select id="flt" onchange="renderAdm()">
-          <option value="ALL">Barcha yo‘nalishlar</option>
-          <option value="TECH">TECH</option>
-          <option value="BIZNES">BIZNES</option>
-          <option value="KREATIV">KREATIV</option>
-          <option value="VOLONTYOR">VOLONTYOR</option>
-          <option value="KARYERA">KARYERA</option>
-        </select>
-        <button class="btn btn-ok" onclick="expCSV()">CSV yuklab olish</button>
-        <div id="admList"></div>
+        <select id="flt" onchange="renderAdm()"><option value="ALL">Barcha yo‘nalishlar</option><option value="YTM//TECH">YTM//TECH</option><option value="YTM//BIZNES">YTM//BIZNES</option><option value="YTM//KREATIV">YTM//KREATIV</option><option value="YTM//VOLONTYOR">YTM//VOLONTYOR</option><option value="YTM//KARYERA">YTM//KARYERA</option></select>
+        <button class="btn" onclick="expCSV()">Ro‘yxatni CSV yuklab olish</button><div id="admList"></div>
       </div>
     </div>
   </div>
 </div>
 
 <div class="nav">
-  <button id="n-reg" class="act" onclick="tab('reg')">📝 Ro‘yxat</button>
-  <button id="n-pass" onclick="tab('pass')">🎫 Ruxsatnoma</button>
-  <button id="n-adm" onclick="tab('adm')">🔐 Admin</button>
+  <button id="n-home" class="act" onclick="tab('home')"><span class="ico-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L4 9v12h5v-7h6v7h5V9l-8-6z"/></svg></span>Asosiy</button>
+  <button id="n-reg" onclick="tab('reg')"><span class="ico-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M12 14l4 4"/></svg></span>Ro‘yxat</button>
+  <button id="n-pass" onclick="tab('pass')"><span class="ico-pill"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V9z"/><line x1="12" y1="7" x2="12" y2="17" stroke-dasharray="2 2"/></svg></span>Chipta</button>
 </div>
 
 <script>
+const TRACKS=[
+{id:'YTM//TECH',bg:'rgba(20,184,166,.14)',svg:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',desc:'Raqamli texnologiyalar va sun’iy intellektni anglatuvchi mikrosxema chiziqlari va kod elementlari bilan boyitilgan metallik belgi.'},
+{id:'YTM//BIZNES',bg:'rgba(249,115,22,.14)',svg:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',desc:'Tadbirkorlik o‘sishi va kapital sari intilishni ko‘rsatuvchi ko‘tariluvchi grafik o‘qi uyg‘unlashgan mis-metallik shakl.'},
+{id:'YTM//KREATIV',bg:'rgba(6,182,212,.14)',svg:'<svg width="18" height="18" viewBox="0 0 24 24" fill="#22d3ee"><circle cx="12" cy="12" r="4"/></svg>',desc:'Ijodiy erkinlik va vizual san’atni ifodalovchi diafragma hamda mo‘yqalam unsurlari birlashgan monogramma.'},
+{id:'YTM//VOLONTYOR',bg:'rgba(16,185,129,.14)',svg:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',desc:'Ijtimoiy birdamlik, yoshlar tashabbusi va jamiyatga foydali loyihalarni birlashtiruvchi ko‘ngillilar harakati.'},
+{id:'YTM//KARYERA',bg:'rgba(59,130,246,.14)',svg:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',desc:'Zamonaviy kasblar, ta’lim grantlari va yosh mutaxassislar bandligini qo‘llab-quvvatlovchi rivojlanish dasturi.'}
+];
 const KEY='ytm_users_2026';
 let users=JSON.parse(localStorage.getItem(KEY)||'[]');
 let myId=localStorage.getItem('ytm_my_id')||'';
-
-const m={name:"YTM App",short_name:"YTM",start_url:"./",display:"standalone",background_color:"#0f172a",theme_color:"#0f172a",icons:[{src:"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='63' font-size='36' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>YTM</text></svg>",sizes:"192x192",type:"image/svg+xml"}]};
+let activeTrack='ALL';
+const m={name:'YTM — Yoshlar tashabbuslari markazi',short_name:'YTM',start_url:'./',display:'standalone',background_color:'#06161d',theme_color:'#06161d',icons:[{src:"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230b2834'/><polygon points='50,12 84,31 84,69 50,88 16,69 16,31' fill='none' stroke='%2310b981' stroke-width='7'/><text x='50' y='58' font-size='26' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>YTM</text></svg>",sizes:'192x192',type:'image/svg+xml'}]};
 const lnk=document.createElement('link');lnk.rel='manifest';lnk.href='data:application/manifest+json,'+encodeURIComponent(JSON.stringify(m));document.head.appendChild(lnk);
-
-function save(){localStorage.setItem(KEY,JSON.stringify(users));}
-
-function tab(t){
-  ['reg','pass','adm'].forEach(x=>{
-    document.getElementById('v-'+x).classList.toggle('hide',x!==t);
-    document.getElementById('n-'+x).classList.toggle('act',x===t);
-  });
-  if(t==='pass')renderPass();
-  if(t==='adm')renderAdm();
-}
-
-document.getElementById('regForm').addEventListener('submit',e=>{
-  e.preventDefault();
-  const id='YTM-'+Math.floor(100000+Math.random()*900000);
-  const u={
-    id,
-    name:document.getElementById('fn').value.trim(),
-    phone:document.getElementById('ph').value.trim(),
-    track:document.getElementById('tr').value,
-    region:document.getElementById('rg').value.trim(),
-    checked:false,
-    time:new Date().toLocaleString('uz-UZ')
-  };
-  users.unshift(u);
-  myId=id;
-  localStorage.setItem('ytm_my_id',id);
-  save();
-  e.target.reset();
-  tab('pass');
-});
-
-function renderPass(){
-  const box=document.getElementById('passBox');
-  const u=users.find(x=>x.id===myId)||users[0];
-  if(!u){
-    box.innerHTML='<div class="card"><p style="text-align:center;color:#94a3b8">Hali ruxsatnoma olinmagan. Avval ro‘yxatdan o‘ting.</p></div>';
-    return;
-  }
-  box.innerHTML=`
-    <div class="pass">
-      <span class="badge">${u.track}</span>
-      <h2 style="font-size:19px">${u.name}</h2>
-      <p style="font-size:13px;color:#cbd5e1;margin-top:4px">${u.region} • ${u.phone}</p>
-      <div class="code-box">${u.id}</div>
-      <p style="font-size:12px;color:${u.checked?'#4ade80':'#fbbf24'}">
-        ${u.checked?'✅ Kirish tasdiqlangan':'⏳ Kirish kutilmoqda'}
-      </p>
-      <p style="font-size:11px;color:#94a3b8;margin-top:8px">${u.time}</p>
-    </div>`;
-}
-
-function loginAdm(){
-  if(document.getElementById('pinIn').value==='0708'){
-    document.getElementById('admLogin').classList.add('hide');
-    document.getElementById('admPanel').classList.remove('hide');
-    renderAdm();
-  }else{alert('PIN noto‘g‘ri!');}
-}
-
-function toggleChk(id){
-  const u=users.find(x=>x.id===id);
-  if(u){u.checked=!u.checked;save();renderAdm();}
-}
-
-function renderAdm(){
-  const f=document.getElementById('flt').value;
-  const list=f==='ALL'?users:users.filter(x=>x.track===f);
-  document.getElementById('stAll').textContent=users.length;
-  document.getElementById('stIn').textContent=users.filter(x=>x.checked).length;
-  const el=document.getElementById('admList');
-  if(!list.length){el.innerHTML='<p style="color:#94a3b8;font-size:13px;margin-top:12px">Ro‘yxat bo‘sh.</p>';return;}
-  el.innerHTML=list.map(u=>`
-    <div class="item">
-      <div class="row">
-        <div>
-          <b>${u.name}</b> <span style="color:#60a5fa;font-size:11px">[${u.track}]</span>
-          <div style="color:#94a3b8;font-size:12px">${u.id} • ${u.phone}</div>
-        </div>
-        <button onclick="toggleChk('${u.id}')" style="padding:6px 10px;border-radius:8px;border:none;background:${u.checked?'#059669':'#334155'};color:#fff;font-size:12px">
-          ${u.checked?'Keldi ✓':'Tasdiqlash'}
-        </button>
-      </div>
-    </div>`).join('');
-}
-
-function expCSV(){
-  const rows=[['ID','F.I.Sh','Telefon','Yonalish','Hudud','Holat','Vaqt'],...users.map(u=>[u.id,u.name,u.phone,u.track,u.region,u.checked?'Tasdiqlangan':'Kutilmoqda',u.time])];
-  const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}));
-  a.download='ytm_ishtirokchilar.csv';
-  a.click();
-}
+function save(){localStorage.setItem(KEY,JSON.stringify(users));updateCnt();}
+function updateCnt(){document.getElementById('heroCnt').textContent=users.length;}
+function setTrack(t,el){activeTrack=t;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('act'));el.classList.add('act');renderTracks();}
+function goReg(t){document.getElementById('tr').value=t;tab('reg');}
+function renderTracks(){const list=activeTrack==='ALL'?TRACKS:TRACKS.filter(x=>x.id===activeTrack);document.getElementById('trackList').innerHTML=list.map(t=>`<div class="t-card" onclick="goReg('${t.id}')"><div class="t-top"><div class="t-ico" style="background:${t.bg}">${t.svg}</div><div class="t-title">${t.id}</div></div><div class="t-desc">${t.desc}</div></div>`).join('');}
+function tab(t){['home','reg','pass','adm'].forEach(x=>{document.getElementById('v-'+x).classList.toggle('hide',x!==t);const nb=document.getElementById('n-'+x);if(nb)nb.classList.toggle('act',x===t);});if(t==='pass')renderPass();if(t==='adm')renderAdm();}
+document.getElementById('regForm').addEventListener('submit',e=>{e.preventDefault();const id='YTM-'+Math.floor(100000+Math.random()*900000);const u={id,name:document.getElementById('fn').value.trim(),phone:document.getElementById('ph').value.trim(),track:document.getElementById('tr').value,region:document.getElementById('rg').value.trim(),checked:false,time:new Date().toLocaleString('uz-UZ')};users.unshift(u);myId=id;localStorage.setItem('ytm_my_id',id);save();e.target.reset();tab('pass');});
+function renderPass(){const box=document.getElementById('passBox');const u=users.find(x=>x.id===myId)||users[0];if(!u){box.innerHTML='<div class="card" style="text-align:center"><p style="color:#94a3b8;font-size:13px">Sizda hali faol chipta yo‘q.</p><button class="btn" onclick="tab(\'reg\')">Ro‘yxatdan o‘tish</button></div>';return;}box.innerHTML=`<div class="ticket"><span class="t-badge">${u.track}</span><h2 style="font-size:20px;color:#fff">${u.name}</h2><p style="font-size:13px;color:#cbd5e1;margin-top:4px">${u.region} • ${u.phone}</p><div class="code-box">${u.id}</div><p style="font-size:12px;font-weight:700;color:${u.checked?'#34d399':'#fbbf24'}">${u.checked?'✅ Kirish tasdiqlangan':'⏳ Tadbir kirishida ko‘rsating'}</p><p style="font-size:11px;color:#64748b;margin-top:10px">${u.time}</p></div>`;}
+function loginAdm(){if(document.getElementById('pinIn').value==='0708'){document.getElementById('admLogin').classList.add('hide');document.getElementById('admPanel').classList.remove('hide');renderAdm();}else{alert('PIN kod noto‘g‘ri!');}}
+function toggleChk(id){const u=users.find(x=>x.id===id);if(u){u.checked=!u.checked;save();renderAdm();}}
+function renderAdm(){const f=document.getElementById('flt').value;const list=f==='ALL'?users:users.filter(x=>x.track===f);document.getElementById('stAll').textContent=users.length;document.getElementById('stIn').textContent=users.filter(x=>x.checked).length;const el=document.getElementById('admList');if(!list.length){el.innerHTML='<p style="color:#94a3b8;font-size:13px;margin-top:12px">Hozircha ro‘yxat bo‘sh.</p>';return;}el.innerHTML=list.map(u=>`<div class="item"><div class="row"><div><b>${u.name}</b> <span style="color:#2dd4bf;font-size:11px">[${u.track}]</span><div style="color:#94a3b8;font-size:12px">${u.id} • ${u.phone}</div></div><button onclick="toggleChk('${u.id}')" style="padding:7px 11px;border-radius:9px;border:none;background:${u.checked?'#10b981':'#163847'};color:${u.checked?'#032b24':'#fff'};font-weight:700;font-size:12px">${u.checked?'Keldi ✓':'Tasdiqlash'}</button></div></div>`).join('');}
+function expCSV(){const rows=[['ID','F.I.Sh','Telefon','Yonalish','Hudud','Holat','Vaqt'],...users.map(u=>[u.id,u.name,u.phone,u.track,u.region,u.checked?'Tasdiqlangan':'Kutilmoqda',u.time])];const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}));a.download='ytm_ishtirokchilar.csv';a.click();URL.revokeObjectURL(a.href);}
+renderTracks();updateCnt();
 </script>
 </body>
 </html>
