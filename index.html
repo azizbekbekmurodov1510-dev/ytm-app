@@ -5,213 +5,131 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YTM — Yoshlar tashabbuslari markazi</title>
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#0f172a" />
+  <meta name="theme-color" content="#071a26" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
   <style>
-    :root {
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --text: #0f172a;
-      --muted: #64748b;
-      --primary: #0f172a;
-      --accent: #2563eb;
-      --border: #e2e8f0;
-      --radius: 14px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background: var(--bg); color: var(--text); line-height: 1.5; padding-bottom: 48px; }
-    header { background: var(--primary); color: #fff; padding: 16px 20px; position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
-    .brand { font-weight: 700; font-size: 1.1rem; }
-    nav { display: flex; flex-wrap: wrap; gap: 8px; }
-    nav button { background: rgba(255,255,255,0.12); color: #fff; border: 0; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; }
-    nav button.active, nav button:hover { background: var(--accent); }
-    main { max-width: 1040px; margin: 24px auto; padding: 0 16px; }
-    .section { display: none; }
-    .section.active { display: block; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
-    .grid-5 { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
-    h1, h2, h3 { margin-bottom: 10px; }
-    p.muted { color: var(--muted); font-size: 0.92rem; margin-bottom: 12px; }
-    label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 4px; }
-    input, select, textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; font-size: 0.95rem; background: #fff; }
-    textarea { min-height: 84px; resize: vertical; }
-    .btn { background: var(--accent); color: #fff; border: 0; padding: 10px 16px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.92rem; }
-    .btn:hover { opacity: 0.92; }
-    .btn.secondary { background: #e2e8f0; color: var(--text); }
-    .list-item { border-top: 1px solid var(--border); padding: 10px 0; font-size: 0.92rem; }
-    .list-item:first-child { border-top: 0; }
-    .badge { display: inline-block; background: #eff6ff; color: var(--accent); padding: 2px 8px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; margin-bottom: 4px; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 10px; }
-    th, td { border: 1px solid var(--border); padding: 8px; text-align: left; }
-    th { background: #f1f5f9; }
-    .table-wrap { overflow-x: auto; }
-    .msg { color: #15803d; font-size: 0.9rem; font-weight: 600; margin-top: 4px; }
-    .err { color: #dc2626; font-size: 0.9rem; font-weight: 600; margin-top: 4px; }
+    :root{--bg:#05121a;--surface:#0b202e;--surface2:#0f2a3c;--border:#193b52;--text:#f1f5f9;--muted:#94a3b8;--teal:#10b981;--orange:#f97316;--orange-hover:#ea580c}
+    *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif}
+    body{background:#02080d;color:var(--text);min-height:100vh;display:flex;justify-content:center}
+    button{font:inherit}
+    .app-shell{width:100%;max-width:480px;min-height:100vh;background:var(--bg);display:flex;flex-direction:column;position:relative;padding-bottom:84px;border-inline:1px solid rgba(255,255,255,.05)}
+    .topbar{background:#071a26;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20}
+    .brand-wrap{display:flex;align-items:center;gap:9px;min-width:0}.brand-icon{width:34px;height:34px;border-radius:10px;background:var(--surface2);border:1px solid #224c68;display:grid;place-items:center;flex-shrink:0;color:#2dd4bf;font-weight:700}
+    .brand-title{font-size:.88rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-sub{font-size:.72rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.top-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}
+    .install-chip,.admin-chip{padding:6px 10px;border-radius:999px;font-size:.73rem;font-weight:700;cursor:pointer}.install-chip{background:rgba(16,185,129,.16);color:#6ee7b7;border:1px solid rgba(110,231,183,.4)}.admin-chip{background:var(--surface2);color:var(--text);border:1px solid #234963}.admin-chip:hover{border-color:var(--teal)}
+    .filter-bar{background:#071924;padding:9px 14px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.05)}.filter-bar::-webkit-scrollbar,.sub-tabs::-webkit-scrollbar{display:none}
+    .chip{background:var(--surface);color:#cbd5e1;border:1px solid var(--border);padding:6px 12px;border-radius:999px;font-size:.75rem;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0}.chip.active{background:var(--teal);color:#042017;border-color:var(--teal)}
+    .content{padding:14px 15px;flex:1}.page{display:none}.page.active{display:block}.hero-card{border-radius:18px;min-height:180px;background:linear-gradient(135deg,#0d3b4c,#162a45 55%,#2b1d2e);border:1px solid #214a63;padding:15px;display:flex;flex-direction:column;justify-content:space-between;margin-bottom:16px}.hero-tag{display:inline-block;background:rgba(16,185,129,.22);color:#6ee7b7;border:1px solid rgba(110,231,183,.35);padding:4px 10px;border-radius:999px;font-size:.72rem;font-weight:700;width:fit-content}.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-top:24px}.hero-title{font-size:1.03rem;font-weight:700;line-height:1.25;max-width:240px}.hero-count{font-size:.76rem;color:#cbd5e1;margin-top:5px}
+    .btn-orange,.btn-teal,.btn-dark{border:0;cursor:pointer;font-weight:700}.btn-orange{background:var(--orange);color:#fff;padding:10px 14px;border-radius:12px;font-size:.82rem;white-space:nowrap}.btn-orange:hover{background:var(--orange-hover)}.btn-orange.full{width:100%;padding:12px 16px;font-size:.88rem;margin-top:6px}.btn-teal{background:var(--teal);color:#042017;padding:9px 13px;border-radius:10px;font-size:.8rem}.btn-dark{background:var(--surface2);color:var(--text);border:1px solid var(--border);padding:8px 12px;border-radius:10px;font-size:.78rem}
+    .sec-head{display:flex;align-items:center;justify-content:space-between;margin:14px 0 9px}.sec-head:first-child{margin-top:0}.sec-title{font-size:.94rem;font-weight:700}.sec-meta{font-size:.75rem;color:var(--muted)}
+    .track-card,.event-card,.info-card,.form-card,.ticket-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px;margin-bottom:10px}.track-card{cursor:pointer}.track-card.selected{border-color:#2dd4bf}.track-top{display:flex;align-items:center;gap:10px;margin-bottom:6px}.track-badge{width:28px;height:28px;border-radius:8px;background:rgba(45,212,191,.12);color:#2dd4bf;display:grid;place-items:center;font-size:.84rem;font-weight:700;flex-shrink:0}.track-name{font-size:.88rem;font-weight:700}.track-desc,.info-desc{font-size:.8rem;color:var(--muted);line-height:1.42}.pill-tag{display:inline-block;background:rgba(45,212,191,.14);color:#5eead4;padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:700;margin-bottom:6px}.event-title,.info-title{font-size:.92rem;font-weight:700;margin-bottom:6px}.event-meta{display:flex;justify-content:space-between;gap:8px;font-size:.76rem;color:var(--muted);margin-bottom:10px;flex-wrap:wrap}
+    .sub-tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:12px}.field{background:#071722;border:1px solid var(--border);border-radius:12px;padding:10px 12px;margin-bottom:10px}.field label{display:block;font-size:.73rem;color:var(--muted);margin-bottom:4px}.field input,.field select,.field textarea{width:100%;background:transparent;border:0;color:var(--text);font-size:.86rem;outline:none}.field textarea{min-height:76px;resize:vertical}.field select option{background:#0b202e;color:#f1f5f9}.status-ok{color:#6ee7b7;font-size:.82rem;font-weight:600;margin-top:8px;min-height:1em}.status-err{color:#f87171;font-size:.82rem;font-weight:600;margin-top:8px;min-height:1em}.ticket-card{border-style:dashed;border-color:#2dd4bf}
+    .admin-box{display:none;position:fixed;inset:0;z-index:50;background:rgba(2,8,13,.92);overflow-y:auto;padding:16px}.admin-box.open{display:block}.admin-inner{max-width:520px;margin:0 auto}.tbl-wrap{overflow-x:auto;margin-top:8px}table{width:100%;border-collapse:collapse;font-size:.74rem}th,td{border:1px solid var(--border);padding:6px;text-align:left;vertical-align:top}th{background:#0f2a3c;color:#5eead4}.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#071a26;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr);padding:7px 8px;gap:6px;z-index:25}.nav-item{background:transparent;border:0;color:var(--muted);padding:7px 6px;border-radius:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.73rem;font-weight:600}.nav-item.active{background:var(--teal);color:#042017}
+    @media(min-width:700px){body{padding:20px 0}.app-shell{min-height:calc(100vh - 40px);border-radius:20px;overflow:clip}.topbar{border-radius:20px 20px 0 0}}
   </style>
 </head>
 <body>
-<header>
-  <div class="brand">YTM — Yoshlar tashabbuslari markazi</div>
-  <nav>
-    <button data-tab="home" class="active">Asosiy</button>
-    <button data-tab="events">Tadbirga yozilish</button>
-    <button data-tab="ideas">G‘oyalar</button>
-    <button data-tab="rooms">Xona band qilish</button>
-    <button data-tab="admin">Admin (0708)</button>
-  </nav>
-</header>
-
-<main>
-  <section id="home" class="section active">
-    <div class="card">
-      <h1>Yoshlar tashabbuslari markazi</h1>
-      <p class="muted">5 ta asosiy yo‘nalish, 14 ta hudud va tuman/shaharlar kesimida faoliyat, tadbirlar, g‘oyalar va xona bandlovlari.</p>
-      <div class="grid-5" id="tracksGrid"></div>
-    </div>
-    <div class="grid-2">
-      <div class="card"><h3>So‘nggi tadbir arizalari</h3><div id="homeEvents"></div></div>
-      <div class="card"><h3>So‘nggi g‘oyalar va bandlovlar</h3><div id="homeIdeasRooms"></div></div>
-    </div>
-  </section>
-
-  <section id="events" class="section">
-    <div class="card">
-      <h2>Tadbirga ro‘yxatdan o‘tish</h2>
-      <form id="eventForm">
-        <div class="grid-2">
-          <div><label>F.I.SH.</label><input id="evName" required placeholder="Masalan: Azizbek Karimov" /></div>
-          <div><label>Telefon</label><input id="evPhone" required placeholder="+998 90 123 45 67" /></div>
-          <div><label>Hudud</label><select id="evRegion" class="region-select" required></select></div>
-          <div><label>Tuman / shahar</label><select id="evDistrict" class="district-select" required></select></div>
-          <div><label>Yo‘nalish</label><select id="evTrack" class="track-select" required></select></div>
-          <div><label>Tadbir nomi</label><input id="evTitle" required placeholder="Tadbir yoki loyiha nomi" /></div>
-        </div>
-        <button class="btn" type="submit">Ro‘yxatdan o‘tish</button><div id="evMsg" class="msg"></div>
-      </form>
-    </div>
-  </section>
-
-  <section id="ideas" class="section">
-    <div class="card">
-      <h2>G‘oya va tashabbus yuborish</h2>
-      <form id="ideaForm">
-        <div class="grid-2">
-          <div><label>Muallif F.I.SH.</label><input id="idName" required placeholder="Ism familiyangiz" /></div>
-          <div><label>Hudud</label><select id="idRegion" class="region-select" required></select></div>
-          <div><label>Tuman / shahar</label><select id="idDistrict" class="district-select" required></select></div>
-          <div><label>Yo‘nalish</label><select id="idTrack" class="track-select" required></select></div>
-        </div>
-        <div><label>G‘oya mazmuni</label><textarea id="idText" required placeholder="Tashabbus yoki taklifingizni yozing..."></textarea></div>
-        <button class="btn" type="submit">G‘oyani yuborish</button><div id="idMsg" class="msg"></div>
-      </form>
-    </div>
-  </section>
-
-  <section id="rooms" class="section">
-    <div class="card">
-      <h2>Xona band qilish</h2>
-      <form id="roomForm">
-        <div class="grid-2">
-          <div><label>Mas’ul F.I.SH.</label><input id="rmName" required placeholder="Ism familiyangiz" /></div>
-          <div><label>Hudud</label><select id="rmRegion" class="region-select" required></select></div>
-          <div><label>Tuman / shahar</label><select id="rmDistrict" class="district-select" required></select></div>
-          <div><label>Xona turi</label><select id="rmType" required><option value="Kovorking zonasi">Kovorking zonasi</option><option value="IT / Laboratoriya">IT / Laboratoriya</option><option value="Kutubxona / Mediateka">Kutubxona / Mediateka</option><option value="Majlislar zali">Majlislar zali</option></select></div>
-          <div><label>Sana</label><input id="rmDate" type="date" required /></div>
-          <div><label>Vaqt oralig‘i</label><input id="rmTime" required placeholder="Masalan: 14:00 - 16:00" /></div>
-        </div>
-        <button class="btn" type="submit">Xonani band qilish</button><div id="rmMsg" class="msg"></div>
-      </form>
-    </div>
-  </section>
-
-  <section id="admin" class="section">
-    <div class="card" id="adminGate">
-      <h2>Admin panelga kirish</h2>
-      <p class="muted">Arizalar, g‘oyalar va xona bandlovlarini ko‘rish hamda CSV eksport qilish uchun PIN kodni kiriting.</p>
-      <form id="pinForm"><div class="grid-2"><div><label>PIN kod</label><input id="pinInput" type="password" inputmode="numeric" maxlength="4" required placeholder="****" /></div></div><button class="btn" type="submit">Kirish</button><div id="pinErr" class="err"></div></form>
-    </div>
-    <div id="adminPanel" style="display:none;">
-      <div class="card">
-        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;"><div><h2>Boshqaruv va filtrlar</h2><p class="muted">14 ta hudud va yo‘nalish bo‘yicha filtrlash hamda CSV yuklab olish.</p></div><div style="display:flex;flex-wrap:wrap;gap:8px;"><button class="btn" id="exportCsvBtn" type="button">CSV eksport</button><button class="btn secondary" id="logoutAdminBtn" type="button">Chiqish</button></div></div>
-        <div class="grid-2" style="margin-top:12px;"><div><label>Hudud bo‘yicha filtr</label><select id="fltRegion"><option value="ALL">Barcha hududlar (14)</option></select></div><div><label>Yo‘nalish bo‘yicha filtr</label><select id="fltTrack"><option value="ALL">Barcha yo‘nalishlar (5)</option></select></div></div>
-      </div>
-      <div class="card"><h3>Tadbirga yozilganlar</h3><div class="table-wrap"><table><thead><tr><th>Vaqt</th><th>F.I.SH.</th><th>Telefon</th><th>Hudud</th><th>Tuman/shahar</th><th>Yo‘nalish</th><th>Tadbir</th></tr></thead><tbody id="admEventsBody"></tbody></table></div></div>
-      <div class="card"><h3>Yuborilgan g‘oyalar</h3><div class="table-wrap"><table><thead><tr><th>Vaqt</th><th>Muallif</th><th>Hudud</th><th>Tuman/shahar</th><th>Yo‘nalish</th><th>G‘oya</th></tr></thead><tbody id="admIdeasBody"></tbody></table></div></div>
-      <div class="card"><h3>Xona bandlovlari</h3><div class="table-wrap"><table><thead><tr><th>Sana / Vaqt</th><th>Mas’ul</th><th>Hudud</th><th>Tuman/shahar</th><th>Xona</th><th>Oraliq</th></tr></thead><tbody id="admRoomsBody"></tbody></table></div></div>
-    </div>
-  </section>
-</main>
-
+<div class="app-shell">
+  <header class="topbar"><div class="brand-wrap"><div class="brand-icon">⬡</div><div style="min-width:0"><div class="brand-title">YTM — Yoshlar tashabbuslari markazi</div><div class="brand-sub">Mobil ro‘yxatdan o‘tish ilovasi</div></div></div><div class="top-actions"><button class="install-chip" id="installAppBtn" type="button">⬇ Ilova</button><button class="admin-chip" id="openAdminBtn" type="button">⚙ Admin</button></div></header>
+  <div class="filter-bar" id="filterBar"></div>
+  <main class="content">
+    <section id="page-home" class="page active">
+      <div class="hero-card"><span class="hero-tag" id="heroTag">YTM 2026 • 5 ta faol tadbir</span><div class="hero-bottom"><div><div class="hero-title">Kelajak tashabbuslarini bugundan boshlang</div><div class="hero-count" id="heroRegCount">0 ta yosh ishtirokchi ro‘yxatdan o‘tgan</div></div><button class="btn-orange" id="heroJoinBtn" type="button">Qatnashish →</button></div></div>
+      <div class="sec-head"><div class="sec-title">5 ta asosiy yo‘nalish</div><div class="sec-meta">5 ta yo‘nalish</div></div><div id="tracksList"></div>
+      <div class="sec-head"><div class="sec-title">Yaqin tadbirlar</div><div class="sec-meta" id="eventsCountLabel">0 ta tadbir</div></div><div id="eventsList"></div>
+      <div class="sec-head"><div class="sec-title">Yangiliklar va muhim ma’lumotlar</div><div class="sec-meta">Yoshlar uchun</div></div><div id="newsList"></div>
+    </section>
+    <section id="page-register" class="page">
+      <div class="sub-tabs" id="regSubTabs"><button class="chip active" type="button" data-sub="event">Tadbirga yozilish</button><button class="chip" type="button" data-sub="idea">G‘oya qo‘llab-quvvatlash</button><button class="chip" type="button" data-sub="room">Xona / Lab band qilish</button></div>
+      <form class="form-card" id="eventForm"><div class="field"><label for="evName">Ism va familiya</label><input id="evName" required placeholder="Ism va familiya" /></div><div class="field"><label for="evPhone">Telefon raqam</label><input id="evPhone" type="tel" required placeholder="+998 90 123 45 67" /></div><div class="field"><label for="evRegion">Hudud</label><select id="evRegion" required></select></div><div class="field"><label for="evDistrict">Tuman yoki shahar</label><select id="evDistrict" required></select></div><div class="field"><label for="evTrack">Yo‘nalish</label><select id="evTrack" required></select></div><div class="field"><label for="evSelect">Tadbir</label><select id="evSelect" required></select></div><div class="field"><label for="evTime">Vaqt</label><select id="evTime" required></select></div><button class="btn-orange full" type="submit">🎟 Ro‘yxatdan o‘tish va chipta olish</button><div class="status-ok" id="evMsg" aria-live="polite"></div></form>
+      <form class="form-card" id="ideaForm" style="display:none"><div class="sec-head" style="margin-top:0"><div class="sec-title">G‘oyani qo‘llab-quvvatlash</div></div><div class="field"><label for="ideaAuthor">Muallif</label><input id="ideaAuthor" required placeholder="Ism va familiya" /></div><div class="field"><label for="ideaPhone">Telefon raqam</label><input id="ideaPhone" type="tel" required placeholder="+998 90 123 45 67" /></div><div class="field"><label for="ideaRegion">Hudud</label><select id="ideaRegion" required></select></div><div class="field"><label for="ideaDistrict">Tuman yoki shahar</label><select id="ideaDistrict" required></select></div><div class="field"><label for="ideaTrack">Yo‘nalish</label><select id="ideaTrack" required></select></div><div class="field"><label for="ideaTitle">G‘oya nomi</label><input id="ideaTitle" required placeholder="Masalan: Yoshlar uchun eko-bot" /></div><div class="field"><label for="ideaSupportType">Qo‘llab-quvvatlash turi</label><select id="ideaSupportType"><option>Mentorlik va inkubatsiya</option><option>Grant / Moliyaviy ko‘mak</option><option>Laboratoriya va texnik baza</option><option>Axborot va hamkorlik ko‘magi</option></select></div><div class="field"><label for="ideaDesc">G‘oya tavsifi</label><textarea id="ideaDesc" required placeholder="G‘oyangiz va kutilayotgan natija haqida yozing..."></textarea></div><button class="btn-orange full" type="submit">💡 G‘oyani yuborish</button><div class="status-ok" id="ideaMsg" aria-live="polite"></div></form>
+      <form class="form-card" id="roomForm" style="display:none"><div class="sec-head" style="margin-top:0"><div class="sec-title">Xona va laboratoriyadan joy band qilish</div></div><div class="field"><label for="rmName">Ism va familiya</label><input id="rmName" required placeholder="Ism va familiya" /></div><div class="field"><label for="rmPhone">Telefon raqam</label><input id="rmPhone" type="tel" required placeholder="+998 90 123 45 67" /></div><div class="field"><label for="rmRegion">Hudud</label><select id="rmRegion" required></select></div><div class="field"><label for="rmDistrict">Tuman yoki shahar</label><select id="rmDistrict" required></select></div><div class="field"><label for="rmSpace">Xona / laboratoriya / o‘quv xonasi</label><select id="rmSpace"><option>IT laboratoriya (Kompyuter & AI)</option><option>Ilmiy va texnik laboratoriya</option><option>Biznes trening va coworking xonasi</option><option>Xorijiy tillar o‘quv xonasi</option><option>Kasbga o‘qitish ustaxonasi</option></select></div><div class="field"><label for="rmDate">Sana</label><input id="rmDate" type="date" required /></div><div class="field"><label for="rmSlot">Vaqt oralig‘i</label><select id="rmSlot"><option>09:00 - 11:00</option><option>11:30 - 13:30</option><option>14:00 - 16:00</option><option>16:30 - 18:30</option></select></div><button class="btn-orange full" type="submit">🏢 Joy band qilish</button><div class="status-ok" id="roomMsg" aria-live="polite"></div></form>
+    </section>
+    <section id="page-tickets" class="page"><div class="sec-head"><div class="sec-title">Mening chiptalarim va bandlovlarim</div><div class="sec-meta" id="ticketsCountLabel">0 ta</div></div><div id="ticketsList"></div></section>
+  </main>
+  <nav class="bottom-nav"><button class="nav-item active" data-page="home" type="button">🏠<span>Asosiy</span></button><button class="nav-item" data-page="register" type="button">📝<span>Ro‘yxat</span></button><button class="nav-item" data-page="tickets" type="button">🎟<span>Chipta</span></button></nav>
+</div>
+<div class="admin-box" id="adminModal"><div class="admin-inner"><div class="form-card" id="adminPinCard"><div class="sec-head" style="margin-top:0"><div class="sec-title">Admin kirish (PIN)</div><button class="btn-dark" id="closeAdminBtn1" type="button">✕ Yopish</button></div><div class="field"><label for="adminPinInput">4 xonali PIN kod</label><input id="adminPinInput" type="password" inputmode="numeric" maxlength="4" placeholder="PIN kiriting" /></div><button class="btn-teal" id="adminPinSubmit" type="button">Kirish</button><div class="status-err" id="adminPinErr" aria-live="polite"></div></div><div class="form-card" id="adminPanelCard" style="display:none"><div class="sec-head" style="margin-top:0"><div class="sec-title">YTM Admin Panel</div><button class="btn-dark" id="closeAdminBtn2" type="button">✕ Yopish</button></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px"><button class="btn-teal" id="exportCsvBtn" type="button">⬇ CSV yuklab olish</button><button class="btn-dark" id="clearDataBtn" type="button">🗑 Ma’lumotlarni tozalash</button></div><div class="sec-meta" id="adminStatsText"></div><div class="tbl-wrap" id="adminTables"></div></div></div></div>
 <script>
-const TRACKS = ["IT va raqamli ko‘nikmalar", "Tadbirkorlik va startaplar", "Madaniyat, san’at va media", "Sport va sog‘lom turmush tarzi", "Ijtimoiy tashabbuslar va ko‘ngillilik"];
-const REGIONS = {
-  "Qoraqalpog‘iston Respublikasi": ["Nukus shahri", "Amudaryo", "Beruniy", "Chimboy", "Ellikqal’a", "Kegeyli", "Mo‘ynoq", "Nukus tumani", "Qanliko‘l", "Qorao‘zak", "Qo‘ng‘irot", "Shumanay", "Taxtako‘pir", "To‘rtko‘l", "Xo‘jayli", "Bo‘zatov", "Taxiatosh"],
-  "Andijon viloyati": ["Andijon shahri", "Xonobod shahri", "Andijon tumani", "Asaka", "Baliqchi", "Bo‘ston", "Buloqboshi", "Izboskan", "Jalolquduq", "Marhamat", "Oltinko‘l", "Paxtaobod", "Qo‘rg‘ontepa", "Shahrixon", "Ulug‘nor", "Xo‘jaobod"],
-  "Buxoro viloyati": ["Buxoro shahri", "Kogon shahri", "Olot", "Buxoro tumani", "Vobkent", "G‘ijduvon", "Jondor", "Kogon tumani", "Qorako‘l", "Qorovulbozor", "Peshku", "Romitan", "Shofirkon"],
-  "Jizzax viloyati": ["Jizzax shahri", "Arnasoy", "Baxmal", "Do‘stlik", "Forish", "G‘allaorol", "Sharof Rashidov", "Mirzacho‘l", "Paxtakor", "Yangiobod", "Zafarobod", "Zomin"],
-  "Qashqadaryo viloyati": ["Qarshi shahri", "Shahrisabz shahri", "Chiroqchi", "Dehqonobod", "G‘uzor", "Kasbi", "Kitob", "Koson", "Mirishkor", "Muborak", "Nishon", "Qamashi", "Qarshi tumani", "Shahrisabz tumani", "Ko‘kdala", "Yakkabog‘"],
-  "Navoiy viloyati": ["Navoiy shahri", "Zarafshon shahri", "G‘ozg‘on shahri", "Karmana", "Konimex", "Navbahor", "Nurota", "Tomdi", "Uchquduq", "Qiziltepa", "Xatirchi"],
-  "Namangan viloyati": ["Namangan shahri", "Chortoq", "Chust", "Kosonsoy", "Mingbuloq", "Namangan tumani", "Norin", "Pop", "To‘raqo‘rg‘on", "Uchqo‘rg‘on", "Uychi", "Yangiqo‘rg‘on", "Davlatobod", "Yangi Namangan"],
-  "Samarqand viloyati": ["Samarqand shahri", "Kattaqo‘rg‘on shahri", "Bulung‘ur", "Ishtixon", "Jomboy", "Kattaqo‘rg‘on tumani", "Narpay", "Nurobod", "Oqdaryo", "Payariq", "Pastdarg‘om", "Paxtachi", "Samarqand tumani", "Toyloq", "Urgut", "Qo‘shrabot"],
-  "Surxondaryo viloyati": ["Termiz shahri", "Angor", "Boysun", "Denov", "Jarqo‘rg‘on", "Qiziriq", "Qumqo‘rg‘on", "Muzrabot", "Oltinsoy", "Sariosiyo", "Sherobod", "Sho‘rchi", "Termiz tumani", "Uzun", "Bandixon"],
-  "Sirdaryo viloyati": ["Guliston shahri", "Shirin shahri", "Yangiyer shahri", "Boyovut", "Guliston tumani", "Mirzaobod", "Oqoltin", "Sardoba", "Sayxunobod", "Sirdaryo tumani", "Xovos"],
-  "Toshkent viloyati": ["Nurafshon shahri", "Angren shahri", "Bekobod shahri", "Chirchiq shahri", "Olmaliq shahri", "Ohangaron shahri", "Yangiyo‘l shahri", "Bekobod tumani", "Bo‘stonliq", "Bo‘ka", "Chinoz", "Qibray", "Ohangaron tumani", "Oqqo‘rg‘on", "Parkent", "Piskent", "Quyi Chirchiq", "O‘rta Chirchiq", "Yangiyo‘l tumani", "Yuqori Chirchiq", "Zangiota", "Toshkent tumani"],
-  "Farg‘ona viloyati": ["Farg‘ona shahri", "Marg‘ilon shahri", "Quvasoy shahri", "Qo‘qon shahri", "Bag‘dod", "Beshariq", "Buvayda", "Dang‘ara", "Farg‘ona tumani", "Furqat", "Oltiariq", "Qo‘shtepa", "Rishton", "So‘x", "Toshloq", "Uchko‘prik", "O‘zbekiston", "Yozyovon"],
-  "Xorazm viloyati": ["Urganch shahri", "Xiva shahri", "Bog‘ot", "Gurlan", "Qo‘shko‘pir", "Shovot", "Urganch tumani", "Xazarasp", "Xiva tumani", "Yangiariq", "Yangibozor", "Tuproqqal’a"],
-  "Toshkent shahri": ["Bektemir", "Chilonzor", "Hamza (Yashnobod)", "Mirobod", "Mirzo Ulug‘bek", "Olmazor", "Sergeli", "Shayxontohur", "Uchtepa", "Yakkasaroy", "Yunusobod", "Yangihayot"]
-};
-const DB_KEY = 'ytm_db_v1';
-let db = { events: [], ideas: [], rooms: [] };
-function loadDB() {
-  try { const raw = localStorage.getItem(DB_KEY); if (raw) { const parsed = JSON.parse(raw); db.events = Array.isArray(parsed.events) ? parsed.events : []; db.ideas = Array.isArray(parsed.ideas) ? parsed.ideas : []; db.rooms = Array.isArray(parsed.rooms) ? parsed.rooms : []; } } catch (_) {}
-}
-function saveAll() { try { localStorage.setItem(DB_KEY, JSON.stringify(db)); } catch (_) {} }
-function esc(str) { return String(str ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
-function csvCell(val) { const s = String(val ?? '').replace(/"/g, '""'); return `"${s}"`; }
-function initSelects() {
-  const tracksGrid = document.getElementById('tracksGrid');
-  if (tracksGrid) tracksGrid.innerHTML = TRACKS.map(t => `<div class="card" style="margin-bottom:0;padding:12px;"><span class="badge">Yo‘nalish</span><div style="font-weight:600;font-size:0.92rem;">${esc(t)}</div></div>`).join('');
-  document.querySelectorAll('.track-select').forEach(sel => { sel.innerHTML = TRACKS.map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join(''); });
-  const regionNames = Object.keys(REGIONS);
-  document.querySelectorAll('.region-select').forEach(sel => { sel.innerHTML = regionNames.map(r => `<option value="${esc(r)}">${esc(r)}</option>`).join(''); sel.addEventListener('change', () => syncDistrictsForRegion(sel)); });
-  document.querySelectorAll('.region-select').forEach(sel => syncDistrictsForRegion(sel));
-  const fltRegion = document.getElementById('fltRegion');
-  if (fltRegion) { fltRegion.innerHTML = `<option value="ALL">Barcha hududlar (14)</option>` + regionNames.map(r => `<option value="${esc(r)}">${esc(r)}</option>`).join(''); fltRegion.addEventListener('change', renderAdminTables); }
-  const fltTrack = document.getElementById('fltTrack');
-  if (fltTrack) { fltTrack.innerHTML = `<option value="ALL">Barcha yo‘nalishlar (5)</option>` + TRACKS.map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join(''); fltTrack.addEventListener('change', renderAdminTables); }
-}
-function syncDistrictsForRegion(regionSel) { const form = regionSel.closest('form'); if (!form) return; const distSel = form.querySelector('.district-select'); if (!distSel) return; const list = REGIONS[regionSel.value] || []; distSel.innerHTML = list.map(d => `<option value="${esc(d)}">${esc(d)}</option>`).join(''); }
-function renderHomeLists() {
-  const homeEvents = document.getElementById('homeEvents');
-  if (homeEvents) homeEvents.innerHTML = db.events.length ? db.events.slice(-5).reverse().map(e => `<div class="list-item"><span class="badge">${esc(e.region)}</span><div><b>${esc(e.name)}</b> — ${esc(e.title)}</div><div class="muted" style="margin-bottom:0;">${esc(e.district)} · ${esc(e.track)}</div></div>`).join('') : `<p class="muted" style="margin-bottom:0;">Hali ariza yo‘q.</p>`;
-  const homeIR = document.getElementById('homeIdeasRooms');
-  if (homeIR) { const combined = [...db.ideas.map(i => ({ kind: 'G‘oya', region: i.region, title: `${i.name}: ${i.text}`, sub: `${i.district} · ${i.track}`, t: i.time })), ...db.rooms.map(r => ({ kind: 'Xona', region: r.region, title: `${r.type} (${r.name})`, sub: `${r.district} · ${r.date} (${r.time})`, t: r.created || '' }))].slice(-5).reverse(); homeIR.innerHTML = combined.length ? combined.map(x => `<div class="list-item"><span class="badge">${esc(x.kind)} · ${esc(x.region)}</span><div><b>${esc(x.title)}</b></div><div class="muted" style="margin-bottom:0;">${esc(x.sub)}</div></div>`).join('') : `<p class="muted" style="margin-bottom:0;">Hali g‘oya yoki bandlov yo‘q.</p>`; }
-}
-function renderAdminTables() {
-  const regVal = document.getElementById('fltRegion')?.value || 'ALL', trkVal = document.getElementById('fltTrack')?.value || 'ALL';
-  const evRows = db.events.filter(e => (regVal === 'ALL' || e.region === regVal) && (trkVal === 'ALL' || e.track === trkVal));
-  const idRows = db.ideas.filter(i => (regVal === 'ALL' || i.region === regVal) && (trkVal === 'ALL' || i.track === trkVal));
-  const rmRows = db.rooms.filter(r => (regVal === 'ALL' || r.region === regVal));
-  const evBody = document.getElementById('admEventsBody'); if (evBody) evBody.innerHTML = evRows.length ? evRows.slice().reverse().map(e => `<tr><td>${esc(e.time)}</td><td>${esc(e.name)}</td><td>${esc(e.phone)}</td><td>${esc(e.region)}</td><td>${esc(e.district)}</td><td>${esc(e.track)}</td><td>${esc(e.title)}</td></tr>`).join('') : `<tr><td colspan="7">Ma’lumot topilmadi</td></tr>`;
-  const idBody = document.getElementById('admIdeasBody'); if (idBody) idBody.innerHTML = idRows.length ? idRows.slice().reverse().map(i => `<tr><td>${esc(i.time)}</td><td>${esc(i.name)}</td><td>${esc(i.region)}</td><td>${esc(i.district)}</td><td>${esc(i.track)}</td><td>${esc(i.text)}</td></tr>`).join('') : `<tr><td colspan="6">Ma’lumot topilmadi</td></tr>`;
-  const rmBody = document.getElementById('admRoomsBody'); if (rmBody) rmBody.innerHTML = rmRows.length ? rmRows.slice().reverse().map(r => `<tr><td>${esc(r.date)}</td><td>${esc(r.name)}</td><td>${esc(r.region)}</td><td>${esc(r.district)}</td><td>${esc(r.type)}</td><td>${esc(r.time)}</td></tr>`).join('') : `<tr><td colspan="6">Ma’lumot topilmadi</td></tr>`;
-}
-function expCSV() {
-  const lines = [['Tur', 'Sana/Vaqt', 'Ism', 'Telefon', 'Hudud', 'Tuman/Shahar', 'Yo‘nalish/Xona', 'Mazmun/Oraliq'].map(csvCell).join(',')];
-  db.events.forEach(e => lines.push(['Tadbir', e.time, e.name, e.phone, e.region, e.district, e.track, e.title].map(csvCell).join(',')));
-  db.ideas.forEach(i => lines.push(['G‘oya', i.time, i.name, '', i.region, i.district, i.track, i.text].map(csvCell).join(',')));
-  db.rooms.forEach(u => lines.push(['Xona', u.date, u.name, '', u.region, u.district, u.type, u.time].map(csvCell).join(',')));
-  const blob = new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/csv;charset=utf-8;' }), url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = 'ytm_malumotlar.csv'; a.click(); URL.revokeObjectURL(url);
-}
-document.querySelectorAll('nav button[data-tab]').forEach(btn => btn.addEventListener('click', () => { document.querySelectorAll('nav button[data-tab]').forEach(b => b.classList.remove('active')); btn.classList.add('active'); const target = btn.getAttribute('data-tab'); document.querySelectorAll('.section').forEach(sec => sec.classList.toggle('active', sec.id === target)); if (target === 'home') renderHomeLists(); if (target === 'admin') renderAdminTables(); }));
-document.getElementById('eventForm')?.addEventListener('submit', e => { e.preventDefault(); db.events.push({time:new Date().toLocaleString('uz-UZ'),name:document.getElementById('evName').value.trim(),phone:document.getElementById('evPhone').value.trim(),region:document.getElementById('evRegion').value,district:document.getElementById('evDistrict').value,track:document.getElementById('evTrack').value,title:document.getElementById('evTitle').value.trim()}); saveAll(); renderHomeLists(); renderAdminTables(); e.target.reset(); syncDistrictsForRegion(document.getElementById('evRegion')); document.getElementById('evMsg').textContent='Tadbirga muvaffaqiyatli yozildingiz!'; });
-document.getElementById('ideaForm')?.addEventListener('submit', e => { e.preventDefault(); db.ideas.push({time:new Date().toLocaleString('uz-UZ'),name:document.getElementById('idName').value.trim(),region:document.getElementById('idRegion').value,district:document.getElementById('idDistrict').value,track:document.getElementById('idTrack').value,text:document.getElementById('idText').value.trim()}); saveAll(); renderHomeLists(); renderAdminTables(); e.target.reset(); syncDistrictsForRegion(document.getElementById('idRegion')); document.getElementById('idMsg').textContent='G‘oyangiz yuborildi!'; });
-document.getElementById('roomForm')?.addEventListener('submit', e => { e.preventDefault(); db.rooms.push({created:new Date().toLocaleString('uz-UZ'),name:document.getElementById('rmName').value.trim(),region:document.getElementById('rmRegion').value,district:document.getElementById('rmDistrict').value,type:document.getElementById('rmType').value,date:document.getElementById('rmDate').value,time:document.getElementById('rmTime').value.trim()}); saveAll(); renderHomeLists(); renderAdminTables(); e.target.reset(); syncDistrictsForRegion(document.getElementById('rmRegion')); document.getElementById('rmMsg').textContent='Xona muvaffaqiyatli band qilindi!'; });
-document.getElementById('pinForm')?.addEventListener('submit', e => { e.preventDefault(); const pin=document.getElementById('pinInput').value.trim(); if(pin==='0708'){document.getElementById('pinErr').textContent='';document.getElementById('adminGate').style.display='none';document.getElementById('adminPanel').style.display='block';renderAdminTables();}else document.getElementById('pinErr').textContent='PIN kod noto‘g‘ri!'; });
-document.getElementById('logoutAdminBtn')?.addEventListener('click', () => { document.getElementById('adminPanel').style.display='none'; document.getElementById('adminGate').style.display='block'; document.getElementById('pinInput').value=''; });
-document.getElementById('exportCsvBtn')?.addEventListener('click', expCSV);
-if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
-loadDB(); initSelects(); renderHomeLists(); saveAll();
+(() => {
+  'use strict';
+  const STORAGE_KEY='ytm_pwa_state_v1';
+  const TRACKS=[
+    {id:'YTM // TECH',badge:'∿',name:'YTM // TECH',desc:'Raqamli texnologiyalar, dasturlash, robototexnika va sun’iy intellekt yo‘nalishi.'},
+    {id:'YTM // BIZNES',badge:'↗',name:'YTM // BIZNES',desc:'Tadbirkorlik, startaplar, moliyaviy savodxonlik va loyihalarni rivojlantirish.'},
+    {id:'YTM // KREATIV',badge:'✦',name:'YTM // KREATIV',desc:'Dizayn, media, kontent yaratish va madaniy tashabbuslar yo‘nalishi.'},
+    {id:'YTM // VOLONTYOR',badge:'♡',name:'YTM // VOLONTYOR',desc:'Ijtimoiy ko‘mak, ekologiya va jamoaviy xayriya tashabbuslari.'},
+    {id:'YTM // KASB-TIL',badge:'⌘',name:'YTM // KASB-TIL',desc:'Xorijiy tillar, zamonaviy kasblar, amaliy laboratoriya va malaka oshirish.'}
+  ];
+  const EVENTS=[
+    {id:'ev-1',track:'YTM // TECH',title:'Sun’iy intellekt va amaliy loyihalar',date:'26-noyabr',times:['10:00 - 12:00','14:00 - 16:00','16:30 - 18:30'],place:'YTM Markazi, IT laboratoriya'},
+    {id:'ev-2',track:'YTM // BIZNES',title:'Startap g‘oyadan biznes modelgacha',date:'27-noyabr',times:['10:30 - 12:30','15:00 - 17:00'],place:'YTM Markazi, biznes trening zali'},
+    {id:'ev-3',track:'YTM // KREATIV',title:'Vizual dizayn va brending mahorat darsi',date:'29-noyabr',times:['11:00 - 13:00','15:00 - 17:00'],place:'YTM Markazi, studiya'},
+    {id:'ev-4',track:'YTM // VOLONTYOR',title:'Yashil hudud va jamoaviy volontyorlik forumi',date:'30-noyabr',times:['09:30 - 11:30','14:00 - 16:00'],place:'YTM Markazi, anjumanlar zali'},
+    {id:'ev-5',track:'YTM // KASB-TIL',title:'Zamonaviy kasblar va til klubi ochiq darsi',date:'02-dekabr',times:['10:00 - 12:00','14:30 - 16:30'],place:'YTM Markazi, til va kasb xonasi'}
+  ];
+  const NEWS=[
+    {tag:'YANGILIK',title:'Hududiy YTM markazlarida yangi o‘quv va mentorlik mavsumi',desc:'Yoshlar g‘oyalari bilan qatnashishi, laboratoriyalardan foydalanishi va mentorlardan maslahat olishi mumkin.'},
+    {tag:'G‘OYALAR QO‘LLABI',title:'Tashabbuslarga mentorlik va inkubatsiya ko‘magi',desc:'Texnologiya, biznes, ijod va ijtimoiy sohadagi g‘oyalar ekspertlar tomonidan ko‘rib chiqiladi.'},
+    {tag:'MUHIM MA’LUMOT',title:'Xona va laboratoriyalardan oldindan joy band qilish',desc:'IT, laboratoriya, biznes trening, til va kasbga o‘qitish xonalarini vaqt bo‘yicha band qiling.'}
+  ];
+  const REGIONS={
+    'Toshkent shahri':['Bektemir tumani','Chilonzor tumani','Mirobod tumani','Mirzo Ulug‘bek tumani','Olmazor tumani','Sergeli tumani','Shayxontohur tumani','Uchtepa tumani','Yakkasaroy tumani','Yangihayot tumani','Yashnobod tumani','Yunusobod tumani'],
+    'Toshkent viloyati':['Nurafshon shahri','Angren shahri','Bekobod shahri','Chirchiq shahri','Olmaliq shahri','Ohangaron shahri','Yangiyo‘l shahri','Bekobod tumani','Bo‘ka tumani','Bo‘stonliq tumani','Chinoz tumani','Qibray tumani','Ohangaron tumani','Oqqo‘rg‘on tumani','Parkent tumani','Piskent tumani','Quyi Chirchiq tumani','O‘rta Chirchiq tumani','Yangiyo‘l tumani','Yuqori Chirchiq tumani','Zangiota tumani'],
+    'Andijon viloyati':['Andijon shahri','Xonobod shahri','Andijon tumani','Asaka tumani','Baliqchi tumani','Bo‘ston tumani','Buloqboshi tumani','Izboskan tumani','Jalolquduq tumani','Marhamat tumani','Oltinko‘l tumani','Paxtaobod tumani','Qo‘rg‘ontepa tumani','Shahrixon tumani','Ulug‘nor tumani','Xo‘jaobod tumani'],
+    'Buxoro viloyati':['Buxoro shahri','Kogon shahri','Olot tumani','Buxoro tumani','G‘ijduvon tumani','Jondor tumani','Kogon tumani','Qorako‘l tumani','Qorovulbozor tumani','Peshku tumani','Romitan tumani','Shofirkon tumani','Vobkent tumani'],
+    'Farg‘ona viloyati':['Farg‘ona shahri','Marg‘ilon shahri','Qo‘qon shahri','Quvasoy shahri','Bag‘dod tumani','Beshariq tumani','Buvayda tumani','Dang‘ara tumani','Farg‘ona tumani','Furqat tumani','Oltiariq tumani','Qo‘shtepa tumani','Quva tumani','Rishton tumani','So‘x tumani','Toshloq tumani','Uchko‘prik tumani','O‘zbekiston tumani','Yozyovon tumani'],
+    'Jizzax viloyati':['Jizzax shahri','Arnasoy tumani','Baxmal tumani','Do‘stlik tumani','Forish tumani','G‘allaorol tumani','Mirzacho‘l tumani','Paxtakor tumani','Yangiobod tumani','Zomin tumani','Zafarobod tumani','Zarbdor tumani'],
+    'Xorazm viloyati':['Urganch shahri','Xiva shahri','Bog‘ot tumani','Gurlan tumani','Xonqa tumani','Xiva tumani','Qo‘shko‘pir tumani','Shovot tumani','Tuproqqal’a tumani','Urganch tumani','Yangiariq tumani','Yangibozor tumani'],
+    'Namangan viloyati':['Namangan shahri','Chortoq tumani','Chust tumani','Kosonsoy tumani','Mingbuloq tumani','Namangan tumani','Norin tumani','Pop tumani','To‘raqo‘rg‘on tumani','Uchqo‘rg‘on tumani','Uychi tumani','Yangiqo‘rg‘on tumani','Davlatobod tumani','Yangi Namangan tumani'],
+    'Navoiy viloyati':['Navoiy shahri','Zarafshon shahri','G‘ozg‘on shahri','Karmana tumani','Konimex tumani','Navbahor tumani','Nurota tumani','Tomdi tumani','Uchquduq tumani','Xatirchi tumani','Qiziltepa tumani'],
+    'Qashqadaryo viloyati':['Qarshi shahri','Shahrisabz shahri','Chiroqchi tumani','Dehqonobod tumani','G‘uzor tumani','Kasbi tumani','Kitob tumani','Koson tumani','Mirishkor tumani','Muborak tumani','Nishon tumani','Qamashi tumani','Qarshi tumani','Shahrisabz tumani','Yakkabog‘ tumani','Ko‘kdala tumani'],
+    'Qoraqalpog‘iston Respublikasi':['Nukus shahri','Amudaryo tumani','Beruniy tumani','Chimboy tumani','Ellikqal’a tumani','Kegeyli tumani','Mo‘ynoq tumani','Nukus tumani','Qonliko‘l tumani','Qo‘ng‘irot tumani','Qorao‘zak tumani','Shumanay tumani','Taxtako‘pir tumani','To‘rtko‘l tumani','Xo‘jayli tumani','Taxiatosh tumani','Bo‘zatov tumani'],
+    'Samarqand viloyati':['Samarqand shahri','Kattaqo‘rg‘on shahri','Bulung‘ur tumani','Ishtixon tumani','Jomboy tumani','Kattaqo‘rg‘on tumani','Narpay tumani','Nurobod tumani','Oqdaryo tumani','Payariq tumani','Pastdarg‘om tumani','Paxtachi tumani','Samarqand tumani','Toyloq tumani','Urgut tumani','Qo‘shrabot tumani'],
+    'Sirdaryo viloyati':['Guliston shahri','Shirin shahri','Yangiyer shahri','Boyovut tumani','Guliston tumani','Mirzaobod tumani','Oqoltin tumani','Sardoba tumani','Sayxunobod tumani','Sirdaryo tumani','Xovos tumani'],
+    'Surxondaryo viloyati':['Termiz shahri','Angor tumani','Bandixon tumani','Boysun tumani','Denov tumani','Jarqo‘rg‘on tumani','Muzrabot tumani','Oltinsoy tumani','Qiziriq tumani','Qumqo‘rg‘on tumani','Sariosiyo tumani','Sherobod tumani','Sho‘rchi tumani','Termiz tumani','Uzun tumani']
+  };
+  const freshState=()=>({selectedTrack:'ALL',registrations:[],ideas:[],bookings:[]});
+  function loadState(){try{const p=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');return p?{selectedTrack:p.selectedTrack||'ALL',registrations:Array.isArray(p.registrations)?p.registrations:[],ideas:Array.isArray(p.ideas)?p.ideas:[],bookings:Array.isArray(p.bookings)?p.bookings:[]}:freshState()}catch{return freshState()}}
+  let state=loadState();
+  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));return true}catch{alert('Ma’lumotni saqlab bo‘lmadi. Qurilma xotirasini tekshiring.');return false}}
+  const $=id=>document.getElementById(id);
+  function setPage(name){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.page===name));if(name==='tickets')renderTickets()}
+  document.querySelectorAll('.nav-item').forEach(b=>b.addEventListener('click',()=>setPage(b.dataset.page)));
+  $('heroJoinBtn').addEventListener('click',()=>{setPage('register');switchSubTab('event')});
+  function renderFilterBar(){const ids=['ALL',...TRACKS.map(t=>t.id)];$('filterBar').innerHTML=ids.map(id=>`<button class="chip ${state.selectedTrack===id?'active':''}" type="button" data-track="${esc(id)}">${id==='ALL'?'Barchasi':esc(id)}</button>`).join('');$('filterBar').querySelectorAll('[data-track]').forEach(b=>b.addEventListener('click',()=>{state.selectedTrack=b.dataset.track;saveState();renderFilterBar();renderHome();if(state.selectedTrack!=='ALL')syncTrackSelects(state.selectedTrack)}))}
+  function renderHome(){const selected=state.selectedTrack,tracks=selected==='ALL'?TRACKS:TRACKS.filter(t=>t.id===selected);$('tracksList').innerHTML=tracks.map(t=>`<div class="track-card ${selected===t.id?'selected':''}" data-pick-track="${esc(t.id)}"><div class="track-top"><div class="track-badge">${esc(t.badge)}</div><div class="track-name">${esc(t.name)}</div></div><div class="track-desc">${esc(t.desc)}</div></div>`).join('');$('tracksList').querySelectorAll('[data-pick-track]').forEach(c=>c.addEventListener('click',()=>{syncTrackSelects(c.dataset.pickTrack);setPage('register');switchSubTab('event')}));const filtered=selected==='ALL'?EVENTS:EVENTS.filter(e=>e.track===selected);$('eventsCountLabel').textContent=`${filtered.length} ta tadbir`;$('heroTag').textContent=`YTM 2026 • ${EVENTS.length} ta faol tadbir`;$('heroRegCount').textContent=`${state.registrations.length} ta yosh ishtirokchi ro‘yxatdan o‘tgan`;$('eventsList').innerHTML=filtered.map(ev=>`<div class="event-card"><span class="pill-tag">${esc(ev.track)}</span><div class="event-title">${esc(ev.title)}</div><div class="event-meta"><span>🗓 ${esc(ev.date)} • ${esc(ev.times[0])}</span><span>📍 ${esc(ev.place)}</span></div><button class="btn-orange full" type="button" data-ev-id="${esc(ev.id)}">Ro‘yxatdan o‘tish</button></div>`).join('');$('eventsList').querySelectorAll('[data-ev-id]').forEach(b=>b.addEventListener('click',()=>{const ev=EVENTS.find(x=>x.id===b.dataset.evId);if(!ev)return;syncTrackSelects(ev.track);populateEventDropdown(ev.track,ev.id);setPage('register');switchSubTab('event')}));$('newsList').innerHTML=NEWS.map(n=>`<div class="info-card"><span class="pill-tag">${esc(n.tag)}</span><div class="info-title">${esc(n.title)}</div><div class="info-desc">${esc(n.desc)}</div></div>`).join('')}
+  function switchSubTab(sub){document.querySelectorAll('#regSubTabs .chip').forEach(c=>c.classList.toggle('active',c.dataset.sub===sub));['event','idea','room'].forEach(x=>$(x+'Form').style.display=x===sub?'block':'none')}
+  document.querySelectorAll('#regSubTabs .chip').forEach(b=>b.addEventListener('click',()=>switchSubTab(b.dataset.sub)));
+  function fillRegionDistrict(regionSel,districtSel){const names=Object.keys(REGIONS);regionSel.innerHTML=names.map(r=>`<option value="${esc(r)}">${esc(r)}</option>`).join('');const update=()=>{districtSel.innerHTML=(REGIONS[regionSel.value]||[]).map(d=>`<option value="${esc(d)}">${esc(d)}</option>`).join('')};regionSel.addEventListener('change',update);update()}
+  const evRegion=$('evRegion'),evDistrict=$('evDistrict'),ideaRegion=$('ideaRegion'),ideaDistrict=$('ideaDistrict'),rmRegion=$('rmRegion'),rmDistrict=$('rmDistrict');
+  fillRegionDistrict(evRegion,evDistrict);fillRegionDistrict(ideaRegion,ideaDistrict);fillRegionDistrict(rmRegion,rmDistrict);
+  const evTrack=$('evTrack'),ideaTrack=$('ideaTrack'),evSelect=$('evSelect'),evTime=$('evTime');
+  function populateTrackSelects(){const opts=TRACKS.map(t=>`<option value="${esc(t.id)}">${esc(t.name)}</option>`).join('');evTrack.innerHTML=opts;ideaTrack.innerHTML=opts}
+  function populateEventDropdown(trackId,preferred){const list=EVENTS.filter(e=>e.track===trackId);evSelect.innerHTML=list.map(e=>`<option value="${esc(e.id)}">${esc(e.title)} (${esc(e.date)})</option>`).join('');if(preferred&&list.some(e=>e.id===preferred))evSelect.value=preferred;populateTimeDropdown()}
+  function populateTimeDropdown(){const event=EVENTS.find(e=>e.id===evSelect.value)||EVENTS[0];evTime.innerHTML=event.times.map(tm=>`<option value="${esc(tm)}">${esc(event.date)} • ${esc(tm)}</option>`).join('')}
+  function syncTrackSelects(id){const valid=TRACKS.some(t=>t.id===id)?id:TRACKS[0].id;evTrack.value=valid;ideaTrack.value=valid;populateEventDropdown(valid)}
+  evTrack.addEventListener('change',()=>populateEventDropdown(evTrack.value));evSelect.addEventListener('change',populateTimeDropdown);
+  function makeCode(prefix){return prefix+'-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase()}
+  $('eventForm').addEventListener('submit',e=>{e.preventDefault();const ev=EVENTS.find(x=>x.id===evSelect.value);if(!ev)return;const item={code:makeCode('YTM'),name:$('evName').value.trim(),phone:$('evPhone').value.trim(),region:evRegion.value,district:evDistrict.value,track:evTrack.value,eventTitle:ev.title,date:ev.date,time:evTime.value,place:ev.place,createdAt:new Date().toLocaleString('uz-UZ')};state.registrations.unshift(item);if(!saveState())return;renderHome();$('evMsg').textContent=`Ro‘yxatdan o‘tdingiz! Chipta raqami: ${item.code}`;e.target.reset();populateEventDropdown(TRACKS[0].id);setPage('tickets')});
+  $('ideaForm').addEventListener('submit',e=>{e.preventDefault();const item={code:makeCode('IDEA'),author:$('ideaAuthor').value.trim(),phone:$('ideaPhone').value.trim(),region:ideaRegion.value,district:ideaDistrict.value,track:ideaTrack.value,title:$('ideaTitle').value.trim(),support:$('ideaSupportType').value,desc:$('ideaDesc').value.trim(),createdAt:new Date().toLocaleString('uz-UZ')};state.ideas.unshift(item);if(!saveState())return;$('ideaMsg').textContent=`G‘oyangiz qabul qilindi (${item.code}).`;e.target.reset();setPage('tickets')});
+  $('roomForm').addEventListener('submit',e=>{e.preventDefault();const item={code:makeCode('ROOM'),name:$('rmName').value.trim(),phone:$('rmPhone').value.trim(),region:rmRegion.value,district:rmDistrict.value,space:$('rmSpace').value,date:$('rmDate').value,time:$('rmSlot').value,createdAt:new Date().toLocaleString('uz-UZ')};state.bookings.unshift(item);if(!saveState())return;$('roomMsg').textContent=`Bandlov so‘rovi yuborildi (${item.code}).`;e.target.reset();$('rmDate').min=new Date().toISOString().slice(0,10);setPage('tickets')});
+  function renderTickets(){const total=state.registrations.length+state.bookings.length+state.ideas.length;$('ticketsCountLabel').textContent=`${total} ta yozuv`;let html='';state.registrations.forEach(r=>html+=`<div class="ticket-card"><span class="pill-tag">CHIPTA • ${esc(r.code)}</span><div class="event-title">${esc(r.eventTitle)}</div><div class="info-desc">👤 ${esc(r.name)} (${esc(r.phone)})<br>📍 ${esc(r.region)}, ${esc(r.district)}<br>🕒 ${esc(r.date)} • ${esc(r.time)} • ${esc(r.place)}</div></div>`);state.bookings.forEach(b=>html+=`<div class="ticket-card"><span class="pill-tag">BANDLOV • ${esc(b.code)}</span><div class="event-title">${esc(b.space)}</div><div class="info-desc">👤 ${esc(b.name)} (${esc(b.phone)})<br>📍 ${esc(b.region)}, ${esc(b.district)}<br>🗓 ${esc(b.date)} • 🕒 ${esc(b.time)}</div></div>`);state.ideas.forEach(g=>html+=`<div class="info-card"><span class="pill-tag">G‘OYA • ${esc(g.code)}</span><div class="info-title">${esc(g.title)}</div><div class="info-desc">👤 ${esc(g.author)} • ${esc(g.track)} • ${esc(g.support)}<br>📍 ${esc(g.region)}, ${esc(g.district)}</div></div>`);$('ticketsList').innerHTML=html||'<div class="info-card"><div class="info-desc">Hali chipta, g‘oya yoki xona bandlovi mavjud emas.</div></div>'}
+  const adminModal=$('adminModal'),adminPinCard=$('adminPinCard'),adminPanelCard=$('adminPanelCard');
+  $('openAdminBtn').addEventListener('click',()=>{adminModal.classList.add('open');adminPinCard.style.display='block';adminPanelCard.style.display='none';$('adminPinInput').value='';$('adminPinErr').textContent=''});
+  const closeAdmin=()=>adminModal.classList.remove('open');$('closeAdminBtn1').addEventListener('click',closeAdmin);$('closeAdminBtn2').addEventListener('click',closeAdmin);adminModal.addEventListener('click',e=>{if(e.target===adminModal)closeAdmin()});
+  $('adminPinSubmit').addEventListener('click',()=>{if($('adminPinInput').value==='0708'){$('adminPinErr').textContent='';adminPinCard.style.display='none';adminPanelCard.style.display='block';renderAdminPanel()}else $('adminPinErr').textContent='PIN kod noto‘g‘ri!'});
+  $('adminPinInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('adminPinSubmit').click()});
+  function renderAdminPanel(){ $('adminStatsText').textContent=`Ishtirokchilar: ${state.registrations.length} | G‘oyalar: ${state.ideas.length} | Xona bandlovlari: ${state.bookings.length}`;const reg=state.registrations.map(r=>`<tr><td>${esc(r.code)}</td><td>${esc(r.name)}</td><td>${esc(r.phone)}</td><td>${esc(r.region)} / ${esc(r.district)}</td><td>${esc(r.track)}</td><td>${esc(r.eventTitle)}</td><td>${esc(r.date)} ${esc(r.time)}</td></tr>`).join('')||'<tr><td colspan="7">Ma’lumot yo‘q</td></tr>';const ideas=state.ideas.map(g=>`<tr><td>${esc(g.code)}</td><td>${esc(g.author)}</td><td>${esc(g.phone)}</td><td>${esc(g.region)} / ${esc(g.district)}</td><td>${esc(g.track)}</td><td>${esc(g.title)} — ${esc(g.desc)}</td></tr>`).join('')||'<tr><td colspan="6">Ma’lumot yo‘q</td></tr>';const rooms=state.bookings.map(b=>`<tr><td>${esc(b.code)}</td><td>${esc(b.name)}</td><td>${esc(b.phone)}</td><td>${esc(b.region)} / ${esc(b.district)}</td><td>${esc(b.space)}</td><td>${esc(b.date)}</td><td>${esc(b.time)}</td></tr>`).join('')||'<tr><td colspan="7">Ma’lumot yo‘q</td></tr>'; $('adminTables').innerHTML=`<div class="sec-head"><div class="sec-title">Tadbir ro‘yxati</div></div><table><thead><tr><th>Kod</th><th>Ism</th><th>Telefon</th><th>Hudud</th><th>Yo‘nalish</th><th>Tadbir</th><th>Sana / vaqt</th></tr></thead><tbody>${reg}</tbody></table><div class="sec-head"><div class="sec-title">Yuborilgan g‘oyalar</div></div><table><thead><tr><th>Kod</th><th>Muallif</th><th>Telefon</th><th>Hudud</th><th>Yo‘nalish</th><th>G‘oya</th></tr></thead><tbody>${ideas}</tbody></table><div class="sec-head"><div class="sec-title">Xona bandlovlari</div></div><table><thead><tr><th>Kod</th><th>Ism</th><th>Telefon</th><th>Hudud</th><th>Xona</th><th>Sana</th><th>Vaqt</th></tr></thead><tbody>${rooms}</tbody></table>`}
+  function csvCell(value){let text=String(value??'');if(/^[=+\-@\t\r]/.test(text))text="'"+text;return '"'+text.replace(/"/g,'""')+'"'}
+  $('exportCsvBtn').addEventListener('click',()=>{const rows=[['Tur','Kod','Sana','Ism','Telefon','Hudud','Tuman','Yo‘nalish/Xona','Tadbir/G‘oya/Mazmun','Vaqt']];state.registrations.forEach(r=>rows.push(['Tadbir',r.code,r.date,r.name,r.phone,r.region,r.district,r.track,r.eventTitle,`${r.time} • ${r.place}`]));state.ideas.forEach(g=>rows.push(['G‘oya',g.code,g.createdAt,g.author,g.phone,g.region,g.district,g.track,`${g.title}: ${g.desc}`,g.support]));state.bookings.forEach(b=>rows.push(['Xona',b.code,b.date,b.name,b.phone,b.region,b.district,b.space,b.time,b.createdAt]));const blob=new Blob(['\uFEFF'+rows.map(row=>row.map(csvCell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='ytm_malumotlar.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+  $('clearDataBtn').addEventListener('click',()=>{if(!confirm('Barcha arizalar, g‘oyalar va bandlovlar o‘chirilsinmi?'))return;state=freshState();saveState();renderHome();renderTickets();renderAdminPanel()});
+  let deferredPrompt=null;const installBtn=$('installAppBtn');window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e});installBtn.addEventListener('click',async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null}else alert('Ilovani o‘rnatish uchun brauzer menyusidagi “Ilovani o‘rnatish” bandini tanlang.')});
+  if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+  populateTrackSelects();syncTrackSelects(state.selectedTrack==='ALL'?TRACKS[0].id:state.selectedTrack);$('rmDate').min=new Date().toISOString().slice(0,10);renderFilterBar();renderHome();renderTickets();
+})();
 </script>
 </body>
 </html>
