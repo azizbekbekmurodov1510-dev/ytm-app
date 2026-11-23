@@ -1,64 +1,217 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#06161d">
-<title>YTM — Yoshlar tashabbuslari markazi</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}body{background:#06161d;color:#f1f5f9;min-height:100vh;padding-bottom:88px}.hdr{position:sticky;top:0;z-index:20;background:rgba(6,22,29,.94);backdrop-filter:blur(12px);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #0e2c38}.brand{display:flex;align-items:center;gap:10px;min-width:0}.logo{width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0}.brand-txt{min-width:0}.brand h1{font-size:13.5px;font-weight:700;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand p{font-size:11px;color:#8fa8b5;margin-top:1px}.adm-btn{background:#0e2733;border:1px solid #1b4354;color:#e2e8f0;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer;flex-shrink:0}.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 16px 6px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{background:#091f28;border:1px solid #153644;color:#cbd5e1;padding:7px 14px;border-radius:20px;font-size:11.5px;font-weight:700;letter-spacing:.3px;white-space:nowrap;cursor:pointer;transition:.15s}.chip.act{background:#10b981;border-color:#10b981;color:#032b24}.wrap{padding:8px 16px;max-width:480px;margin:auto}.hero{position:relative;border-radius:20px;height:186px;padding:16px;margin-bottom:16px;border:1px solid #1d4959;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 28px rgba(0,0,0,.45);background:#0c2b38}.hero-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}.hero-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,22,29,.22),rgba(6,22,29,.65) 55%,rgba(6,22,29,.94));z-index:1}.hero-top,.hero-btm{position:relative;z-index:2}.pill{display:inline-flex;align-items:center;gap:5px;background:rgba(13,65,62,.84);backdrop-filter:blur(6px);border:1px solid rgba(45,212,191,.35);color:#5eead4;font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px}.hero-btm{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}.hero-txt h2{font-size:17px;font-weight:800;line-height:1.22;color:#fff;margin-bottom:4px}.hero-txt p{font-size:11px;color:#cbd5e1}.cta{background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;border:none;padding:9px 15px;border-radius:14px;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:0 4px 14px rgba(249,115,22,.42);flex-shrink:0}.sec-hdr{display:flex;justify-content:space-between;align-items:center;margin:14px 0 10px}.sec-hdr h3{font-size:14.5px;font-weight:700;color:#f8fafc}.sec-hdr span{font-size:11.5px;color:#10b981;font-weight:600}.t-card{background:#091f28;border:1px solid #133340;border-radius:18px;padding:15px;margin-bottom:12px;transition:.15s;cursor:pointer}.t-card:active{transform:scale(.99);border-color:#10b981}.t-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}.t-ico{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}.t-title{font-size:13.5px;font-weight:800;letter-spacing:.4px;color:#f1f5f9}.t-desc{font-size:12.5px;color:#94a3b8;line-height:1.45}.n-card{background:#091f28;border:1px solid #133340;border-radius:16px;padding:14px;margin-bottom:10px}.n-tag{display:inline-block;padding:3px 9px;border-radius:12px;font-size:10.5px;font-weight:700;background:rgba(16,185,129,.15);color:#34d399;margin-bottom:6px}.n-card h4{font-size:13.5px;font-weight:700;color:#f8fafc;margin-bottom:4px}.n-card p{font-size:12px;color:#94a3b8;line-height:1.45}.n-meta{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:11px;color:#64748b}.seg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:#091f28;padding:5px;border-radius:14px;border:1px solid #133340;margin-bottom:12px}.seg button{background:none;border:none;color:#94a3b8;padding:8px 6px;border-radius:10px;font-size:11.5px;font-weight:700;cursor:pointer}.seg button.act{background:#10b981;color:#032b24}.card{background:#091f28;border:1px solid #133340;border-radius:18px;padding:16px;margin-bottom:14px}label{display:block;font-size:12px;color:#cbd5e1;margin:11px 0 5px;font-weight:600}input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #1b4354;background:#06161d;color:#fff;font-size:13.5px;outline:none}textarea{min-height:76px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:#10b981}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{width:100%;padding:13px;border:none;border-radius:13px;background:linear-gradient(135deg,#10b981,#059669);color:#032b24;font-weight:800;font-size:14px;margin-top:14px;cursor:pointer}.btn-alt{background:linear-gradient(135deg,#f97316,#ea580c);color:#fff}.btn-sec{background:#133340;color:#e2e8f0;font-weight:600;margin-top:8px}.ticket{background:linear-gradient(145deg,#0c2d3a,#06161d);border:2px dashed #10b981;border-radius:20px;padding:18px;text-align:center;margin-bottom:12px}.t-badge{display:inline-block;background:#10b981;color:#032b24;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:800;margin-bottom:8px}.code-box{background:#06161d;padding:12px;border-radius:12px;font-family:monospace;font-size:20px;letter-spacing:2px;color:#2dd4bf;margin:12px 0;border:1px solid #1b4354}.stat{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}.stat div{background:#091f28;padding:10px 6px;border-radius:14px;text-align:center;border:1px solid #133340}.stat b{font-size:19px;color:#2dd4bf;display:block}.item{background:#06161d;padding:12px;border-radius:12px;margin-top:9px;border:1px solid #133340;font-size:12.5px}.row{display:flex;justify-content:space-between;align-items:center;gap:8px}.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(6,22,29,.97);backdrop-filter:blur(12px);border-top:1px solid #0e2c38;display:flex;justify-content:space-around;padding:7px 0 9px;z-index:30}.nav button{background:none;border:none;color:#7a93a0;font-size:10.5px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:2px 8px}.nav .ico-pill{width:48px;height:26px;border-radius:14px;display:flex;align-items:center;justify-content:center;transition:.2s}.nav button.act{color:#34d399}.nav button.act .ico-pill{background:#10b981;color:#fff}.hide{display:none}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YTM — Yoshlar tashabbuslari markazi</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0f172a" />
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --primary: #0f172a;
+      --accent: #2563eb;
+      --border: #e2e8f0;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.5; padding-bottom: 48px; }
+    header { background: var(--primary); color: #fff; padding: 16px 20px; position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+    .brand { font-weight: 700; font-size: 1.1rem; }
+    nav { display: flex; flex-wrap: wrap; gap: 8px; }
+    nav button { background: rgba(255,255,255,0.12); color: #fff; border: 0; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; }
+    nav button.active, nav button:hover { background: var(--accent); }
+    main { max-width: 1040px; margin: 24px auto; padding: 0 16px; }
+    .section { display: none; }
+    .section.active { display: block; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+    h1, h2, h3 { margin-bottom: 10px; }
+    p.muted { color: var(--muted); font-size: 0.92rem; margin-bottom: 12px; }
+    label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 4px; }
+    input, select, textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; font-size: 0.95rem; background: #fff; }
+    textarea { min-height: 84px; resize: vertical; }
+    .btn { background: var(--accent); color: #fff; border: 0; padding: 10px 16px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.92rem; }
+    .btn:hover { opacity: 0.92; }
+    .btn.secondary { background: #e2e8f0; color: var(--text); }
+    .list-item { border-top: 1px solid var(--border); padding: 10px 0; font-size: 0.92rem; }
+    .list-item:first-child { border-top: 0; }
+    .badge { display: inline-block; background: #eff6ff; color: var(--accent); padding: 2px 8px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; margin-bottom: 4px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 10px; }
+    th, td { border: 1px solid var(--border); padding: 8px; text-align: left; }
+    th { background: #f1f5f9; }
+    .table-wrap { overflow-x: auto; }
+    .msg { color: #15803d; font-size: 0.9rem; font-weight: 600; margin-top: 4px; }
+    .err { color: #dc2626; font-size: 0.9rem; font-weight: 600; margin-top: 4px; }
+  </style>
 </head>
 <body>
-<div class="hdr"><div class="brand"><div class="logo"><svg width="36" height="36" viewBox="0 0 40 40" fill="none"><polygon points="20,2 36,11 36,29 20,38 4,29 4,11" fill="#0b2834" stroke="#e2e8f0" stroke-width="2.2"/><path d="M11 24 L17 18 L21 21 L29 13" stroke="#10b981" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 13 H29 V18" stroke="#f97316" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="brand-txt"><h1>YTM — Yoshlar tashabbuslari markazi</h1><p>Mobil ro‘yxatdan o‘tish va xizmatlar ilovasi</p></div></div><button class="adm-btn" onclick="tab('adm')">🔐 Admin</button></div>
-<div class="wrap">
-<div id="v-home"><div class="chips"><button class="chip act" onclick="setTrack('ALL',this)">Barchasi</button><button class="chip" onclick="setTrack('YTM//TECH',this)">YTM//TECH</button><button class="chip" onclick="setTrack('YTM//BIZNES',this)">YTM//BIZNES</button><button class="chip" onclick="setTrack('YTM//KREATIV',this)">YTM//KREATIV</button><button class="chip" onclick="setTrack('YTM//VOLONTYOR',this)">YTM//VOLONTYOR</button><button class="chip" onclick="setTrack('YTM//KARYERA',this)">YTM//KARYERA</button></div>
-<div class="hero" style="margin-top:8px"><svg class="hero-art" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#134e4a"/><stop offset="50%" stop-color="#1e3a5f"/><stop offset="100%" stop-color="#432818"/></linearGradient></defs><rect width="400" height="200" fill="url(#bgG)"/><rect x="20" y="20" width="110" height="75" rx="6" fill="#0f293a" stroke="#2dd4bf" stroke-opacity=".35"/><rect x="28" y="30" width="42" height="24" rx="3" fill="#0ea5e9" fill-opacity=".35"/><rect x="76" y="30" width="44" height="24" rx="3" fill="#f97316" fill-opacity=".35"/><line x1="155" y1="15" x2="155" y2="185" stroke="#38bdf8" stroke-opacity=".25" stroke-width="3"/><line x1="255" y1="15" x2="255" y2="185" stroke="#f97316" stroke-opacity=".25" stroke-width="3"/><rect x="170" y="68" width="210" height="10" rx="3" fill="#0c2433"/><circle cx="205" cy="48" r="11" fill="#fb923c" fill-opacity=".6"/><rect x="192" y="61" width="26" height="32" rx="8" fill="#0284c7" fill-opacity=".65"/><circle cx="295" cy="44" r="11" fill="#fde047" fill-opacity=".55"/><rect x="282" y="57" width="26" height="35" rx="8" fill="#10b981" fill-opacity=".6"/><rect x="65" y="112" width="270" height="14" rx="4" fill="#7c2d12" fill-opacity=".7"/></svg><div class="hero-ov"></div><div class="hero-top"><span class="pill">YTM 2026 • 5 ta faol yo‘nalish</span></div><div class="hero-btm"><div class="hero-txt"><h2>Kelajak tashabbuslarini bugundan boshlang</h2><p><b id="heroCnt">0</b> ta yosh ishtirokchi ro‘yxatdan o‘tgan</p></div><button class="cta" onclick="tab('reg')">Qatnashish →</button></div></div>
-<div class="sec-hdr"><h3>5 ta asosiy yo‘nalish</h3><span>5 ta yo‘nalish</span></div><div id="trackList"></div><div class="sec-hdr"><h3>Yangiliklar</h3><span>Dolzarb</span></div><div id="newsList"></div><div class="sec-hdr"><h3>Yoshlarga doir muhim</h3><span>Eslatma va imkoniyat</span></div><div id="infoList"></div></div>
-<div id="v-reg" class="hide"><div class="seg"><button id="s-event" class="act" onclick="subMode('event')">📅 Tadbir</button><button id="s-idea" onclick="subMode('idea')">💡 G‘oya</button><button id="s-room" onclick="subMode('room')">🏢 Xona bron</button></div>
-<div id="m-event" class="card"><h2 style="font-size:16.5px">Tadbirga ro‘yxatdan o‘tish</h2><p style="font-size:12px;color:#94a3b8">Yo‘nalishga mos tadbir va hududingizni tanlab chipta oling</p><form id="evForm"><label>F.I.Sh</label><input id="ev_name" required placeholder="Masalan: Karimov Jasur"><label>Telefon raqam</label><input id="ev_phone" type="tel" required placeholder="+998 90 123 45 67"><label>Yo‘nalish</label><select id="ev_track" onchange="fillEvents()"></select><label>Tadbir va vaqt</label><select id="ev_session"></select><div class="grid2"><div><label>Viloyat / Hudud</label><select id="ev_reg" onchange="fillDistricts('ev_reg','ev_dist')"></select></div><div><label>Tuman / Shahar</label><select id="ev_dist"></select></div></div><button class="btn btn-alt" type="submit">🎫 Ro‘yxatdan o‘tish va chipta olish</button></form></div>
-<div id="m-idea" class="card hide"><h2 style="font-size:16.5px">G‘oyani qo‘llab-quvvatlashga topshirish</h2><p style="font-size:12px;color:#94a3b8">Loyiha g‘oyangizni yuboring — mentorlik va markaz yordamini oling</p><form id="idForm"><label>Muallif F.I.Sh</label><input id="id_name" required><label>Telefon raqam</label><input id="id_phone" type="tel" required><label>G‘oya nomi</label><input id="id_title" required><label>Yo‘nalish</label><select id="id_track"></select><label>Qanday yordam kerak?</label><select id="id_support"><option>Mentorlik va yo‘l-yo‘riq</option><option>Kovorking va IT/Lab maydoni</option><option>Jamoa yig‘ish va taqdimot (Pitch)</option><option>Grant / tanlovga tayyorgarlik</option></select><div class="grid2"><div><label>Viloyat</label><select id="id_reg" onchange="fillDistricts('id_reg','id_dist')"></select></div><div><label>Tuman / Shahar</label><select id="id_dist"></select></div></div><label>G‘oya tavsifi</label><textarea id="id_desc" required></textarea><button class="btn" type="submit">💡 G‘oyani yuborish</button></form></div>
-<div id="m-room" class="card hide"><h2 style="font-size:16.5px">Xona va laboratoriyadan joy band qilish</h2><p style="font-size:12px;color:#94a3b8">IT, laboratoriya, biznes trening va ta’lim xonalari</p><form id="rmForm"><label>F.I.Sh</label><input id="rm_name" required><label>Telefon</label><input id="rm_phone" type="tel" required><label>Xona / mashg‘ulot turi</label><select id="rm_type"><option>IT va kompyuter xonasi</option><option>Laboratoriya mashg‘ulotlari xonasi</option><option>Biznes trening xonasi</option><option>Til va kasbga o‘qitish xonasi</option><option>Ta’lim / kovorking xonasi</option></select><label>Yo‘nalish</label><select id="rm_track"></select><div class="grid2"><div><label>Viloyat</label><select id="rm_reg" onchange="fillDistricts('rm_reg','rm_dist')"></select></div><div><label>Tuman / Shahar</label><select id="rm_dist"></select></div></div><div class="grid2"><div><label>Sana</label><input id="rm_date" type="date" required></div><div><label>Vaqt oralig‘i</label><select id="rm_time"><option>09:00 - 11:00</option><option>11:30 - 13:30</option><option>14:00 - 16:00</option><option>16:30 - 18:30</option></select></div></div><label>Maqsad</label><input id="rm_goal" required><button class="btn" type="submit">🏢 Joyni band qilish</button></form></div></div>
-<div id="v-pass" class="hide"><div id="passBox"></div><div id="myExtraBox"></div></div>
-<div id="v-adm" class="hide"><div id="admLogin" class="card"><h2>Admin panelga kirish</h2><label>Admin PIN kod</label><input id="pinIn" type="password" inputmode="numeric"><button class="btn" onclick="loginAdm()">Kirish</button></div><div id="admPanel" class="hide"><div class="stat"><div><b id="stEv">0</b>Ishtirokchi</div><div><b id="stId">0</b>G‘oya</div><div><b id="stRm">0</b>Xona bron</div></div><div class="card"><label>Bo‘lim</label><select id="admCat" onchange="renderAdm()"><option value="events">Tadbir ishtirokchilari</option><option value="ideas">G‘oyalar</option><option value="rooms">Xona bandlovlari</option></select><label>Yo‘nalish filtri</label><select id="flt" onchange="renderAdm()"></select><button class="btn" onclick="expCSV()">📥 Joriy bo‘limni CSV yuklab olish</button><div id="admList"></div></div></div></div>
-</div>
-<div class="nav"><button id="n-home" class="act" onclick="tab('home')"><span class="ico-pill">⌂</span>Asosiy</button><button id="n-reg" onclick="tab('reg')"><span class="ico-pill">▣</span>Ro‘yxat</button><button id="n-pass" onclick="tab('pass')"><span class="ico-pill">🎫</span>Chipta</button></div>
+<header>
+  <div class="brand">YTM — Yoshlar tashabbuslari markazi</div>
+  <nav>
+    <button data-tab="home" class="active">Asosiy</button>
+    <button data-tab="events">Tadbirga yozilish</button>
+    <button data-tab="ideas">G‘oyalar</button>
+    <button data-tab="rooms">Xona band qilish</button>
+    <button data-tab="admin">Admin (0708)</button>
+  </nav>
+</header>
+
+<main>
+  <section id="home" class="section active">
+    <div class="card">
+      <h1>Yoshlar tashabbuslari markazi</h1>
+      <p class="muted">5 ta asosiy yo‘nalish, 14 ta hudud va tuman/shaharlar kesimida faoliyat, tadbirlar, g‘oyalar va xona bandlovlari.</p>
+      <div class="grid-5" id="tracksGrid"></div>
+    </div>
+    <div class="grid-2">
+      <div class="card"><h3>So‘nggi tadbir arizalari</h3><div id="homeEvents"></div></div>
+      <div class="card"><h3>So‘nggi g‘oyalar va bandlovlar</h3><div id="homeIdeasRooms"></div></div>
+    </div>
+  </section>
+
+  <section id="events" class="section">
+    <div class="card">
+      <h2>Tadbirga ro‘yxatdan o‘tish</h2>
+      <form id="eventForm">
+        <div class="grid-2">
+          <div><label>F.I.SH.</label><input id="evName" required placeholder="Masalan: Azizbek Karimov" /></div>
+          <div><label>Telefon</label><input id="evPhone" required placeholder="+998 90 123 45 67" /></div>
+          <div><label>Hudud</label><select id="evRegion" class="region-select" required></select></div>
+          <div><label>Tuman / shahar</label><select id="evDistrict" class="district-select" required></select></div>
+          <div><label>Yo‘nalish</label><select id="evTrack" class="track-select" required></select></div>
+          <div><label>Tadbir nomi</label><input id="evTitle" required placeholder="Tadbir yoki loyiha nomi" /></div>
+        </div>
+        <button class="btn" type="submit">Ro‘yxatdan o‘tish</button><div id="evMsg" class="msg"></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="ideas" class="section">
+    <div class="card">
+      <h2>G‘oya va tashabbus yuborish</h2>
+      <form id="ideaForm">
+        <div class="grid-2">
+          <div><label>Muallif F.I.SH.</label><input id="idName" required placeholder="Ism familiyangiz" /></div>
+          <div><label>Hudud</label><select id="idRegion" class="region-select" required></select></div>
+          <div><label>Tuman / shahar</label><select id="idDistrict" class="district-select" required></select></div>
+          <div><label>Yo‘nalish</label><select id="idTrack" class="track-select" required></select></div>
+        </div>
+        <div><label>G‘oya mazmuni</label><textarea id="idText" required placeholder="Tashabbus yoki taklifingizni yozing..."></textarea></div>
+        <button class="btn" type="submit">G‘oyani yuborish</button><div id="idMsg" class="msg"></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="rooms" class="section">
+    <div class="card">
+      <h2>Xona band qilish</h2>
+      <form id="roomForm">
+        <div class="grid-2">
+          <div><label>Mas’ul F.I.SH.</label><input id="rmName" required placeholder="Ism familiyangiz" /></div>
+          <div><label>Hudud</label><select id="rmRegion" class="region-select" required></select></div>
+          <div><label>Tuman / shahar</label><select id="rmDistrict" class="district-select" required></select></div>
+          <div><label>Xona turi</label><select id="rmType" required><option value="Kovorking zonasi">Kovorking zonasi</option><option value="IT / Laboratoriya">IT / Laboratoriya</option><option value="Kutubxona / Mediateka">Kutubxona / Mediateka</option><option value="Majlislar zali">Majlislar zali</option></select></div>
+          <div><label>Sana</label><input id="rmDate" type="date" required /></div>
+          <div><label>Vaqt oralig‘i</label><input id="rmTime" required placeholder="Masalan: 14:00 - 16:00" /></div>
+        </div>
+        <button class="btn" type="submit">Xonani band qilish</button><div id="rmMsg" class="msg"></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="admin" class="section">
+    <div class="card" id="adminGate">
+      <h2>Admin panelga kirish</h2>
+      <p class="muted">Arizalar, g‘oyalar va xona bandlovlarini ko‘rish hamda CSV eksport qilish uchun PIN kodni kiriting.</p>
+      <form id="pinForm"><div class="grid-2"><div><label>PIN kod</label><input id="pinInput" type="password" inputmode="numeric" maxlength="4" required placeholder="****" /></div></div><button class="btn" type="submit">Kirish</button><div id="pinErr" class="err"></div></form>
+    </div>
+    <div id="adminPanel" style="display:none;">
+      <div class="card">
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;"><div><h2>Boshqaruv va filtrlar</h2><p class="muted">14 ta hudud va yo‘nalish bo‘yicha filtrlash hamda CSV yuklab olish.</p></div><div style="display:flex;flex-wrap:wrap;gap:8px;"><button class="btn" id="exportCsvBtn" type="button">CSV eksport</button><button class="btn secondary" id="logoutAdminBtn" type="button">Chiqish</button></div></div>
+        <div class="grid-2" style="margin-top:12px;"><div><label>Hudud bo‘yicha filtr</label><select id="fltRegion"><option value="ALL">Barcha hududlar (14)</option></select></div><div><label>Yo‘nalish bo‘yicha filtr</label><select id="fltTrack"><option value="ALL">Barcha yo‘nalishlar (5)</option></select></div></div>
+      </div>
+      <div class="card"><h3>Tadbirga yozilganlar</h3><div class="table-wrap"><table><thead><tr><th>Vaqt</th><th>F.I.SH.</th><th>Telefon</th><th>Hudud</th><th>Tuman/shahar</th><th>Yo‘nalish</th><th>Tadbir</th></tr></thead><tbody id="admEventsBody"></tbody></table></div></div>
+      <div class="card"><h3>Yuborilgan g‘oyalar</h3><div class="table-wrap"><table><thead><tr><th>Vaqt</th><th>Muallif</th><th>Hudud</th><th>Tuman/shahar</th><th>Yo‘nalish</th><th>G‘oya</th></tr></thead><tbody id="admIdeasBody"></tbody></table></div></div>
+      <div class="card"><h3>Xona bandlovlari</h3><div class="table-wrap"><table><thead><tr><th>Sana / Vaqt</th><th>Mas’ul</th><th>Hudud</th><th>Tuman/shahar</th><th>Xona</th><th>Oraliq</th></tr></thead><tbody id="admRoomsBody"></tbody></table></div></div>
+    </div>
+  </section>
+</main>
+
 <script>
-'use strict';
-const TRACKS=[['YTM//TECH','rgba(20,184,166,.14)','Raqamli texnologiyalar, dasturlash, AI va IT laboratoriyalar yo‘nalishi.'],['YTM//BIZNES','rgba(249,115,22,.14)','Tadbirkorlik, startaplar, biznes treninglar va loyiha rivojlantirish.'],['YTM//KREATIV','rgba(6,182,212,.14)','Dizayn, media, vizual san’at va ijodiy tashabbuslar maydoni.'],['YTM//VOLONTYOR','rgba(16,185,129,.14)','Ijtimoiy loyihalar, volontyorlik va hudud tashabbuslari.'],['YTM//KARYERA','rgba(59,130,246,.14)','Til o‘rganish, kasbga o‘qitish, grantlar va bandlik dasturlari.']].map(([id,bg,desc])=>({id,bg,desc}));
-const SESSIONS={'YTM//TECH':['Sun’iy intellekt va amaliy loyihalar (26-noyabr, 14:00)','Veb va mobil dasturlash amaliyoti (28-noyabr, 10:00)'],'YTM//BIZNES':['Startap g‘oyadan MVP gacha — biznes trening (27-noyabr, 11:00)','Loyiha taqdimoti va moliyaviy reja (29-noyabr, 15:00)'],'YTM//KREATIV':['Brending va vizual dizayn ustaxonasi (27-noyabr, 14:00)','Kontent yaratish va media laboratoriyasi (30-noyabr, 11:00)'],'YTM//VOLONTYOR':['Hududiy ekologiya va ijtimoiy loyihalar (28-noyabr, 15:00)','Ko‘ngillilar jamoasi yig‘ilishi (1-dekabr, 10:00)'],'YTM//KARYERA':['Xorijiy tillar va kasbga yo‘naltirish sessiyasi (29-noyabr, 11:00)','Rezyume, suhbat va stipendiya dasturlari (2-dekabr, 14:00)']};
-const NEWS=[{tag:'Tanlov • YTM//TECH',title:'Yoshlar startap va IT loyihalari tanlovi boshlandi',desc:'G‘oya bo‘limi orqali taklif yuborib, mentorlik va IT xonalaridan foydalaning.',date:'Noyabr 2026'},{tag:'Trening • YTM//BIZNES',title:'Biznes trening va o‘quv xonalariga yozilish ochildi',desc:'Kerakli xona, sana va soatni Xona bron bo‘limida tanlang.',date:'Noyabr 2026'}];
-const IMPORTANT=[{tag:'Muhim eslatma',title:'Tadbirga kirish va chipta tartibi',desc:'Tadbirga ro‘yxatdan o‘tgach, YTM-... kodli elektron chiptani ko‘rsating.'},{tag:'Yoshlar imkoniyati',title:'Mentorlik, laboratoriya va kasbiy rivojlanish',desc:'Xona va laboratoriyalardan o‘quv hamda loyiha maqsadida foydalanish mumkin.'}];
-const REGIONS={'Toshkent shahri':['Bektemir','Chilonzor','Mirobod','Mirzo Ulug‘bek','Olmazor','Sergeli','Shayxontohur','Uchtepa','Yakkasaroy','Yangihayot','Yashnobod','Yunusobod'],'Toshkent viloyati':['Nurafshon','Angren','Bekobod','Chirchiq','Olmaliq','Ohangaron','Yangiyo‘l','Bo‘ka','Bo‘stonliq','Chinoz','Qibray','Parkent','Piskent','Zangiota'],'Andijon viloyati':['Andijon','Xonobod','Asaka','Baliqchi','Buloqboshi','Izboskan','Jalolquduq','Marhamat','Oltinko‘l','Paxtaobod','Shahrixon','Xo‘jaobod'],'Buxoro viloyati':['Buxoro','Kogon','G‘ijduvon','Jondor','Olot','Peshku','Qorako‘l','Romitan','Shofirkon','Vobkent'],'Farg‘ona viloyati':['Farg‘ona','Marg‘ilon','Qo‘qon','Quvasoy','Bag‘dod','Beshariq','Dang‘ara','Oltiariq','Rishton','Toshloq'],'Jizzax viloyati':['Jizzax','Arnasoy','Baxmal','Do‘stlik','Forish','G‘allaorol','Paxtakor','Zaamin','Zarbdor'],'Xorazm viloyati':['Urganch','Xiva','Bog‘ot','Gurlan','Qo‘shko‘pir','Shovot','Urganch tumani','Xazorasp','Yangiariq'],'Namangan viloyati':['Namangan','Chortoq','Chust','Kosonsoy','Mingbuloq','Norin','Pop','To‘raqo‘rg‘on','Uychi'],'Navoiy viloyati':['Navoiy','Zarafshon','Karmana','Konimex','Navbahor','Nurota','Qiziltepa','Uchquduq','Xatirchi'],'Qashqadaryo viloyati':['Qarshi','Shahrisabz','Chiroqchi','Dehqonobod','G‘uzor','Kitob','Koson','Muborak','Qamashi','Yakkabog‘'],'Qoraqalpog‘iston Respublikasi':['Nukus','Amudaryo','Beruniy','Bo‘zatov','Chimboy','Kegeyli','Mo‘ynoq','Qo‘ng‘irot','To‘rtko‘l','Xo‘jayli'],'Samarqand viloyati':['Samarqand','Kattaqo‘rg‘on','Bulung‘ur','Ishtixon','Jomboy','Nurobod','Oqdaryo','Pastdarg‘om','Payariq','Urgut'],'Sirdaryo viloyati':['Guliston','Shirin','Yangiyer','Boyovut','Mirzaobod','Oqoltin','Sardoba','Sayxunobod','Xovos'],'Surxondaryo viloyati':['Termiz','Angor','Boysun','Denov','Jarqo‘rg‘on','Muzrabot','Oltinsoy','Qumqo‘rg‘on','Sherobod','Sho‘rchi']};
-const KEYS={events:'ytm_ev_2026',ideas:'ytm_id_2026',rooms:'ytm_rm_2026'};
-function load(key){try{const value=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(value)?value:[]}catch{return []}}
-let events=load(KEYS.events),ideas=load(KEYS.ideas),rooms=load(KEYS.rooms),myEvId=localStorage.getItem('ytm_my_ev')||'',activeTrack='ALL';
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function saveAll(){try{localStorage.setItem(KEYS.events,JSON.stringify(events));localStorage.setItem(KEYS.ideas,JSON.stringify(ideas));localStorage.setItem(KEYS.rooms,JSON.stringify(rooms));document.getElementById('heroCnt').textContent=events.length}catch{alert('Ma’lumotni saqlab bo‘lmadi. Qurilma xotirasini tekshiring.')}}
-function makeId(prefix){return prefix+'-'+cryptoRandom()}
-function cryptoRandom(){if(crypto&&crypto.getRandomValues){const a=new Uint32Array(2);crypto.getRandomValues(a);return [...a].map(x=>x.toString(36)).join('').slice(0,9).toUpperCase()}return Math.random().toString(36).slice(2,11).toUpperCase()}
-function fillTrack(id){document.getElementById(id).innerHTML=TRACKS.map(t=>`<option value="${esc(t.id)}">${esc(t.id)}</option>`).join('')}
-function fillRegion(id){document.getElementById(id).innerHTML=Object.keys(REGIONS).map(r=>`<option value="${esc(r)}">${esc(r)}</option>`).join('')}
-function fillDistricts(regionId,distId){const region=document.getElementById(regionId).value;document.getElementById(distId).innerHTML=(REGIONS[region]||[]).map(d=>`<option value="${esc(d)}">${esc(d)}</option>`).join('')}
-function fillEvents(){const tr=document.getElementById('ev_track').value;document.getElementById('ev_session').innerHTML=(SESSIONS[tr]||[]).map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join('')}
-function initSelects(){['ev_track','id_track','rm_track'].forEach(fillTrack);['ev_reg','id_reg','rm_reg'].forEach(fillRegion);['ev_reg|ev_dist','id_reg|id_dist','rm_reg|rm_dist'].forEach(pair=>{const [r,d]=pair.split('|');fillDistricts(r,d)});fillEvents();const today=new Date().toISOString().slice(0,10);document.getElementById('rm_date').min=today;document.getElementById('rm_date').value=today;document.getElementById('flt').innerHTML='<option value="ALL">Barcha yo‘nalishlar</option>'+TRACKS.map(t=>`<option value="${esc(t.id)}">${esc(t.id)}</option>`).join('')}
-function trackIcon(id){return {'YTM//TECH':'⌁','YTM//BIZNES':'↗','YTM//KREATIV':'◉','YTM//VOLONTYOR':'♡','YTM//KARYERA':'◇'}[id]||'•'}
-function renderHomeLists(){const list=activeTrack==='ALL'?TRACKS:TRACKS.filter(t=>t.id===activeTrack);document.getElementById('trackList').innerHTML=list.map(t=>`<div class="t-card" onclick="goRegWithTrack('${esc(t.id)}')"><div class="t-top"><div class="t-ico" style="background:${t.bg}">${trackIcon(t.id)}</div><div class="t-title">${esc(t.id)}</div></div><div class="t-desc">${esc(t.desc)}</div></div>`).join('');const news=activeTrack==='ALL'?NEWS:NEWS.filter(n=>n.tag.includes(activeTrack));document.getElementById('newsList').innerHTML=(news.length?news:NEWS).map(n=>`<div class="n-card"><span class="n-tag">${esc(n.tag)}</span><h4>${esc(n.title)}</h4><p>${esc(n.desc)}</p><div class="n-meta"><span>${esc(n.date)}</span><span>YTM Markazi</span></div></div>`).join('');document.getElementById('infoList').innerHTML=IMPORTANT.map(x=>`<div class="n-card"><span class="n-tag" style="background:rgba(249,115,22,.16);color:#fb923c">${esc(x.tag)}</span><h4>${esc(x.title)}</h4><p>${esc(x.desc)}</p></div>`).join('')}
-function setTrack(t,el){activeTrack=t;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('act'));el.classList.add('act');renderHomeLists()}
-function goRegWithTrack(t){document.getElementById('ev_track').value=t;fillEvents();subMode('event');tab('reg')}
-function subMode(m){['event','idea','room'].forEach(x=>{document.getElementById('m-'+x).classList.toggle('hide',x!==m);document.getElementById('s-'+x).classList.toggle('act',x===m)})}
-function tab(t){['home','reg','pass','adm'].forEach(x=>{document.getElementById('v-'+x).classList.toggle('hide',x!==t);const b=document.getElementById('n-'+x);if(b)b.classList.toggle('act',x===t)});if(t==='pass')renderPass();if(t==='adm')renderAdm()}
-function locationFor(prefix){return {region:document.getElementById(prefix+'_reg').value,district:document.getElementById(prefix+'_dist').value}}
-document.getElementById('evForm').addEventListener('submit',e=>{e.preventDefault();const id=makeId('YTM'),u={id,name:document.getElementById('ev_name').value.trim(),phone:document.getElementById('ev_phone').value.trim(),track:document.getElementById('ev_track').value,session:document.getElementById('ev_session').value,...locationFor('ev'),checked:false,time:new Date().toLocaleString('uz-UZ')};events.unshift(u);myEvId=id;localStorage.setItem('ytm_my_ev',id);saveAll();e.target.reset();initSelects();tab('pass')});
-document.getElementById('idForm').addEventListener('submit',e=>{e.preventDefault();const id=makeId('IDEA'),u={id,name:document.getElementById('id_name').value.trim(),phone:document.getElementById('id_phone').value.trim(),title:document.getElementById('id_title').value.trim(),track:document.getElementById('id_track').value,support:document.getElementById('id_support').value,...locationFor('id'),desc:document.getElementById('id_desc').value.trim(),status:'Ko‘rib chiqilmoqda',time:new Date().toLocaleString('uz-UZ')};ideas.unshift(u);saveAll();e.target.reset();initSelects();alert('G‘oyangiz yuborildi! Kodi: '+id);tab('pass')});
-document.getElementById('rmForm').addEventListener('submit',e=>{e.preventDefault();const id=makeId('BOOK'),u={id,name:document.getElementById('rm_name').value.trim(),phone:document.getElementById('rm_phone').value.trim(),roomType:document.getElementById('rm_type').value,track:document.getElementById('rm_track').value,...locationFor('rm'),date:document.getElementById('rm_date').value,slot:document.getElementById('rm_time').value,goal:document.getElementById('rm_goal').value.trim(),approved:false,time:new Date().toLocaleString('uz-UZ')};rooms.unshift(u);saveAll();e.target.reset();initSelects();alert('Xona bandlovi yuborildi! Kodi: '+id);tab('pass')});
-function renderPass(){const u=events.find(x=>x.id===myEvId),box=document.getElementById('passBox');box.innerHTML=u?`<div class="ticket"><span class="t-badge">${esc(u.track)}</span><h2 style="font-size:19px">${esc(u.name)}</h2><p>${esc(u.session)}</p><p style="font-size:12px;color:#94a3b8">${esc(u.region)}, ${esc(u.district)} • ${esc(u.phone)}</p><div class="code-box">${esc(u.id)}</div><p style="color:${u.checked?'#34d399':'#fbbf24'}">${u.checked?'✅ Kirish tasdiqlangan':'⏳ Kirishda ko‘rsating'}</p></div>`:'<div class="card" style="text-align:center">Sizda hali faol tadbir chiptasi yo‘q.<button class="btn" onclick="tab(\'reg\')">Ro‘yxatdan o‘tish</button></div>';let out='';if(ideas.length)out+=`<div class="card"><h3>💡 Yuborilgan g‘oyalar (${ideas.length})</h3>${ideas.slice(0,3).map(x=>`<div class="item"><b>${esc(x.title)}</b> [${esc(x.id)}]<div>${esc(x.track)} • ${esc(x.support)} • ${esc(x.status)}</div></div>`).join('')}</div>`;if(rooms.length)out+=`<div class="card"><h3>🏢 Xona bandlovlari (${rooms.length})</h3>${rooms.slice(0,3).map(x=>`<div class="item"><b>${esc(x.roomType)}</b> [${esc(x.id)}]<div>${esc(x.date)} (${esc(x.slot)}) • ${x.approved?'Tasdiqlangan':'Kutilmoqda'}</div></div>`).join('')}</div>`;document.getElementById('myExtraBox').innerHTML=out}
-function loginAdm(){if(document.getElementById('pinIn').value==='0708'){document.getElementById('admLogin').classList.add('hide');document.getElementById('admPanel').classList.remove('hide');renderAdm()}else alert('PIN kod noto‘g‘ri!')}
-function toggleEv(id){const x=events.find(u=>u.id===id);if(x){x.checked=!x.checked;saveAll();renderAdm()}}function cycleIdea(id){const x=ideas.find(u=>u.id===id),s=['Ko‘rib chiqilmoqda','Qo‘llab-quvvatlandi','Takomillashtirish kerak'];if(x){x.status=s[(s.indexOf(x.status)+1)%s.length];saveAll();renderAdm()}}function toggleRm(id){const x=rooms.find(u=>u.id===id);if(x){x.approved=!x.approved;saveAll();renderAdm()}}
-function renderAdm(){document.getElementById('stEv').textContent=events.length;document.getElementById('stId').textContent=ideas.length;document.getElementById('stRm').textContent=rooms.length;const cat=document.getElementById('admCat').value,f=document.getElementById('flt').value,list=(cat==='events'?events:cat==='ideas'?ideas:rooms).filter(x=>f==='ALL'||x.track===f),el=document.getElementById('admList');if(!list.length){el.innerHTML='<p style="color:#94a3b8;margin-top:10px">Ma’lumot yo‘q.</p>';return}el.innerHTML=list.map(x=>cat==='events'?`<div class="item"><div class="row"><div><b>${esc(x.name)}</b> [${esc(x.track)}]<div>${esc(x.id)} • ${esc(x.phone)}</div><div>${esc(x.region)}, ${esc(x.district)} • ${esc(x.session)}</div></div><button onclick="toggleEv('${esc(x.id)}')">${x.checked?'Keldi ✓':'Tasdiq'}</button></div></div>`:cat==='ideas'?`<div class="item"><div class="row"><div><b>${esc(x.title)}</b> [${esc(x.id)}]<div>${esc(x.name)} • ${esc(x.phone)} • ${esc(x.region)}, ${esc(x.district)}</div><div>Yordam: ${esc(x.support)} • Holat: ${esc(x.status)}</div><p>${esc(x.desc)}</p></div><button onclick="cycleIdea('${esc(x.id)}')">Holat</button></div></div>`:`<div class="item"><div class="row"><div><b>${esc(x.roomType)}</b> [${esc(x.id)}]<div>${esc(x.name)} • ${esc(x.phone)} • ${esc(x.region)}, ${esc(x.district)}</div><div>${esc(x.date)} (${esc(x.slot)}) • ${esc(x.goal)}</div></div><button onclick="toggleRm('${esc(x.id)}')">${x.approved?'Bron ✓':'Tasdiq'}</button></div></div>`).join('')}
-function csvCell(v){let s=String(v??'');if(/^[=+\-@\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"'}
-function expCSV(){const cat=document.getElementById('admCat').value,f=document.getElementById('flt').value,source=cat==='events'?events:cat==='ideas'?ideas:rooms,list=source.filter(x=>f==='ALL'||x.track===f);let header,rows,name;if(cat==='events'){header=['ID','F.I.Sh','Telefon','Yo‘nalish','Tadbir','Viloyat','Tuman','Holat','Vaqt'];rows=list.map(x=>[x.id,x.name,x.phone,x.track,x.session,x.region,x.district,x.checked?'Tasdiqlangan':'Kutilmoqda',x.time]);name='ytm_ishtirokchilar.csv'}else if(cat==='ideas'){header=['ID','G‘oya nomi','Muallif','Telefon','Yo‘nalish','Yordam turi','Viloyat','Tuman','Holat','Tavsif','Vaqt'];rows=list.map(x=>[x.id,x.title,x.name,x.phone,x.track,x.support,x.region,x.district,x.status,x.desc,x.time]);name='ytm_goyalar.csv'}else{header=['ID','Xona turi','F.I.Sh','Telefon','Yo‘nalish','Viloyat','Tuman','Sana','Vaqt oralig‘i','Maqsad','Holat','Vaqt'];rows=list.map(x=>[x.id,x.roomType,x.name,x.phone,x.track,x.region,x.district,x.date,x.slot,x.goal,x.approved?'Tasdiqlangan':'Kutilmoqda',x.time]);name='ytm_xonalar.csv'}const csv=[header,...rows].map(r=>r.map(csvCell).join(',')).join('\r\n'),url=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-initSelects();renderHomeLists();document.getElementById('heroCnt').textContent=events.length;
+const TRACKS = ["IT va raqamli ko‘nikmalar", "Tadbirkorlik va startaplar", "Madaniyat, san’at va media", "Sport va sog‘lom turmush tarzi", "Ijtimoiy tashabbuslar va ko‘ngillilik"];
+const REGIONS = {
+  "Qoraqalpog‘iston Respublikasi": ["Nukus shahri", "Amudaryo", "Beruniy", "Chimboy", "Ellikqal’a", "Kegeyli", "Mo‘ynoq", "Nukus tumani", "Qanliko‘l", "Qorao‘zak", "Qo‘ng‘irot", "Shumanay", "Taxtako‘pir", "To‘rtko‘l", "Xo‘jayli", "Bo‘zatov", "Taxiatosh"],
+  "Andijon viloyati": ["Andijon shahri", "Xonobod shahri", "Andijon tumani", "Asaka", "Baliqchi", "Bo‘ston", "Buloqboshi", "Izboskan", "Jalolquduq", "Marhamat", "Oltinko‘l", "Paxtaobod", "Qo‘rg‘ontepa", "Shahrixon", "Ulug‘nor", "Xo‘jaobod"],
+  "Buxoro viloyati": ["Buxoro shahri", "Kogon shahri", "Olot", "Buxoro tumani", "Vobkent", "G‘ijduvon", "Jondor", "Kogon tumani", "Qorako‘l", "Qorovulbozor", "Peshku", "Romitan", "Shofirkon"],
+  "Jizzax viloyati": ["Jizzax shahri", "Arnasoy", "Baxmal", "Do‘stlik", "Forish", "G‘allaorol", "Sharof Rashidov", "Mirzacho‘l", "Paxtakor", "Yangiobod", "Zafarobod", "Zomin"],
+  "Qashqadaryo viloyati": ["Qarshi shahri", "Shahrisabz shahri", "Chiroqchi", "Dehqonobod", "G‘uzor", "Kasbi", "Kitob", "Koson", "Mirishkor", "Muborak", "Nishon", "Qamashi", "Qarshi tumani", "Shahrisabz tumani", "Ko‘kdala", "Yakkabog‘"],
+  "Navoiy viloyati": ["Navoiy shahri", "Zarafshon shahri", "G‘ozg‘on shahri", "Karmana", "Konimex", "Navbahor", "Nurota", "Tomdi", "Uchquduq", "Qiziltepa", "Xatirchi"],
+  "Namangan viloyati": ["Namangan shahri", "Chortoq", "Chust", "Kosonsoy", "Mingbuloq", "Namangan tumani", "Norin", "Pop", "To‘raqo‘rg‘on", "Uchqo‘rg‘on", "Uychi", "Yangiqo‘rg‘on", "Davlatobod", "Yangi Namangan"],
+  "Samarqand viloyati": ["Samarqand shahri", "Kattaqo‘rg‘on shahri", "Bulung‘ur", "Ishtixon", "Jomboy", "Kattaqo‘rg‘on tumani", "Narpay", "Nurobod", "Oqdaryo", "Payariq", "Pastdarg‘om", "Paxtachi", "Samarqand tumani", "Toyloq", "Urgut", "Qo‘shrabot"],
+  "Surxondaryo viloyati": ["Termiz shahri", "Angor", "Boysun", "Denov", "Jarqo‘rg‘on", "Qiziriq", "Qumqo‘rg‘on", "Muzrabot", "Oltinsoy", "Sariosiyo", "Sherobod", "Sho‘rchi", "Termiz tumani", "Uzun", "Bandixon"],
+  "Sirdaryo viloyati": ["Guliston shahri", "Shirin shahri", "Yangiyer shahri", "Boyovut", "Guliston tumani", "Mirzaobod", "Oqoltin", "Sardoba", "Sayxunobod", "Sirdaryo tumani", "Xovos"],
+  "Toshkent viloyati": ["Nurafshon shahri", "Angren shahri", "Bekobod shahri", "Chirchiq shahri", "Olmaliq shahri", "Ohangaron shahri", "Yangiyo‘l shahri", "Bekobod tumani", "Bo‘stonliq", "Bo‘ka", "Chinoz", "Qibray", "Ohangaron tumani", "Oqqo‘rg‘on", "Parkent", "Piskent", "Quyi Chirchiq", "O‘rta Chirchiq", "Yangiyo‘l tumani", "Yuqori Chirchiq", "Zangiota", "Toshkent tumani"],
+  "Farg‘ona viloyati": ["Farg‘ona shahri", "Marg‘ilon shahri", "Quvasoy shahri", "Qo‘qon shahri", "Bag‘dod", "Beshariq", "Buvayda", "Dang‘ara", "Farg‘ona tumani", "Furqat", "Oltiariq", "Qo‘shtepa", "Rishton", "So‘x", "Toshloq", "Uchko‘prik", "O‘zbekiston", "Yozyovon"],
+  "Xorazm viloyati": ["Urganch shahri", "Xiva shahri", "Bog‘ot", "Gurlan", "Qo‘shko‘pir", "Shovot", "Urganch tumani", "Xazarasp", "Xiva tumani", "Yangiariq", "Yangibozor", "Tuproqqal’a"],
+  "Toshkent shahri": ["Bektemir", "Chilonzor", "Hamza (Yashnobod)", "Mirobod", "Mirzo Ulug‘bek", "Olmazor", "Sergeli", "Shayxontohur", "Uchtepa", "Yakkasaroy", "Yunusobod", "Yangihayot"]
+};
+const DB_KEY = 'ytm_db_v1';
+let db = { events: [], ideas: [], rooms: [] };
+function loadDB() {
+  try { const raw = localStorage.getItem(DB_KEY); if (raw) { const parsed = JSON.parse(raw); db.events = Array.isArray(parsed.events) ? parsed.events : []; db.ideas = Array.isArray(parsed.ideas) ? parsed.ideas : []; db.rooms = Array.isArray(parsed.rooms) ? parsed.rooms : []; } } catch (_) {}
+}
+function saveAll() { try { localStorage.setItem(DB_KEY, JSON.stringify(db)); } catch (_) {} }
+function esc(str) { return String(str ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function csvCell(val) { const s = String(val ?? '').replace(/"/g, '""'); return `"${s}"`; }
+function initSelects() {
+  const tracksGrid = document.getElementById('tracksGrid');
+  if (tracksGrid) tracksGrid.innerHTML = TRACKS.map(t => `<div class="card" style="margin-bottom:0;padding:12px;"><span class="badge">Yo‘nalish</span><div style="font-weight:600;font-size:0.92rem;">${esc(t)}</div></div>`).join('');
+  document.querySelectorAll('.track-select').forEach(sel => { sel.innerHTML = TRACKS.map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join(''); });
+  const regionNames = Object.keys(REGIONS);
+  document.querySelectorAll('.region-select').forEach(sel => { sel.innerHTML = regionNames.map(r => `<option value="${esc(r)}">${esc(r)}</option>`).join(''); sel.addEventListener('change', () => syncDistrictsForRegion(sel)); });
+  document.querySelectorAll('.region-select').forEach(sel => syncDistrictsForRegion(sel));
+  const fltRegion = document.getElementById('fltRegion');
+  if (fltRegion) { fltRegion.innerHTML = `<option value="ALL">Barcha hududlar (14)</option>` + regionNames.map(r => `<option value="${esc(r)}">${esc(r)}</option>`).join(''); fltRegion.addEventListener('change', renderAdminTables); }
+  const fltTrack = document.getElementById('fltTrack');
+  if (fltTrack) { fltTrack.innerHTML = `<option value="ALL">Barcha yo‘nalishlar (5)</option>` + TRACKS.map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join(''); fltTrack.addEventListener('change', renderAdminTables); }
+}
+function syncDistrictsForRegion(regionSel) { const form = regionSel.closest('form'); if (!form) return; const distSel = form.querySelector('.district-select'); if (!distSel) return; const list = REGIONS[regionSel.value] || []; distSel.innerHTML = list.map(d => `<option value="${esc(d)}">${esc(d)}</option>`).join(''); }
+function renderHomeLists() {
+  const homeEvents = document.getElementById('homeEvents');
+  if (homeEvents) homeEvents.innerHTML = db.events.length ? db.events.slice(-5).reverse().map(e => `<div class="list-item"><span class="badge">${esc(e.region)}</span><div><b>${esc(e.name)}</b> — ${esc(e.title)}</div><div class="muted" style="margin-bottom:0;">${esc(e.district)} · ${esc(e.track)}</div></div>`).join('') : `<p class="muted" style="margin-bottom:0;">Hali ariza yo‘q.</p>`;
+  const homeIR = document.getElementById('homeIdeasRooms');
+  if (homeIR) { const combined = [...db.ideas.map(i => ({ kind: 'G‘oya', region: i.region, title: `${i.name}: ${i.text}`, sub: `${i.district} · ${i.track}`, t: i.time })), ...db.rooms.map(r => ({ kind: 'Xona', region: r.region, title: `${r.type} (${r.name})`, sub: `${r.district} · ${r.date} (${r.time})`, t: r.created || '' }))].slice(-5).reverse(); homeIR.innerHTML = combined.length ? combined.map(x => `<div class="list-item"><span class="badge">${esc(x.kind)} · ${esc(x.region)}</span><div><b>${esc(x.title)}</b></div><div class="muted" style="margin-bottom:0;">${esc(x.sub)}</div></div>`).join('') : `<p class="muted" style="margin-bottom:0;">Hali g‘oya yoki bandlov yo‘q.</p>`; }
+}
+function renderAdminTables() {
+  const regVal = document.getElementById('fltRegion')?.value || 'ALL', trkVal = document.getElementById('fltTrack')?.value || 'ALL';
+  const evRows = db.events.filter(e => (regVal === 'ALL' || e.region === regVal) && (trkVal === 'ALL' || e.track === trkVal));
+  const idRows = db.ideas.filter(i => (regVal === 'ALL' || i.region === regVal) && (trkVal === 'ALL' || i.track === trkVal));
+  const rmRows = db.rooms.filter(r => (regVal === 'ALL' || r.region === regVal));
+  const evBody = document.getElementById('admEventsBody'); if (evBody) evBody.innerHTML = evRows.length ? evRows.slice().reverse().map(e => `<tr><td>${esc(e.time)}</td><td>${esc(e.name)}</td><td>${esc(e.phone)}</td><td>${esc(e.region)}</td><td>${esc(e.district)}</td><td>${esc(e.track)}</td><td>${esc(e.title)}</td></tr>`).join('') : `<tr><td colspan="7">Ma’lumot topilmadi</td></tr>`;
+  const idBody = document.getElementById('admIdeasBody'); if (idBody) idBody.innerHTML = idRows.length ? idRows.slice().reverse().map(i => `<tr><td>${esc(i.time)}</td><td>${esc(i.name)}</td><td>${esc(i.region)}</td><td>${esc(i.district)}</td><td>${esc(i.track)}</td><td>${esc(i.text)}</td></tr>`).join('') : `<tr><td colspan="6">Ma’lumot topilmadi</td></tr>`;
+  const rmBody = document.getElementById('admRoomsBody'); if (rmBody) rmBody.innerHTML = rmRows.length ? rmRows.slice().reverse().map(r => `<tr><td>${esc(r.date)}</td><td>${esc(r.name)}</td><td>${esc(r.region)}</td><td>${esc(r.district)}</td><td>${esc(r.type)}</td><td>${esc(r.time)}</td></tr>`).join('') : `<tr><td colspan="6">Ma’lumot topilmadi</td></tr>`;
+}
+function expCSV() {
+  const lines = [['Tur', 'Sana/Vaqt', 'Ism', 'Telefon', 'Hudud', 'Tuman/Shahar', 'Yo‘nalish/Xona', 'Mazmun/Oraliq'].map(csvCell).join(',')];
+  db.events.forEach(e => lines.push(['Tadbir', e.time, e.name, e.phone, e.region, e.district, e.track, e.title].map(csvCell).join(',')));
+  db.ideas.forEach(i => lines.push(['G‘oya', i.time, i.name, '', i.region, i.district, i.track, i.text].map(csvCell).join(',')));
+  db.rooms.forEach(u => lines.push(['Xona', u.date, u.name, '', u.region, u.district, u.type, u.time].map(csvCell).join(',')));
+  const blob = new Blob(['\uFEFF' + lines.join('\n')], { type: 'text/csv;charset=utf-8;' }), url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = 'ytm_malumotlar.csv'; a.click(); URL.revokeObjectURL(url);
+}
+document.querySelectorAll('nav button[data-tab]').forEach(btn => btn.addEventListener('click', () => { document.querySelectorAll('nav button[data-tab]').forEach(b => b.classList.remove('active')); btn.classList.add('active'); const target = btn.getAttribute('data-tab'); document.querySelectorAll('.section').forEach(sec => sec.classList.toggle('active', sec.id === target)); if (target === 'home') renderHomeLists(); if (target === 'admin') renderAdminTables(); }));
+document.getElementById('eventForm')?.addEventListener('submit', e => { e.preventDefault(); db.events.push({time:new Date().toLocaleString('uz-UZ'),name:document.getElementById('evName').value.trim(),phone:document.getElementById('evPhone').value.trim(),region:document.getElementById('evRegion').value,district:document.getElementById('evDistrict').value,track:document.getElementById('evTrack').value,title:document.getElementById('evTitle').value.trim()}); saveAll(); renderHomeLists(); renderAdminTables(); e.target.reset(); syncDistrictsForRegion(document.getElementById('evRegion')); document.getElementById('evMsg').textContent='Tadbirga muvaffaqiyatli yozildingiz!'; });
+document.getElementById('ideaForm')?.addEventListener('submit', e => { e.preventDefault(); db.ideas.push({time:new Date().toLocaleString('uz-UZ'),name:document.getElementById('idName').value.trim(),region:document.getElementById('idRegion').value,district:document.getElementById('idDistrict').value,track:document.getElementById('idTrack').value,text:document.getElementById('idText').value.trim()}); saveAll(); renderHomeLists(); renderAdminTables(); e.target.reset(); syncDistrictsForRegion(document.getElementById('idRegion')); document.getElementById('idMsg').textContent='G‘oyangiz yuborildi!'; });
+document.getElementById('roomForm')?.addEventListener('submit', e => { e.preventDefault(); db.rooms.push({created:new Date().toLocaleString('uz-UZ'),name:document.getElementById('rmName').value.trim(),region:document.getElementById('rmRegion').value,district:document.getElementById('rmDistrict').value,type:document.getElementById('rmType').value,date:document.getElementById('rmDate').value,time:document.getElementById('rmTime').value.trim()}); saveAll(); renderHomeLists(); renderAdminTables(); e.target.reset(); syncDistrictsForRegion(document.getElementById('rmRegion')); document.getElementById('rmMsg').textContent='Xona muvaffaqiyatli band qilindi!'; });
+document.getElementById('pinForm')?.addEventListener('submit', e => { e.preventDefault(); const pin=document.getElementById('pinInput').value.trim(); if(pin==='0708'){document.getElementById('pinErr').textContent='';document.getElementById('adminGate').style.display='none';document.getElementById('adminPanel').style.display='block';renderAdminTables();}else document.getElementById('pinErr').textContent='PIN kod noto‘g‘ri!'; });
+document.getElementById('logoutAdminBtn')?.addEventListener('click', () => { document.getElementById('adminPanel').style.display='none'; document.getElementById('adminGate').style.display='block'; document.getElementById('pinInput').value=''; });
+document.getElementById('exportCsvBtn')?.addEventListener('click', expCSV);
+if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+loadDB(); initSelects(); renderHomeLists(); saveAll();
 </script>
 </body>
 </html>
