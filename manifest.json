@@ -1,0 +1,23 @@
+{
+  "name": "YTM — Yoshlar tashabbuslari markazi",
+  "short_name": "YTM",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#05121a",
+  "theme_color": "#071a26",
+  "icons": [
+    {
+      "src": "./IMG_20261124_161114_586-1-1-square.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./IMG_20261124_161114_586-1-1-square.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
