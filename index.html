@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YTM 0708 — Yoshlar tashabbuslari markazi</title>
+  <style>
+    :root {
+      --bg-canvas: #030e16;
+      --bg-surface: #071926;
+      --bg-surface-2: #0b2233;
+      --bg-field: #051420;
+      --line: #123147;
+      --text: #eef6fb;
+      --muted: #86a0b2;
+      --teal: #00b87c;
+      --teal-soft: rgba(0, 184, 124, 0.16);
+      --teal-glow: rgba(0, 184, 124, 0.28);
+      --amber: #ff7a00;
+      --amber-hover: #e56c00;
+      --booked-soft: rgba(255, 92, 108, 0.14);
+      --r-xl: 22px;
+      --r-lg: 16px;
+      --r-md: 12px;
+      --r-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(ellipse at 50% -10%, #0b293d 0%, var(--bg-canvas) 62%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 92px;
+    }
+
+    .mobile-frame {
+      width: 100%;
+      max-width: 460px;
+      min-height: 100vh;
+      padding: 14px 16px 24px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #00c988, #0077b6);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 6px 18px var(--teal-glow);
+    }
+
+    .brand-name {
+      font-size: 14.5px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-tagline {
+      font-size: 11.5px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .admin-pill {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: var(--r-pill);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      transition: 0.2s ease;
+    }
+
+    .admin-pill:hover, .admin-pill.active {
+      border-color: var(--teal);
+      background: var(--teal-soft);
+      color: #6df2c3;
+    }
+
+    .filter-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 14px;
+      scrollbar-width: none;
+    }
+
+    .filter-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-chip {
+      background: var(--bg-surface);
+      border: 1px solid var(--line);
+      color: #c7d9e5;
+      padding: 8px 15px;
+      border-radius: var(--r-pill);
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .filter-chip.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #03150e;
+      box-shadow: 0 4px 14px var(--teal-glow);
+    }
+
+    .hero-banner {
+      position: relative;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      min-height: 204px;
+      border: 1px solid var(--line);
+      margin-bottom: 18px;
+      background:
+        linear-gradient(95deg, rgba(3, 15, 24, 0.92) 0%, rgba(4, 22, 34, 0.56) 60%, rgba(4, 22, 34, 0.22) 100%),
+        url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=75') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px;
+    }
+
+    .hero-tag {
+      align-self: flex-start;
+      background: rgba(0, 184, 124, 0.24);
+      border: 1px solid rgba(0, 184, 124, 0.45);
+      color: #6df2c3;
+      padding: 5px 12px;
+      border-radius: var(--r-pill);
+      font-size: 11px;
+      font-weight: 700;
+      backdrop-filter: blur(6px);
+    }
+
+    .hero-footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .hero-heading {
+      font-size: 19px;
+      line-height: 1.22;
+      font-weight: 800;
+      max-width: 245px;
+      margin-bottom: 6px;
+    }
+
+    .hero-counter {
+      font-size: 12px;
+      color: #c2d7e6;
+    }
+
+    .cta-orange {
+      background: var(--amber);
+      color: #ffffff;
+      border: none;
+      border-radius: 13px;
+      padding: 11px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      box-shadow: 0 6px 18px rgba(255, 122, 0, 0.32);
+      transition: 0.2s ease;
+    }
+
+    .cta-orange:hover {
+      background: var(--amber-hover);
+      transform: translateY(-1px);
+    }
+
+    .cta-teal {
+      background: var(--teal);
+      color: #03150e;
+      border: none;
+      border-radius: 13px;
+      padding: 11px 15px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-outline {
+      background: var(--bg-field);
+      border: 1px solid var(--line);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+      .sec-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 16px 0 10px;
+    }
+
+    .sec-title {
+      font-size: 15.5px;
+      font-weight: 700;
+    }
+
+    .sec-note {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .dir-box {
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .dir-box:hover, .dir-box.selected {
+      border-color: var(--teal);
+      background: var(--bg-surface-2);
+    }
+
+    .dir-header {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 8px;
+    }
+
+    .dir-badge-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .dir-code-text {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
+
+    .dir-body {
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: #b5cad9;
+    }
+
+    .ev-heading {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .ev-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .field-group {
+      margin-bottom: 12px;
+    }
+
+    .field-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .field-input, .field-select, .field-textarea {
+      width: 100%;
+      background: var(--bg-field);
+      border: 1px solid var(--line);
+      color: var(--text);
+      border-radius: var(--r-md);
+      padding: 11px 13px;
+      font-size: 13.5px;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .field-input:focus, .field-select:focus, .field-textarea:focus {
+      border-color: var(--teal);
+    }
+
+    .field-textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .page-view {
+      display: none;
+    }
+
+    .page-view.active {
+      display: block;
+    }
+
+    .seg-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: var(--bg-surface);
+      border: 1px solid var(--line);
+      padding: 5px;
+      border-radius: 14px;
+      margin-bottom: 14px;
+    }
+
+    .seg-btn {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      padding: 8px 6px;
+      border-radius: 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .seg-btn.active {
+      background: var(--bg-surface-2);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .pass-card {
+      background: linear-gradient(145deg, #0b2234, #06131e);
+      border: 1px dashed #23506e;
+      border-radius: 18px;
+      padding: 15px;
+      margin-bottom: 12px;
+    }
+
+    .badge-teal {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--r-pill);
+      background: var(--teal-soft);
+      color: #6df2c3;
+      margin-bottom: 8px;
+    }
+
+    .badge-amber {
+      background: rgba(255, 122, 0, 0.16);
+      color: #ffa654;
+    }
+
+    .seat-count-pill {
+      font-size: 11px;
+      color: #6df2c3;
+      background: var(--teal-soft);
+      border: 1px solid rgba(0, 184, 124, 0.35);
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .booked-notice {
+      font-size: 11.5px;
+      color: #ff9aa5;
+      background: var(--booked-soft);
+      border: 1px solid rgba(255, 92, 108, 0.32);
+      border-radius: 11px;
+      padding: 9px 11px;
+      margin-bottom: 12px;
+      line-height: 1.45;
+    }
+
+    .toast-banner {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: #0c2a3d;
+      border: 1px solid var(--teal);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.25s ease;
+      z-index: 999;
+      max-width: 92vw;
+      text-align: center;
+    }
+
+    .toast-banner.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dock-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 460px;
+      background: #051420;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 8px 10px 10px;
+      z-index: 50;
+    }
+
+    .dock-item {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .dock-pill {
+      width: 46px;
+      height: 28px;
+      border-radius: var(--r-pill);
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      transition: 0.2s ease;
+    }
+
+    .dock-item.active {
+      color: var(--text);
+    }
+
+    .dock-item.active .dock-pill {
+      background: var(--teal);
+      color: #03150e;
+      box-shadow: 0 4px 12px var(--teal-glow);
+    }
+  </style>
+</head>
+<body>
+  <div id="toast" class="toast-banner"></div>
+
+  <div class="mobile-frame">
+    <header class="top-bar">
+      <div class="brand-group">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#03141c" stroke-width="2.4">
+            <polygon points="12 2 21 7 21 17 12 22 3 17 3 7 12 2"></polygon>
+            <polyline points="7 13 10 16 17 9"></polyline>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-name">YTM 0708 — Yoshlar tashabbuslari mar...</div>
+          <div class="brand-tagline">Mobil ro‘yxatdan o‘tish ilovasi</div>
+        </div>
+      </div>
+
+      <button class="admin-pill" id="topAdminBtn" onclick="switchView('admin')">
+        <span>🛡️</span>
+        <span id="adminBtnLabel">Admin</span>
+      </button>
+    </header>
+
+    <nav class="filter-strip" id="filterStrip" aria-label="Yo'nalishlar"></nav>
+
+    <!-- VIEW 1: ASOSIY -->
+    <section id="view-home" class="page-view active">
+      <div class="hero-banner">
+        <span class="hero-tag" id="heroTag">YTM 0708 • 5 ta faol tadbir</span>
+        <div class="hero-footer">
+          <div>
+            <h1 class="hero-heading">Kelajak tashabbuslarini bugundan boshlang</h1>
+            <div class="hero-counter" id="heroCounter">0 ta yosh ishtirokchi ro‘yxatdan o‘tgan</div>
+          </div>
+          <button class="cta-orange" onclick="switchView('register')">
+            <span>Qatnashish</span>
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="sec-head">
+        <h2 class="sec-title">5 ta asosiy yo‘nalish</h2>
+        <span class="sec-note" id="dirCountNote">5 ta yo‘nalish</span>
+      </div>
+      <div id="directionsWrap"></div>
+
+      <div class="sec-head">
+        <h2 class="sec-title">Yaqin tadbirlar</h2>
+        <span class="sec-note" id="evCountNote">5 ta tadbir</span>
+      </div>
+      <div id="eventsWrap"></div>
+    </section>
+        <!-- VIEW 2: RO'YXAT -->
+    <section id="view-register" class="page-view">
+      <div class="sec-head">
+        <h2 class="sec-title">Tadbirga ro‘yxatdan o‘tish</h2>
+        <span class="seat-count-pill" id="regSeatBadge">24/24 bo‘sh joy</span>
+      </div>
+
+      <div class="panel">
+        <form id="registerForm" onsubmit="handleEventRegistration(event)">
+          <div class="field-group">
+            <label class="field-label" for="regFullName">Ism va familiya</label>
+            <input class="field-input" id="regFullName" type="text" placeholder="Ism va familiya" required />
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="regPhone">Telefon raqam</label>
+            <input class="field-input" id="regPhone" type="tel" placeholder="Telefon raqam" required />
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="regDirection">Yo‘nalish</label>
+            <select class="field-select" id="regDirection" onchange="onRegDirectionChange()"></select>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="regEvent">Tadbir</label>
+            <select class="field-select" id="regEvent" onchange="onRegEventChange()"></select>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="regTimeSlot">Vaqt tanlovi</label>
+            <select class="field-select" id="regTimeSlot" onchange="refreshSeatSelectors()"></select>
+          </div>
+
+          <div class="two-col">
+            <div class="field-group">
+              <label class="field-label" for="regRegion">Viloyat / Hudud (14 ta)</label>
+              <select class="field-select" id="regRegion" onchange="populateDistricts('regRegion', 'regDistrict')"></select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="regDistrict">Tuman / Shahar</label>
+              <select class="field-select" id="regDistrict"></select>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="regSeat">Joy / O‘rin tanlovi</label>
+            <select class="field-select" id="regSeat"></select>
+          </div>
+
+          <div class="booked-notice" id="regBookedNotice">
+            Band qilingan joylar: hozircha yo‘q.
+          </div>
+
+          <button class="cta-orange" style="width: 100%;" type="submit">
+            <span>🎟️</span>
+            <span>Ro‘yxatdan o‘tish va chipta olish</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- VIEW 3: CHIPTA -->
+    <section id="view-tickets" class="page-view">
+      <div class="sec-head">
+        <h2 class="sec-title">Mening chiptalarim</h2>
+        <span class="sec-note" id="ticketsCountNote">0 ta</span>
+      </div>
+      <div id="ticketsWrap"></div>
+    </section>
+        <!-- VIEW 4: XONALAR, G'OYALAR, YANGILIKLAR VA YOSHLAR MA'LUMOTLARI -->
+    <section id="view-hub" class="page-view">
+      <div class="sec-head">
+        <h2 class="sec-title">Markaz va imkoniyatlar</h2>
+        <span class="sec-note">YTM 0708</span>
+      </div>
+
+      <div class="seg-tabs">
+        <button class="seg-btn active" id="seg-rooms" onclick="switchHubTab('rooms')">🏢 Xonalar</button>
+        <button class="seg-btn" id="seg-ideas" onclick="switchHubTab('ideas')">💡 G‘oyalar</button>
+        <button class="seg-btn" id="seg-news" onclick="switchHubTab('news')">📰 Yangilik</button>
+      </div>
+
+      <!-- Xonalar va laboratoriyalar -->
+      <div id="hub-rooms">
+        <div class="panel">
+          <div class="field-label">
+            <span>Xona va laboratoriyadan joy band qilish</span>
+            <span class="seat-count-pill" id="roomSeatBadge">16/16 bo‘sh joy</span>
+          </div>
+          <div class="ev-meta-row">IT, biznes trening, til, kasbga o‘qitish xonalari va laboratoriyalar</div>
+
+          <form id="roomForm" onsubmit="handleRoomBooking(event)">
+            <div class="field-group">
+              <label class="field-label" for="roomFullName">Ism va familiya</label>
+              <input class="field-input" id="roomFullName" type="text" placeholder="Ism va familiya" required />
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="roomSelect">Xona / Laboratoriya</label>
+              <select class="field-select" id="roomSelect" onchange="refreshSeatSelectors()">
+                <option value="IT xonasi — Kompyuter va AI">IT xonasi — Kompyuter va AI</option>
+                <option value="Biznes trening xonasi — Coworking & Pitch">Biznes trening xonasi — Coworking & Pitch</option>
+                <option value="Til o‘qitish xonasi — Xorijiy tillar">Til o‘qitish xonasi — Xorijiy tillar</option>
+                <option value="Kasbga o‘qitish xonasi — Amaliy kasblar">Kasbga o‘qitish xonasi — Amaliy kasblar</option>
+                <option value="Laboratoriya — Robototexnika va muhandislik">Laboratoriya — Robototexnika va muhandislik</option>
+              </select>
+            </div>
+
+            <div class="two-col">
+              <div class="field-group">
+                <label class="field-label" for="roomDate">Sana</label>
+                <input class="field-input" id="roomDate" type="date" onchange="refreshSeatSelectors()" required />
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="roomTime">Vaqt</label>
+                <select class="field-select" id="roomTime" onchange="refreshSeatSelectors()">
+                  <option value="09:00 – 11:00">09:00 – 11:00</option>
+                  <option value="11:30 – 13:30">11:30 – 13:30</option>
+                  <option value="14:00 – 16:00">14:00 – 16:00</option>
+                  <option value="16:30 – 18:30">16:30 – 18:30</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="two-col">
+              <div class="field-group">
+                <label class="field-label" for="roomRegion">Viloyat / Hudud (14 ta)</label>
+                <select class="field-select" id="roomRegion" onchange="populateDistricts('roomRegion', 'roomDistrict')"></select>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="roomDistrict">Tuman / Shahar</label>
+                <select class="field-select" id="roomDistrict"></select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="roomSeat">Joy / Stansiya tanlovi</label>
+              <select class="field-select" id="roomSeat"></select>
+            </div>
+
+            <div class="booked-notice" id="roomBookedNotice">
+              Band qilingan joylar: hozircha yo‘q.
+            </div>
+
+            <button class="cta-teal" style="width: 100%;" type="submit">
+              <span>✅</span>
+              <span>Joyni band qilish</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- G'oyalarni qo'llab-quvvatlash -->
+      <div id="hub-ideas" style="display: none;">
+        <div class="panel">
+          <div class="ev-heading">G‘oyani qo‘llab-quvvatlashga yuborish</div>
+          <p class="dir-body" style="margin-bottom: 12px;">
+            Tashabbus, startap yoki ijtimoiy loyihangizni yuboring — markaz jamoasi ko‘rib chiqadi.
+          </p>
+          <form id="ideaForm" onsubmit="handleIdeaSubmit(event)">
+            <div class="field-group">
+              <label class="field-label" for="ideaAuthor">Muallif (Ism va familiya)</label>
+              <input class="field-input" id="ideaAuthor" type="text" placeholder="Ism va familiya" required />
+            </div>
+
+            <div class="two-col">
+              <div class="field-group">
+                <label class="field-label" for="ideaTitle">G‘oya / Loyiha nomi</label>
+                <input class="field-input" id="ideaTitle" type="text" placeholder="G‘oya nomi" required />
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="ideaDir">Yo‘nalish</label>
+                <select class="field-select" id="ideaDir"></select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="ideaDesc">Qisqacha tavsif</label>
+              <textarea class="field-textarea" id="ideaDesc" placeholder="G‘oya maqsadi va kerakli ko‘mak..." required></textarea>
+            </div>
+
+            <button class="cta-orange" style="width: 100%;" type="submit">
+              <span>🚀</span>
+              <span>G‘oyani yuborish</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="sec-head">
+          <h3 class="sec-title">G‘oyalar va loyihalar</h3>
+          <span class="sec-note" id="ideasCountNote">0 ta</span>
+        </div>
+        <div id="ideasWrap"></div>
+      </div>
+
+      <!-- Yangiliklar va Yoshlarga oid muhim ma'lumotlar -->
+      <div id="hub-news" style="display: none;">
+        <div class="sec-head" style="margin-top: 0;">
+          <h3 class="sec-title">Yangiliklar</h3>
+          <span class="sec-note">YTM 0708</span>
+        </div>
+        <div id="newsWrap"></div>
+
+        <div class="sec-head">
+          <h3 class="sec-title">Yoshlarga oid muhim ma’lumotlar</h3>
+          <span class="sec-note">Ma’lumotnoma</span>
+        </div>
+        <div id="youthInfoWrap"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 5: ADMIN PANEL -->
+    <section id="view-admin" class="page-view">
+      <div class="sec-head">
+        <h2 class="sec-title">Admin boshqaruv</h2>
+        <button class="btn-outline" id="logoutAdminBtn" style="display: none;" onclick="logoutAdmin()">Chiqish</button>
+      </div>
+
+      <div class="panel" id="adminLoginBox">
+        <div class="ev-heading">Parol orqali kirish</div>
+        <p class="dir-body" style="margin-bottom: 12px;">
+          Yangi tadbir va loyihalar boshlash uchun admin parolini kiriting (parol: <b>ytm0708</b>).
+        </p>
+        <form onsubmit="handleAdminLogin(event)">
+          <div class="field-group">
+            <label class="field-label" for="adminPassInput">Admin parol</label>
+            <input class="field-input" id="adminPassInput" type="password" placeholder="Parolni kiriting" required />
+          </div>
+          <button class="cta-orange" style="width: 100%;" type="submit">
+            <span>🔐</span>
+            <span>Kirish</span>
+          </button>
+        </form>
+      </div>
+
+      <div id="adminPanelBody" style="display: none;">
+        <div class="panel">
+          <div class="ev-heading">➕ Yangi tadbir boshlash</div>
+          <form onsubmit="handleCreateEvent(event)">
+            <div class="field-group">
+              <label class="field-label" for="newEvTitle">Tadbir nomi</label>
+              <input class="field-input" id="newEvTitle" type="text" placeholder="Masalan: AI va amaliy loyihalar" required />
+            </div>
+
+            <div class="two-col">
+              <div class="field-group">
+                <label class="field-label" for="newEvDir">Yo‘nalish</label>
+                <select class="field-select" id="newEvDir"></select>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="newEvLoc">Joy / Xona</label>
+                <input class="field-input" id="newEvLoc" type="text" placeholder="YTM Markazi, IT zal" required />
+              </div>
+            </div>
+
+            <div class="two-col">
+              <div class="field-group">
+                <label class="field-label" for="newEvDate">Sana</label>
+                <input class="field-input" id="newEvDate" type="text" placeholder="30-noyabr" required />
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="newEvTimes">Vaqtlar (vergul bilan)</label>
+                <input class="field-input" id="newEvTimes" type="text" value="10:00, 14:00, 16:30" required />
+              </div>
+            </div>
+
+            <button class="cta-teal" style="width: 100%;" type="submit">
+              <span>Tadbirni boshlash</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <div class="ev-heading">🚀 Yangi loyiha boshlash</div>
+          <form onsubmit="handleCreateProject(event)">
+            <div class="field-group">
+              <label class="field-label" for="newProjTitle">Loyiha nomi</label>
+              <input class="field-input" id="newProjTitle" type="text" placeholder="Masalan: Yoshlar Startap Inkubatori" required />
+            </div>
+
+            <div class="two-col">
+              <div class="field-group">
+                <label class="field-label" for="newProjAuthor">Mas’ul / Jamoa</label>
+                <input class="field-input" id="newProjAuthor" type="text" placeholder="YTM 0708 Jamoasi" required />
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="newProjDir">Yo‘nalish</label>
+                <select class="field-select" id="newProjDir"></select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="newProjDesc">Loyiha tavsifi</label>
+              <textarea class="field-textarea" id="newProjDesc" placeholder="Loyiha maqsadi va bosqichlari..." required></textarea>
+            </div>
+
+            <button class="cta-orange" style="width: 100%;" type="submit">
+              <span>Loyihani boshlash</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <div class="ev-heading">📋 Band qilingan joylar va ro‘yxat</div>
+          <div id="adminSummaryWrap" class="dir-body">Hozircha bandlovlar yo‘q.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bottom Dock Navigation matching screenshot -->
+  <nav class="dock-nav" aria-label="Asosiy menyu">
+    <button class="dock-item active" id="nav-home" onclick="switchView('home')">
+      <span class="dock-pill">🏠</span>
+      <span>Asosiy</span>
+    </button>
+    <button class="dock-item" id="nav-register" onclick="switchView('register')">
+      <span class="dock-pill">📝</span>
+      <span>Ro‘yxat</span>
+    </button>
+    <button class="dock-item" id="nav-tickets" onclick="switchView('tickets')">
+      <span class="dock-pill">🎟️</span>
+      <span>Chipta</span>
+    </button>
+    <button class="dock-item" id="nav-hub" onclick="switchView('hub')">
+      <span class="dock-pill">✨</span>
+      <span>Xona/G‘oya</span>
+    </button>
+  </nav>
+    <script>
+    const ADMIN_PASS = "ytm0708";
+    const STORAGE_KEY = "ytm_0708_state_v2";
+    const EVENT_SEAT_TOTAL = 24;
+    const ROOM_SEAT_TOTAL = 16;
+
+    const DIRECTIONS = [
+      {
+        code: "YTM // TECH",
+        short: "YTM//TECH",
+        icon: "〰️",
+        iconBg: "rgba(0, 184, 124, 0.16)",
+        iconColor: "#3ee8af",
+        desc: "Raqamli texnologiyalar va sun'iy intellektni anglatuvchi mikrosxema chiziqlari va kod elementlari bilan boyitilgan metallik belgi."
+      },
+      {
+        code: "YTM // BIZNES",
+        short: "YTM//BIZNES",
+        icon: "📈",
+        iconBg: "rgba(255, 122, 0, 0.16)",
+        iconColor: "#ff9933",
+        desc: "Tadbirkorlik o'sishi va kapital sari intilishni ko'rsatuvchi ko'tariluvchi grafik o'qi uyg'unlashgan mis-metallik shakl."
+      },
+      {
+        code: "YTM // KREATIV",
+        short: "YTM//KREATIV",
+        icon: "🎨",
+        iconBg: "rgba(34, 152, 243, 0.16)",
+        iconColor: "#5bb5ff",
+        desc: "Ijodiy erkinlik va vizual san'atni ifodalovchi diafragma hamda mo'yqalam unsurlari birlashgan monogramma."
+      },
+      {
+        code: "YTM // VOLONTYOR",
+        short: "YTM//VOLONTYOR",
+        icon: "💚",
+        iconBg: "rgba(0, 184, 124, 0.14)",
+        iconColor: "#55ebb8",
+        desc: "Jamiyatga foyda keltiruvchi ko'ngilli tashabbuslar, ekologiya va yoshlar hamjihatligi yo'nalishi."
+      },
+      {
+        code: "YTM // KASB VA TIL",
+        short: "YTM//KASB VA TIL",
+        icon: "🎓",
+        iconBg: "rgba(168, 85, 247, 0.16)",
+        iconColor: "#c084fc",
+        desc: "Zamonaviy kasblar, xorijiy tillar va amaliy laboratoriyalar orqali yoshlarni tayyorlash yo'nalishi."
+      }
+    ];
+
+    const REGIONS_DATA = {
+      "Toshkent shahri": [
+        "Bektemir tumani", "Chilonzor tumani", "Mirzo Ulug‘bek tumani", "Mirobod tumani",
+        "Olmazor tumani", "Sergeli tumani", "Shayxontohur tumani", "Uchtepa tumani",
+        "Yakkasaroy tumani", "Yangihayot tumani", "Yashnobod tumani", "Yunusobod tumani"
+      ],
+      "Toshkent viloyati": [
+        "Nurafshon shahri", "Angren shahri", "Bekobod shahri", "Chirchiq shahri", "Olmaliq shahri",
+        "Ohangaron shahri", "Yangiyo‘l shahri", "Bekobod tumani", "Bo‘ka tumani", "Bo‘stonliq tumani",
+        "Chinoz tumani", "Qibray tumani", "Ohangaron tumani", "Oqqo‘rg‘on tumani", "Parkent tumani",
+        "Piskent tumani", "Quyi Chirchiq tumani", "O‘rta Chirchiq tumani", "Yangiyo‘l tumani", "Yuqori Chirchiq tumani", "Zangiota tumani"
+      ],
+      "Andijon viloyati": [
+        "Andijon shahri", "Xonobod shahri", "Andijon tumani", "Asaka tumani", "Baliqchi tumani",
+        "Bo‘ston tumani", "Buloqboshi tumani", "Izboskan tumani", "Jalolquduq tumani",
+        "Marhamat tumani", "Oltinko‘l tumani", "Paxtaobod tumani", "Qo‘rg‘ontepa tumani", "Shahrixon tumani", "Ulug‘nor tumani", "Xo‘jaobod tumani"
+      ],
+      "Buxoro viloyati": [
+        "Buxoro shahri", "Kogon shahri", "Olot tumani", "Buxoro tumani", "G‘ijduvon tumani",
+        "Jondor tumani", "Kogon tumani", "Peshku tumani", "Qorako‘l tumani",
+        "Qorovulbozor tumani", "Romitan tumani", "Shofirkon tumani", "Vobkent tumani"
+      ],
+      "Farg‘ona viloyati": [
+        "Farg‘ona shahri", "Marg‘ilon shahri", "Quvasoy shahri", "Qo‘qon shahri",
+        "Bag‘dod tumani", "Beshariq tumani", "Buvayda tumani", "Dang‘ara tumani",
+        "Farg‘ona tumani", "Furqat tumani", "Oltiariq tumani", "Qo‘shtepa tumani",
+        "Quva tumani", "Rishton tumani", "So‘x tumani", "Toshloq tumani", "Uchko‘prik tumani", "Yozyovon tumani"
+      ],
+      "Jizzax viloyati": [
+        "Jizzax shahri", "Arnasoy tumani", "Baxmal tumani", "Do‘stlik tumani",
+        "Forish tumani", "G‘allaorol tumani", "Mirzacho‘l tumani", "Paxtakor tumani",
+        "Yangiobod tumani", "Zafarobod tumani", "Zarbdor tumani", "Zomin tumani"
+      ],
+      "Xorazm viloyati": [
+        "Urganch shahri", "Xiva shahri", "Bog‘ot tumani", "Gurlan tumani", "Qo‘shko‘pir tumani",
+        "Shovot tumani", "Tuproqqal‘a tumani", "Urganch tumani", "Xazarasp tumani", "Xiva tumani", "Yangiariq tumani", "Yangibozor tumani"
+      ],
+      "Namangan viloyati": [
+        "Namangan shahri", "Chortoq tumani", "Chust tumani", "Kosonsoy tumani",
+        "Mingbuloq tumani", "Namangan tumani", "Norin tumani", "Pop tumani",
+        "To‘raqo‘rg‘on tumani", "Uchqo‘rg‘on tumani", "Uychi tumani", "Yangiqo‘rg‘on tumani"
+      ],
+      "Navoiy viloyati": [
+        "Navoiy shahri", "Zarafshon shahri", "G‘ozg‘on shahri", "Karmana tumani",
+        "Konimex tumani", "Navbahor tumani", "Nurota tumani", "Tomdi tumani", "Uchquduq tumani", "Xatirchi tumani"
+      ],
+      "Qashqadaryo viloyati": [
+        "Qarshi shahri", "Shahrisabz shahri", "Chiroqchi tumani", "Dehqonobod tumani",
+        "G‘uzor tumani", "Kasbi tumani", "Kitob tumani", "Koson tumani", "Mirishkor tumani",
+        "Muborak tumani", "Nishon tumani", "Qamashi tumani", "Qarshi tumani", "Shahrisabz tumani", "Yakkabog‘ tumani"
+      ],
+      "Qoraqalpog‘iston Respublikasi": [
+        "Nukus shahri", "Amudaryo tumani", "Beruniy tumani", "Bo‘zatov tumani",
+        "Ellikqal‘a tumani", "Kegeyli tumani", "Mo‘ynoq tumani", "Nukus tumani",
+        "Qo‘ng‘irot tumani", "Qorao‘zak tumani", "Shumanay tumani", "Taxtako‘pir tumani", "To‘rtko‘l tumani", "Xo‘jayli tumani"
+      ],
+      "Samarqand viloyati": [
+        "Samarqand shahri", "Kattaqo‘rg‘on shahri", "Bulung‘ur tumani", "Ishtixon tumani",
+        "Jomboy tumani", "Kattaqo‘rg‘on tumani", "Narpoy tumani", "Nurobod tumani",
+        "Oqdaryo tumani", "Payariq tumani", "Pastdarg‘om tumani", "Paxtachi tumani", "Qo‘shrabot tumani", "Samarqand tumani", "Toyloq tumani", "Urgut tumani"
+      ],
+      "Surxondaryo viloyati": [
+        "Termiz shahri", "Angor tumani", "Bandixon tumani", "Boysun tumani",
+        "Denov tumani", "Jarqo‘rg‘on tumani", "Muzrabot tumani", "Oltinsoy tumani",
+        "Qiziriq tumani", "Qumqo‘rg‘on tumani", "Sariosiyo tumani", "Sherobod tumani", "Sho‘rchi tumani", "Termiz tumani", "Uzun tumani"
+      ],
+      "Sirdaryo viloyati": [
+        "Guliston shahri", "Shirin shahri", "Yangiyer shahri", "Boyovut tumani",
+        "Guliston tumani", "Mirzaobod tumani", "Oqoltin tumani", "Sardoba tumani",
+        "Sayxunobod tumani", "Sirdaryo tumani", "Xovos tumani"
+      ]
+    };
+
+    const DEFAULT_STATE = {
+      selectedDirection: "ALL",
+      isAdmin: false,
+      events: [
+        {
+          id: "ev-1",
+          title: "Sun'iy intellekt va amaliy loyihalar",
+          direction: "YTM // TECH",
+          date: "26-noyabr",
+          times: ["10:00", "14:00", "17:00"],
+          location: "YTM 0708 Markazi, IT zal"
+        },
+        {
+          id: "ev-2",
+          title: "Startap g'oyani moliyalashtirishga tayyorlash",
+          direction: "YTM // BIZNES",
+          date: "27-noyabr",
+          times: ["11:00", "15:00"],
+          location: "YTM 0708 Markazi, Biznes trening"
+        },
+        {
+          id: "ev-3",
+          title: "Vizual dizayn va brending mahorat darsi",
+          direction: "YTM // KREATIV",
+          date: "29-noyabr",
+          times: ["15:00", "17:30"],
+          location: "YTM 0708 Markazi, Studiya"
+        },
+        {
+          id: "ev-4",
+          title: "Yashil makon va yoshlar volontyorlik forumi",
+          direction: "YTM // VOLONTYOR",
+          date: "02-dekabr",
+          times: ["09:30", "13:30"],
+          location: "YTM 0708 Markazi, Konferens zal"
+        },
+        {
+          id: "ev-5",
+          title: "Xorijiy tillar va zamonaviy kasblar amaliyoti",
+          direction: "YTM // KASB VA TIL",
+          date: "04-dekabr",
+          times: ["10:30", "14:30", "16:00"],
+          location: "YTM 0708 Markazi, Til va kasb xonasi"
+        }
+      ],
+      ideas: [
+        {
+          id: "idea-1",
+          author: "Javohir Tursunov",
+          title: "AgroSensor 0708 — Smart sug'orish moduli",
+          direction: "YTM // TECH",
+          desc: "Issiqxona va tomorqalar uchun namlikni o'lchovchi amaliy IoT yechim.",
+          status: "Qo'llab-quvvatlanmoqda"
+        },
+        {
+          id: "idea-2",
+          author: "Dilnoza Sobirova",
+          title: "Yosh Hunarmandlar Eksport Klubi",
+          direction: "YTM // BIZNES",
+          desc: "Milliy dizayn va hunarmandchilik mahsulotlarini bozorga olib chiqish loyihasi.",
+          status: "Ko'rib chiqilmoqda"
+        }
+      ],
+      registrations: [],
+      roomBookings: []
+    };
+
+    const NEWS_ITEMS = [
+      {
+        title: "YTM 0708: yangi laboratoriyalar va xonalardan bandlov ochildi",
+        date: "Bugun",
+        text: "IT, biznes trening, til, kasbga o'qitish xonalari va laboratoriyalarda qolgan bo'sh joylar real vaqtda hisoblanadi."
+      },
+      {
+        title: "14 hudud yoshlari uchun loyihalar va g'oyalar tanlovi boshlandi",
+        date: "2 kun oldin",
+        text: "Barcha viloyat, shahar va tumanlardan kelgan yoshlar o'z g'oyalarini yuborib, qo'llab-quvvatlov olishlari mumkin."
+      }
+    ];
+
+    const YOUTH_INFO_ITEMS = [
+      {
+        title: "Yoshlar tashabbuslari va loyihalarini qo'llab-quvvatlash",
+        text: "G'oya mualliflari loyiha pasportini shakllantirish, mentorlik sessiyalariga yozilish va amaliy xonalardan foydalanish imkoniga ega."
+      },
+      {
+        title: "Xonalar va laboratoriyalardan foydalanish qoidalari",
+        text: "Joy band qilinganda band bo'lgan o'rinlar darhol belgilanadi va qolgan o'rinlar soni avtomatik kamayadi."
+      }
+    ];
+
+    let state = loadState();
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return structuredClone(DEFAULT_STATE);
+        const parsed = JSON.parse(raw);
+        return {
+          ...structuredClone(DEFAULT_STATE),
+          ...parsed,
+          events: Array.isArray(parsed.events) && parsed.events.length ? parsed.events : structuredClone(DEFAULT_STATE).events,
+          ideas: Array.isArray(parsed.ideas) && parsed.ideas.length ? parsed.ideas : structuredClone(DEFAULT_STATE).ideas,
+          registrations: Array.isArray(parsed.registrations) ? parsed.registrations : [],
+          roomBookings: Array.isArray(parsed.roomBookings) ? parsed.roomBookings : []
+        };
+      } catch (e) {
+        return structuredClone(DEFAULT_STATE);
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById("toast");
+      el.textContent = msg;
+      el.classList.add("show");
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => el.classList.remove("show"), 2800);
+    }
+
+    function getBookedEventSeats(eventId, timeSlot) {
+      return state.registrations
+        .filter(r => r.eventId === eventId && (!timeSlot || r.timeSlot === timeSlot))
+        .map(r => r.seat);
+    }
+
+    function getBookedRoomSeats(roomName, dateVal, timeVal) {
+      return state.roomBookings
+        .filter(b =>
+          b.room === roomName &&
+          (!dateVal || b.date === dateVal) &&
+          (!timeVal || b.timeRange === timeVal)
+        )
+        .map(b => b.seat);
+    }
+
+    function refreshSeatSelectors() {
+      populateEventSeatSelect();
+      populateRoomSeatSelect();
+      renderAdminWorkspace();
+    }
+
+    function populateEventSeatSelect() {
+      const sel = document.getElementById("regSeat");
+      const badge = document.getElementById("regSeatBadge");
+      const notice = document.getElementById("regBookedNotice");
+      if (!sel) return;
+
+      const evId = document.getElementById("regEvent")?.value || "";
+      const timeSlot = document.getElementById("regTimeSlot")?.value || "";
+      const bookedSet = new Set(getBookedEventSeats(evId, timeSlot));
+      const freeCount = Math.max(0, EVENT_SEAT_TOTAL - bookedSet.size);
+
+      if (badge) badge.textContent = `${freeCount}/${EVENT_SEAT_TOTAL} bo‘sh joy`;
+
+      const options = [];
+      let firstFree = "";
+      for (let i = 1; i <= EVENT_SEAT_TOTAL; i++) {
+        const seatLabel = `O'rin #${i}`;
+        const isBooked = bookedSet.has(seatLabel);
+        if (!isBooked && !firstFree) firstFree = seatLabel;
+        options.push(
+          `<option value="${escapeHtml(seatLabel)}" ${isBooked ? "disabled" : ""}>${escapeHtml(seatLabel)}${isBooked ? " — [BAND]" : ""}</option>`
+        );
+      }
+      sel.innerHTML = options.join("");
+      if (firstFree) sel.value = firstFree;
+
+      if (notice) {
+        const bookedList = [...bookedSet];
+        notice.textContent = bookedList.length
+          ? `Band qilingan joylar (${bookedList.length} ta): ${bookedList.join(", ")} • Qolgan bo‘sh joylar: ${freeCount} ta.`
+          : `Band qilingan joylar: hozircha yo‘q • Barcha ${EVENT_SEAT_TOTAL} ta joy bo‘sh.`;
+      }
+    }
+
+    function populateRoomSeatSelect() {
+      const sel = document.getElementById("roomSeat");
+      const badge = document.getElementById("roomSeatBadge");
+      const notice = document.getElementById("roomBookedNotice");
+      if (!sel) return;
+
+      const roomName = document.getElementById("roomSelect")?.value || "";
+      const dateVal = document.getElementById("roomDate")?.value || "";
+      const timeVal = document.getElementById("roomTime")?.value || "";
+      const bookedSet = new Set(getBookedRoomSeats(roomName, dateVal, timeVal));
+      const freeCount = Math.max(0, ROOM_SEAT_TOTAL - bookedSet.size);
+
+      if (badge) badge.textContent = `${freeCount}/${ROOM_SEAT_TOTAL} bo‘sh joy`;
+
+      const options = [];
+      let firstFree = "";
+      for (let i = 1; i <= ROOM_SEAT_TOTAL; i++) {
+        const seatLabel = `Joy #${i}`;
+        const isBooked = bookedSet.has(seatLabel);
+        if (!isBooked && !firstFree) firstFree = seatLabel;
+        options.push(
+          `<option value="${escapeHtml(seatLabel)}" ${isBooked ? "disabled" : ""}>${escapeHtml(seatLabel)}${isBooked ? " — [BAND]" : ""}</option>`
+        );
+      }
+      sel.innerHTML = options.join("");
+      if (firstFree) sel.value = firstFree;
+
+      if (notice) {
+        const bookedList = [...bookedSet];
+        notice.textContent = bookedList.length
+          ? `Band qilingan joylar (${bookedList.length} ta): ${bookedList.join(", ")} • Qolgan bo‘sh joylar: ${freeCount} ta.`
+          : `Band qilingan joylar: hozircha yo‘q • Barcha ${ROOM_SEAT_TOTAL} ta joy bo‘sh.`;
+      }
+    }
+      function switchView(viewName) {
+      document.querySelectorAll(".page-view").forEach(v => v.classList.remove("active"));
+      document.getElementById(`view-${viewName}`)?.classList.add("active");
+
+      document.querySelectorAll(".dock-item").forEach(btn => btn.classList.remove("active"));
+      document.getElementById(`nav-${viewName}`)?.classList.add("active");
+
+      document.getElementById("topAdminBtn")?.classList.toggle("active", viewName === "admin");
+
+      if (viewName === "register") {
+        syncRegisterForm(state.selectedDirection === "ALL" ? DIRECTIONS[0].code : state.selectedDirection);
+      } else if (viewName === "tickets") {
+        renderTickets();
+      } else if (viewName === "hub") {
+        populateRoomSeatSelect();
+        renderIdeas();
+      } else if (viewName === "admin") {
+        renderAdminWorkspace();
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function switchHubTab(tab) {
+      ["rooms", "ideas", "news"].forEach(t => {
+        document.getElementById(`hub-${t}`).style.display = t === tab ? "block" : "none";
+        document.getElementById(`seg-${t}`).classList.toggle("active", t === tab);
+      });
+      if (tab === "rooms") populateRoomSeatSelect();
+      if (tab === "ideas") renderIdeas();
+    }
+
+    function renderFilterChips() {
+      const strip = document.getElementById("filterStrip");
+      const items = [{ label: "Barchasi", code: "ALL" }, ...DIRECTIONS.map(d => ({ label: d.short, code: d.code }))];
+      strip.innerHTML = items.map(it => `
+        <button class="filter-chip ${state.selectedDirection === it.code ? "active" : ""}" onclick="setDirectionFilter('${it.code}')">
+          ${escapeHtml(it.label)}
+        </button>
+      `).join("");
+    }
+
+    function setDirectionFilter(code) {
+      state.selectedDirection = code;
+      saveState();
+      renderFilterChips();
+      renderHome();
+    }
+
+    function renderHome() {
+      const dirs = state.selectedDirection === "ALL"
+        ? DIRECTIONS
+        : DIRECTIONS.filter(d => d.code === state.selectedDirection);
+
+      const evs = state.selectedDirection === "ALL"
+        ? state.events
+        : state.events.filter(e => e.direction === state.selectedDirection);
+
+      document.getElementById("heroTag").textContent = `YTM 0708 • ${state.events.length} ta faol tadbir`;
+      document.getElementById("heroCounter").textContent = `${state.registrations.length} ta yosh ishtirokchi ro‘yxatdan o‘tgan`;
+      document.getElementById("dirCountNote").textContent = state.selectedDirection === "ALL" ? "5 ta yo‘nalish" : state.selectedDirection;
+      document.getElementById("evCountNote").textContent = `${evs.length} ta tadbir`;
+
+      document.getElementById("directionsWrap").innerHTML = dirs.map(d => `
+        <div class="panel dir-box ${state.selectedDirection === d.code ? "selected" : ""}" onclick="setDirectionFilter('${d.code}')">
+          <div class="dir-header">
+            <div class="dir-badge-icon" style="background:${d.iconBg}; color:${d.iconColor};">${d.icon}</div>
+            <div class="dir-code-text">${escapeHtml(d.code)}</div>
+          </div>
+          <p class="dir-body">${escapeHtml(d.desc)}</p>
+        </div>
+      `).join("");
+
+      document.getElementById("eventsWrap").innerHTML = evs.length
+        ? evs.map(ev => {
+            const bookedCount = state.registrations.filter(r => r.eventId === ev.id).length;
+            const leftCount = Math.max(0, EVENT_SEAT_TOTAL - bookedCount);
+            return `
+              <div class="panel">
+                <span class="badge-teal">${escapeHtml(ev.direction)} • ${leftCount} ta bo‘sh joy</span>
+                <div class="ev-heading">${escapeHtml(ev.title)}</div>
+                <div class="ev-meta-row">
+                  <span>📅 ${escapeHtml(ev.date)} • ${escapeHtml((ev.times || []).join(", "))}</span>
+                  <span>📍 ${escapeHtml(ev.location)}</span>
+                </div>
+                <button class="cta-orange" style="width: 100%;" onclick="openRegisterWithEvent('${escapeHtml(ev.direction)}', '${escapeHtml(ev.id)}')">
+                  Ro‘yxatdan o‘tish
+                </button>
+              </div>
+            `;
+          }).join("")
+        : `<div class="panel"><p class="dir-body">Bu yo‘nalishda hozircha tadbir yo‘q.</p></div>`;
+    }
+
+    function openRegisterWithEvent(dirCode, evId) {
+      switchView("register");
+      document.getElementById("regDirection").value = dirCode;
+      onRegDirectionChange();
+      const evSel = document.getElementById("regEvent");
+      if ([...evSel.options].some(o => o.value === evId)) {
+        evSel.value = evId;
+        onRegEventChange();
+      }
+    }
+
+    function populateRegions() {
+      const opts = Object.keys(REGIONS_DATA)
+        .map(r => `<option value="${escapeHtml(r)}">${escapeHtml(r)}</option>`)
+        .join("");
+      ["regRegion", "roomRegion"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = opts;
+      });
+      populateDistricts("regRegion", "regDistrict");
+      populateDistricts("roomRegion", "roomDistrict");
+    }
+
+    function populateDistricts(regionId, districtId) {
+      const regionVal = document.getElementById(regionId)?.value;
+      const distEl = document.getElementById(districtId);
+      if (!distEl) return;
+      const list = REGIONS_DATA[regionVal] || [];
+      distEl.innerHTML = list.map(d => `<option value="${escapeHtml(d)}">${escapeHtml(d)}</option>`).join("");
+    }
+
+    function populateDirectionSelects() {
+      const opts = DIRECTIONS.map(d => `<option value="${escapeHtml(d.code)}">${escapeHtml(d.code)}</option>`).join("");
+      ["regDirection", "ideaDir", "newEvDir", "newProjDir"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = opts;
+      });
+    }
+
+    function syncRegisterForm(dirCode) {
+      const dirSel = document.getElementById("regDirection");
+      if (dirSel && DIRECTIONS.some(d => d.code === dirCode)) {
+        dirSel.value = dirCode;
+      }
+      onRegDirectionChange();
+    }
+
+    function onRegDirectionChange() {
+      const dirCode = document.getElementById("regDirection").value;
+      const evSel = document.getElementById("regEvent");
+      const timeSel = document.getElementById("regTimeSlot");
+      const matches = state.events.filter(e => e.direction === dirCode);
+
+      if (!matches.length) {
+        evSel.innerHTML = `<option value="">Tadbir topilmadi</option>`;
+        timeSel.innerHTML = `<option value="">Vaqt yo‘q</option>`;
+        populateEventSeatSelect();
+        return;
+      }
+
+      evSel.innerHTML = matches
+        .map(e => `<option value="${escapeHtml(e.id)}">${escapeHtml(e.title)} (${escapeHtml(e.date)})</option>`)
+        .join("");
+
+      onRegEventChange();
+    }
+
+    function onRegEventChange() {
+      const evId = document.getElementById("regEvent").value;
+      const timeSel = document.getElementById("regTimeSlot");
+      const ev = state.events.find(e => e.id === evId);
+      const times = ev && Array.isArray(ev.times) && ev.times.length ? ev.times : ["10:00", "14:00"];
+
+      timeSel.innerHTML = times
+        .map(t => `<option value="${escapeHtml(t)}">${escapeHtml(ev ? `${ev.date}, ${t}` : t)}</option>`)
+        .join("");
+
+      populateEventSeatSelect();
+    }
+
+    function handleEventRegistration(e) {
+      e.preventDefault();
+      const fullName = document.getElementById("regFullName").value.trim();
+      const phone = document.getElementById("regPhone").value.trim();
+      const direction = document.getElementById("regDirection").value;
+      const evId = document.getElementById("regEvent").value;
+      const timeSlot = document.getElementById("regTimeSlot").value;
+      const region = document.getElementById("regRegion").value;
+      const district = document.getElementById("regDistrict").value;
+      const seat = document.getElementById("regSeat").value;
+
+      const ev = state.events.find(item => item.id === evId);
+      if (!ev) {
+        showToast("Tadbir tanlanmagan!");
+        return;
+      }
+
+      if (getBookedEventSeats(ev.id, timeSlot).includes(seat)) {
+        showToast("Bu joy allaqachon band qilingan!");
+        populateEventSeatSelect();
+        return;
+      }
+
+      const code = `YTM0708-${Math.floor(100000 + Math.random() * 900000)}`;
+      state.registrations.unshift({
+        id: "reg-" + Date.now(),
+        code,
+        fullName,
+        phone,
+        direction,
+        eventId: ev.id,
+        eventTitle: ev.title,
+        location: ev.location,
+        timeSlot,
+        region,
+        district,
+        seat
+      });
+
+      saveState();
+      renderHome();
+      populateEventSeatSelect();
+      document.getElementById("registerForm").reset();
+      syncRegisterForm(direction);
+      showToast(`Chipta tayyor: ${code}`);
+      switchView("tickets");
+    }
+
+    function handleRoomBooking(e) {
+      e.preventDefault();
+      const fullName = document.getElementById("roomFullName").value.trim();
+      const room = document.getElementById("roomSelect").value;
+      const date = document.getElementById("roomDate").value;
+      const timeRange = document.getElementById("roomTime").value;
+      const region = document.getElementById("roomRegion").value;
+      const district = document.getElementById("roomDistrict").value;
+      const seat = document.getElementById("roomSeat").value;
+
+      if (getBookedRoomSeats(room, date, timeRange).includes(seat)) {
+        showToast("Bu joy allaqachon band qilingan!");
+        populateRoomSeatSelect();
+        return;
+      }
+
+      const code = `XONA0708-${Math.floor(1000 + Math.random() * 9000)}`;
+      state.roomBookings.unshift({
+        id: "rm-" + Date.now(),
+        code,
+        fullName,
+        room,
+        date,
+        timeRange,
+        region,
+        district,
+        seat
+      });
+
+      saveState();
+      populateRoomSeatSelect();
+      document.getElementById("roomForm").reset();
+      initDefaultDate();
+      showToast(`Xona joyi band qilindi: ${code}`);
+      switchView("tickets");
+    }
+
+    function initDefaultDate() {
+      const el = document.getElementById("roomDate");
+      if (el && !el.value) el.value = new Date().toISOString().split("T")[0];
+    }
+
+    function handleIdeaSubmit(e) {
+      e.preventDefault();
+      const author = document.getElementById("ideaAuthor").value.trim();
+      const title = document.getElementById("ideaTitle").value.trim();
+      const direction = document.getElementById("ideaDir").value;
+      const desc = document.getElementById("ideaDesc").value.trim();
+
+      state.ideas.unshift({
+        id: "idea-" + Date.now(),
+        author,
+        title,
+        direction,
+        desc,
+        status: "Qo'llab-quvvatlashga yuborildi"
+      });
+
+      saveState();
+      e.target.reset();
+      renderIdeas();
+      showToast("G‘oyangiz qo‘llab-quvvatlash ro‘yxatiga qo‘shildi!");
+    }
+
+    function renderIdeas() {
+      document.getElementById("ideasCountNote").textContent = `${state.ideas.length} ta`;
+      document.getElementById("ideasWrap").innerHTML = state.ideas.map(item => `
+        <div class="panel">
+          <span class="badge-teal badge-amber">${escapeHtml(item.direction)}</span>
+          <div class="ev-heading">${escapeHtml(item.title)}</div>
+          <p class="dir-body" style="margin-bottom:8px;">${escapeHtml(item.desc)}</p>
+          <div class="ev-meta-row" style="margin-bottom:0;">
+            <span>👤 ${escapeHtml(item.author)}</span>
+            <span>📌 ${escapeHtml(item.status)}</span>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderInfoSections() {
+      document.getElementById("newsWrap").innerHTML = NEWS_ITEMS.map(n => `
+        <div class="panel">
+          <span class="badge-teal">${escapeHtml(n.date)}</span>
+          <div class="ev-heading">${escapeHtml(n.title)}</div>
+          <p class="dir-body">${escapeHtml(n.text)}</p>
+        </div>
+      `).join("");
+
+      document.getElementById("youthInfoWrap").innerHTML = YOUTH_INFO_ITEMS.map(y => `
+        <div class="panel">
+          <div class="ev-heading">ℹ️ ${escapeHtml(y.title)}</div>
+          <p class="dir-body">${escapeHtml(y.text)}</p>
+        </div>
+      `).join("");
+    }
+
+    function renderTickets() {
+      const total = state.registrations.length + state.roomBookings.length;
+      document.getElementById("ticketsCountNote").textContent = `${total} ta`;
+      const wrap = document.getElementById("ticketsWrap");
+
+      if (!total) {
+        wrap.innerHTML = `
+          <div class="panel">
+            <div class="ev-heading">Hali chipta yoki bandlov yo‘q</div>
+            <p class="dir-body" style="margin-bottom:12px;">Tadbir yoki xonadan joy band qiling — chiptangiz shu yerda ko‘rinadi.</p>
+            <button class="cta-orange" onclick="switchView('register')">Ro‘yxatdan o‘tish</button>
+          </div>
+        `;
+        return;
+      }
+
+      const evHtml = state.registrations.map(r => `
+        <div class="pass-card">
+          <span class="badge-teal">TADBIR • ${escapeHtml(r.code)}</span>
+          <div class="ev-heading">${escapeHtml(r.eventTitle)}</div>
+          <div class="ev-meta-row">
+            <span>👤 ${escapeHtml(r.fullName)} (${escapeHtml(r.phone)})</span>
+            <span>🏷️ ${escapeHtml(r.direction)}</span>
+            <span>🕒 ${escapeHtml(r.timeSlot)}</span>
+            <span>📍 ${escapeHtml(r.region)}, ${escapeHtml(r.district)}</span>
+            <span>💺 ${escapeHtml(r.seat)}</span>
+          </div>
+        </div>
+      `).join("");
+
+      const rmHtml = state.roomBookings.map(b => `
+        <div class="pass-card">
+          <span class="badge-teal badge-amber">XONA • ${escapeHtml(b.code)}</span>
+          <div class="ev-heading">${escapeHtml(b.room)}</div>
+          <div class="ev-meta-row">
+            <span>👤 ${escapeHtml(b.fullName)}</span>
+            <span>📅 ${escapeHtml(b.date)} • ${escapeHtml(b.timeRange)}</span>
+            <span>📍 ${escapeHtml(b.region)}, ${escapeHtml(b.district)}</span>
+            <span>💺 ${escapeHtml(b.seat)}</span>
+          </div>
+        </div>
+      `).join("");
+
+      wrap.innerHTML = evHtml + rmHtml;
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const val = document.getElementById("adminPassInput").value;
+      if (val === ADMIN_PASS) {
+        state.isAdmin = true;
+        saveState();
+        document.getElementById("adminPassInput").value = "";
+        renderAdminWorkspace();
+        showToast("Admin panel ochildi!");
+      } else {
+        showToast("Parol noto‘g‘ri!");
+      }
+    }
+
+    function logoutAdmin() {
+      state.isAdmin = false;
+      saveState();
+      renderAdminWorkspace();
+      showToast("Admin paneldan chiqildi.");
+    }
+
+    function renderAdminWorkspace() {
+      const loginBox = document.getElementById("adminLoginBox");
+      const bodyBox = document.getElementById("adminPanelBody");
+      const logoutBtn = document.getElementById("logoutAdminBtn");
+      const label = document.getElementById("adminBtnLabel");
+
+      if (state.isAdmin) {
+        loginBox.style.display = "none";
+        bodyBox.style.display = "block";
+        logoutBtn.style.display = "inline-block";
+        label.textContent = "Admin (Faol)";
+      } else {
+        loginBox.style.display = "block";
+        bodyBox.style.display = "none";
+        logoutBtn.style.display = "none";
+        label.textContent = "Admin";
+      }
+
+      const summary = document.getElementById("adminSummaryWrap");
+      const rows = [
+        ...state.registrations.map(r => `• <b>${escapeHtml(r.seat)}</b> [BAND] — ${escapeHtml(r.fullName)} (${escapeHtml(r.eventTitle)}, ${escapeHtml(r.timeSlot)})`),
+        ...state.roomBookings.map(b => `• <b>${escapeHtml(b.seat)}</b> [BAND] — ${escapeHtml(b.fullName)} (${escapeHtml(b.room)}, ${escapeHtml(b.date)} ${escapeHtml(b.timeRange)})`)
+      ];
+      summary.innerHTML = rows.length ? rows.slice(0, 10).join("<br/>") : "Hozircha band qilingan joylar yo‘q.";
+    }
+
+    function handleCreateEvent(e) {
+      e.preventDefault();
+      if (!state.isAdmin) return;
+      const title = document.getElementById("newEvTitle").value.trim();
+      const direction = document.getElementById("newEvDir").value;
+      const location = document.getElementById("newEvLoc").value.trim();
+      const date = document.getElementById("newEvDate").value.trim();
+      const times = document.getElementById("newEvTimes").value.split(",").map(s => s.trim()).filter(Boolean);
+
+      state.events.unshift({
+        id: "ev-" + Date.now(),
+        title,
+        direction,
+        date,
+        times: times.length ? times : ["14:00"],
+        location
+      });
+
+      saveState();
+      e.target.reset();
+      renderHome();
+      syncRegisterForm(direction);
+      showToast("Yangi tadbir boshlandi!");
+    }
+
+    function handleCreateProject(e) {
+      e.preventDefault();
+      if (!state.isAdmin) return;
+      const title = document.getElementById("newProjTitle").value.trim();
+      const author = document.getElementById("newProjAuthor").value.trim();
+      const direction = document.getElementById("newProjDir").value;
+      const desc = document.getElementById("newProjDesc").value.trim();
+
+      state.ideas.unshift({
+        id: "proj-" + Date.now(),
+        author,
+        title,
+        direction,
+        desc,
+        status: "Admin tomonidan boshlangan loyiha"
+      });
+
+      saveState();
+      e.target.reset();
+      renderIdeas();
+      showToast("Yangi loyiha boshlandi!");
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    (function init() {
+      populateDirectionSelects();
+      populateRegions();
+      initDefaultDate();
+      renderFilterChips();
+      renderHome();
+      renderInfoSections();
+      renderIdeas();
+      renderTickets();
+      syncRegisterForm(state.selectedDirection === "ALL" ? DIRECTIONS[0].code : state.selectedDirection);
+      populateRoomSeatSelect();
+      renderAdminWorkspace();
+    })();
+  </script>
+</body>
+</html>
