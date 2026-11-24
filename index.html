@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YTM — Yoshlar tashabbuslari markazi</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#071a26" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <style>
+    :root {
+      --bg: #05121a;
+      --surface: #0b202e;
+      --surface-2: #0f2a3c;
+      --border: #193b52;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --teal: #10b981;
+      --orange: #f97316;
+      --orange-hover: #ea580c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body {
+      background: #02080d;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+    .app-shell {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-bottom: 84px;
+      border-left: 1px solid rgba(255,255,255,0.05);
+      border-right: 1px solid rgba(255,255,255,0.05);
+    }
+    .topbar {
+      background: #071a26;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .brand-wrap { display: flex; align-items: center; gap: 9px; min-width: 0; }
+    .brand-icon {
+      width: 34px; height: 34px; border-radius: 10px;
+      background: var(--surface-2); border: 1px solid #224c68;
+      display: grid; place-items: center; flex-shrink: 0; color: #2dd4bf; font-weight: 700;
+    }
+    .brand-title { font-size: 0.88rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .brand-sub { font-size: 0.72rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .top-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .install-chip {
+      background: rgba(16, 185, 129, 0.16); color: #6ee7b7; border: 1px solid rgba(110, 231, 183, 0.4);
+      padding: 6px 10px; border-radius: 999px; font-size: 0.73rem; font-weight: 700; cursor: pointer;
+    }
+    .admin-chip {
+      background: var(--surface-2); color: var(--text); border: 1px solid #234963;
+      padding: 6px 11px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; cursor: pointer;
+    }
+    .admin-chip:hover { border-color: var(--teal); }
+    .filter-bar {
+      background: #071924;
+      padding: 9px 14px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .chip {
+      background: var(--surface); color: #cbd5e1; border: 1px solid var(--border);
+      padding: 6px 12px; border-radius: 999px; font-size: 0.75rem; font-weight: 600;
+      cursor: pointer; white-space: nowrap; flex-shrink: 0;
+    }
+    .chip.active { background: var(--teal); color: #042017; border-color: var(--teal); }
+    .content { padding: 14px 15px; flex: 1; }
+    .page { display: none; }
+    .page.active { display: block; }
+    .hero-card {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      min-height: 180px;
+      background: linear-gradient(135deg, #0d3b4c 0%, #162a45 55%, #2b1d2e 100%);
+      border: 1px solid #214a63;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.22);
+      color: #6ee7b7;
+      border: 1px solid rgba(110, 231, 183, 0.35);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      width: fit-content;
+    }
+    .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; margin-top: 24px; }
+    .hero-title { font-size: 1.03rem; font-weight: 700; line-height: 1.25; max-width: 240px; }
+    .hero-count { font-size: 0.76rem; color: #cbd5e1; margin-top: 5px; }
+    .btn-orange {
+      background: var(--orange); color: #fff; border: 0;
+      padding: 10px 14px; border-radius: 12px; font-size: 0.82rem; font-weight: 700;
+      cursor: pointer; white-space: nowrap;
+    }
+    .btn-orange:hover { background: var(--orange-hover); }
+    .btn-orange.full { width: 100%; padding: 12px 16px; font-size: 0.88rem; margin-top: 6px; }
+    .btn-teal {
+      background: var(--teal); color: #042017; border: 0;
+      padding: 9px 13px; border-radius: 10px; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+    }
+    .btn-dark {
+      background: var(--surface-2); color: var(--text); border: 1px solid var(--border);
+      padding: 8px 12px; border-radius: 10px; font-size: 0.78rem; font-weight: 600; cursor: pointer;
+    }
+    .sec-head { display: flex; align-items: center; justify-content: space-between; margin: 14px 0 9px; }
+    .sec-head:first-child { margin-top: 0; }
+    .sec-title { font-size: 0.94rem; font-weight: 700; }
+    .sec-meta { font-size: 0.75rem; color: var(--muted); }
+    .track-card, .event-card, .info-card, .form-card, .ticket-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .track-card.selected { border-color: #2dd4bf; }
+    .track-top { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .track-badge {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: rgba(45, 212, 191, 0.12); color: #2dd4bf;
+      display: grid; place-items: center; font-size: 0.84rem; font-weight: 700; flex-shrink: 0;
+    }
+    .track-name { font-size: 0.88rem; font-weight: 700; }
+    .track-desc, .info-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.42; }
+    .pill-tag {
+      display: inline-block; background: rgba(45, 212, 191, 0.14); color: #5eead4;
+      padding: 2px 8px; border-radius: 999px; font-size: 0.7rem; font-weight: 700; margin-bottom: 6px;
+    }
+    .event-title, .info-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 6px; }
+    .event-meta { display: flex; justify-content: space-between; gap: 8px; font-size: 0.76rem; color: var(--muted); margin-bottom: 10px; flex-wrap: wrap; }
+    .sub-tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin-bottom: 12px; }
+    .sub-tabs::-webkit-scrollbar { display: none; }
+    .field {
+      background: #071722;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+    }
+    .field label { display: block; font-size: 0.73rem; color: var(--muted); margin-bottom: 4px; }
+    .field input, .field select, .field textarea {
+      width: 100%; background: transparent; border: 0; color: var(--text);
+      font-size: 0.86rem; outline: none;
+    }
+    .field textarea { min-height: 76px; resize: vertical; }
+    .field select option { background: #0b202e; color: #f1f5f9; }
+    .status-ok { color: #6ee7b7; font-size: 0.82rem; font-weight: 600; margin-top: 8px; }
+    .status-err { color: #f87171; font-size: 0.82rem; font-weight: 600; margin-top: 8px; }
+    .ticket-card { border-style: dashed; border-color: #2dd4bf; }
+    .admin-box {
+      display: none; position: fixed; inset: 0; z-index: 50;
+      background: rgba(2, 8, 13, 0.92); overflow-y: auto; padding: 16px;
+    }
+    .admin-box.open { display: block; }
+    .admin-inner { max-width: 520px; margin: 0 auto; }
+    .tbl-wrap { overflow-x: auto; margin-top: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.74rem; }
+    th, td { border: 1px solid var(--border); padding: 6px; text-align: left; }
+    th { background: #0f2a3c; color: #5eead4; }
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; max-width: 480px; background: #071a26;
+      border-top: 1px solid var(--border); display: grid;
+      grid-template-columns: repeat(3, 1fr); padding: 7px 8px; gap: 6px; z-index: 25;
+    }
+    .nav-item {
+      background: transparent; border: 0; color: var(--muted);
+      padding: 7px 6px; border-radius: 12px; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      font-size: 0.73rem; font-weight: 600;
+    }
+    .nav-item.active { background: var(--teal); color: #042017; }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand-wrap">
+      <div class="brand-icon">⬡</div>
+      <div style="min-width:0;">
+        <div class="brand-title">YTM — Yoshlar tashabbuslari mar...</div>
+        <div class="brand-sub">Mobil ro'yxatdan o'tish ilovasi</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="install-chip" id="installAppBtn" type="button">⬇ Ilova</button>
+      <button class="admin-chip" id="openAdminBtn" type="button">⚙ Admin</button>
+    </div>
+  </header>
+
+  <div class="filter-bar" id="filterBar"></div>
+
+  <main class="content">
+    <section id="page-home" class="page active">
+      <div class="hero-card">
+        <span class="hero-tag" id="heroTag">YTM 2026 • 5 ta faol tadbir</span>
+        <div class="hero-bottom">
+          <div>
+            <div class="hero-title">Kelajak tashabbuslarini bugundan boshlang</div>
+            <div class="hero-count" id="heroRegCount">0 ta yosh ishtirokchi ro'yxatdan o'tgan</div>
+          </div>
+          <button class="btn-orange" id="heroJoinBtn" type="button">Qatnashish →</button>
+        </div>
+      </div>
+
+      <div class="sec-head">
+        <div class="sec-title">5 ta asosiy yo'nalish</div>
+        <div class="sec-meta">5 ta yo'nalish</div>
+      </div>
+      <div id="tracksList"></div>
+
+      <div class="sec-head">
+        <div class="sec-title">Yaqin tadbirlar</div>
+        <div class="sec-meta" id="eventsCountLabel">0 ta tadbir</div>
+      </div>
+      <div id="eventsList"></div>
+
+      <div class="sec-head">
+        <div class="sec-title">Yangiliklar va muhim ma'lumotlar</div>
+        <div class="sec-meta">Yoshlar uchun</div>
+      </div>
+      <div id="newsList"></div>
+    </section>
+
+    <section id="page-register" class="page">
+      <div class="sub-tabs" id="regSubTabs">
+        <button class="chip active" type="button" data-sub="event">Tadbirga yozilish</button>
+        <button class="chip" type="button" data-sub="idea">G'oya qo'llab-quvvatlash</button>
+        <button class="chip" type="button" data-sub="room">Xona / Lab band qilish</button>
+      </div>
+
+      <form class="form-card" id="eventForm">
+        <div class="field">
+          <label for="evName">Ism va familiya</label>
+          <input id="evName" type="text" required placeholder="Ism va familiya" />
+        </div>
+        <div class="field">
+          <label for="evPhone">Telefon raqam</label>
+          <input id="evPhone" type="tel" required placeholder="+998 90 123 45 67" />
+        </div>
+        <div class="field">
+          <label for="evRegion">Hudud (14 ta hudud)</label>
+          <select id="evRegion" required></select>
+        </div>
+        <div class="field">
+          <label for="evDistrict">Tuman yoki shahar</label>
+          <select id="evDistrict" required></select>
+        </div>
+        <div class="field">
+          <label for="evTrack">Yo'nalish</label>
+          <select id="evTrack"></select>
+        </div>
+        <div class="field">
+          <label for="evSelect">Tadbir (yo'nalishga bog'langan)</label>
+          <select id="evSelect"></select>
+        </div>
+        <div class="field">
+          <label for="evTime">Vaqt tanlovi (tadbirga bog'langan)</label>
+          <select id="evTime"></select>
+        </div>
+        <button class="btn-orange full" type="submit">🎟 Ro'yxatdan o'tish va chipta olish</button>
+        <div class="status-ok" id="evMsg"></div>
+      </form>
+
+      <form class="form-card" id="ideaForm" style="display:none;">
+        <div class="sec-head" style="margin-top:0;"><div class="sec-title">G'oyani qo'llab-quvvatlash</div></div>
+        <div class="field">
+          <label for="ideaAuthor">Muallif (Ism va familiya)</label>
+          <input id="ideaAuthor" type="text" required placeholder="Ism va familiya" />
+        </div>
+        <div class="field">
+          <label for="ideaPhone">Telefon raqam</label>
+          <input id="ideaPhone" type="tel" required placeholder="+998 90 123 45 67" />
+        </div>
+        <div class="field">
+          <label for="ideaRegion">Hudud (14 ta hudud)</label>
+          <select id="ideaRegion"></select>
+        </div>
+        <div class="field">
+          <label for="ideaDistrict">Tuman yoki shahar</label>
+          <select id="ideaDistrict"></select>
+        </div>
+        <div class="field">
+          <label for="ideaTrack">Yo'nalish</label>
+          <select id="ideaTrack"></select>
+        </div>
+        <div class="field">
+          <label for="ideaTitle">G'oya yoki loyiha nomi</label>
+          <input id="ideaTitle" type="text" required placeholder="Masalan: Yoshlar uchun eko-bot" />
+        </div>
+        <div class="field">
+          <label for="ideaSupportType">Qo'llab-quvvatlash turi</label>
+          <select id="ideaSupportType">
+            <option value="Mentorlik va inkubatsiya">Mentorlik va inkubatsiya</option>
+            <option value="Grant / Moliyaviy ko'mak">Grant / Moliyaviy ko'mak</option>
+            <option value="Laboratoriya va texnik baza">Laboratoriya va texnik baza</option>
+            <option value="Axborot va hamkorlik ko'magi">Axborot va hamkorlik ko'magi</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ideaDesc">G'oya tavsifi va kutilayotgan natija</label>
+          <textarea id="ideaDesc" required placeholder="G'oyangiz haqida qisqacha yozing..."></textarea>
+        </div>
+        <button class="btn-orange full" type="submit">💡 G'oyani yuborish</button>
+        <div class="status-ok" id="ideaMsg"></div>
+      </form>
+
+      <form class="form-card" id="roomForm" style="display:none;">
+        <div class="sec-head" style="margin-top:0;"><div class="sec-title">Xona va laboratoriyadan joy band qilish</div></div>
+        <div class="field">
+          <label for="rmName">Ism va familiya</label>
+          <input id="rmName" type="text" required placeholder="Ism va familiya" />
+        </div>
+        <div class="field">
+          <label for="rmPhone">Telefon raqam</label>
+          <input id="rmPhone" type="tel" required placeholder="+998 90 123 45 67" />
+        </div>
+        <div class="field">
+          <label for="rmRegion">Hudud (14 ta hudud)</label>
+          <select id="rmRegion"></select>
+        </div>
+        <div class="field">
+          <label for="rmDistrict">Tuman yoki shahar</label>
+          <select id="rmDistrict"></select>
+        </div>
+        <div class="field">
+          <label for="rmSpace">Xona / Laboratoriya / O'quv xonasi</label>
+          <select id="rmSpace">
+            <option value="IT laboratoriya (Kompyuter & AI)">IT laboratoriya (Kompyuter & AI)</option>
+            <option value="Ilmiy va texnik laboratoriya">Ilmiy va texnik laboratoriya</option>
+            <option value="Biznes trening va coworking xonasi">Biznes trening va coworking xonasi</option>
+            <option value="Xorijiy tillar o'quv xonasi">Xorijiy tillar o'quv xonasi</option>
+            <option value="Kasbga o'qitish ustaxonasi">Kasbga o'qitish ustaxonasi</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="rmDate">Sana</label>
+          <input id="rmDate" type="date" required />
+        </div>
+        <div class="field">
+          <label for="rmSlot">Vaqt oralig'i</label>
+          <select id="rmSlot">
+            <option value="09:00 - 11:00">09:00 - 11:00</option>
+            <option value="11:30 - 13:30">11:30 - 13:30</option>
+            <option value="14:00 - 16:00">14:00 - 16:00</option>
+            <option value="16:30 - 18:30">16:30 - 18:30</option>
+          </select>
+        </div>
+        <button class="btn-orange full" type="submit">🏢 Joy band qilish</button>
+        <div class="status-ok" id="roomMsg"></div>
+      </form>
+    </section>
+
+    <section id="page-tickets" class="page">
+      <div class="sec-head">
+        <div class="sec-title">Mening chiptalarim va bandlovlarim</div>
+        <div class="sec-meta" id="ticketsCountLabel">0 ta</div>
+      </div>
+      <div id="ticketsList"></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-page="home" type="button">🏠<span>Asosiy</span></button>
+    <button class="nav-item" data-page="register" type="button">📝<span>Ro'yxat</span></button>
+    <button class="nav-item" data-page="tickets" type="button">🎟<span>Chipta</span></button>
+  </nav>
+</div>
+
+<div class="admin-box" id="adminModal">
+  <div class="admin-inner">
+    <div class="form-card" id="adminPinCard">
+      <div class="sec-head" style="margin-top:0;">
+        <div class="sec-title">Admin kirish (PIN)</div>
+        <button class="btn-dark" id="closeAdminBtn1" type="button">✕ Yopish</button>
+      </div>
+      <div class="field">
+        <label for="adminPinInput">4 xonali PIN kod</label>
+        <input id="adminPinInput" type="password" maxlength="4" placeholder="PIN kiriting" />
+      </div>
+      <button class="btn-teal" id="adminPinSubmit" type="button">Kirish</button>
+      <div class="status-err" id="adminPinErr"></div>
+    </div>
+
+    <div class="form-card" id="adminPanelCard" style="display:none;">
+      <div class="sec-head" style="margin-top:0;">
+        <div class="sec-title">YTM Admin Panel</div>
+        <button class="btn-dark" id="closeAdminBtn2" type="button">✕ Yopish</button>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+        <button class="btn-teal" id="exportCsvBtn" type="button">⬇ CSV yuklab olish</button>
+        <button class="btn-dark" id="clearDataBtn" type="button">🗑 Ma'lumotlarni tozalash</button>
+      </div>
+      <div class="sec-meta" id="adminStatsText"></div>
+      <div class="tbl-wrap" id="adminTables"></div>
+    </div>
+  </div>
+  </div>
+          <script>
+(() => {
+  const STORAGE_KEY = 'ytm_pwa_state_v1';
+
+  const TRACKS = [
+    { id: 'YTM // TECH', icon: '⚡', desc: "Raqamli texnologiyalar, dasturlash, sun'iy intellekt va amaliy IT loyihalar yo'nalishi." },
+    { id: 'YTM // BIZNES', icon: '📈', desc: "Tadbirkorlik, startaplar, biznes modellari va moliyaviy savodxonlik yo'nalishi." },
+    { id: 'YTM // KREATIV', icon: '🎨', desc: "Grafik dizayn, brending, media, kontent yaratish va ijodiy tashabbuslar yo'nalishi." },
+    { id: 'YTM // VOLONTYOR', icon: '💚', desc: "Ijtimoiy ko'mak, ekologik aksiyalar va mahalla yoshlari ishtirokidagi loyihalar." },
+    { id: 'YTM // KASB-TIL', icon: '🌐', desc: "Xorijiy tillar, zamonaviy kasblar va amaliy ko'nikmalar bo'yicha o'quv dasturlari." }
+  ];
+
+  const INITIAL_EVENTS = [
+    { id: 'ev-1', track: 'YTM // TECH', title: "Sun'iy intellekt va amaliy loyihalar", date: '26-noyabr, 14:00', location: 'YTM Markazi, IT Hall', seats: 35, times: ['14:00 - 15:30', '16:00 - 17:30'] },
+    { id: 'ev-2', track: 'YTM // BIZNES', title: 'Startap g‘oyadan MVP gacha', date: '27-noyabr, 15:00', location: 'YTM Kovorking zali', seats: 30, times: ['15:00 - 16:30'] },
+    { id: 'ev-3', track: 'YTM // KREATIV', title: 'Vizual dizayn va brending mahorat darsi', date: '29-noyabr, 15:00', location: 'YTM Markazi, Studiya', seats: 25, times: ['15:00 - 17:00'] },
+    { id: 'ev-4', track: 'YTM // VOLONTYOR', title: 'Yashil hudud va yoshlar tashabbusi', date: '1-dekabr, 10:00', location: 'Markaziy bog‘ / YTM', seats: 50, times: ['10:00 - 12:00'] },
+    { id: 'ev-5', track: 'YTM // KASB-TIL', title: 'IELTS va xalqaro til strategiyalari', date: '3-dekabr, 16:00', location: 'YTM O‘quv xonasi №2', seats: 28, times: ['16:00 - 17:30'] }
+  ];
+
+  const INITIAL_NEWS = [
+    { tag: 'E’LON', title: 'Yangi mavsum ro‘yxatdan o‘tishi ochildi', desc: "5 ta yo'nalish bo'yicha seminar, trening va laboratoriyalarga onlayn chipta oling." },
+    { tag: 'IMKONIYAT', title: 'Laboratoriya va xonalarni bepul band qiling', desc: "IT, biznes, til, kasb va ilmiy laboratoriyalardan jamoaviy loyihalar uchun jadval asosida foydalaning." }
+  ];
+
+  const REGIONS = {
+    'Toshkent shahri': ['Bektemir', 'Chilonzor', 'Mirobod', 'Mirzo Ulug‘bek', 'Olmazor', 'Sergeli', 'Shayxontohur', 'Uchtepa', 'Yakkasaroy', 'Yangihayot', 'Yashnobod', 'Yunusobod'],
+    'Toshkent viloyati': ['Nurafshon shahri', 'Angren shahri', 'Bekobod shahri', 'Chirchiq shahri', 'Olmaliq shahri', 'Ohangaron shahri', 'Yangiyo‘l shahri', 'Bekobod', 'Bo‘ka', 'Bo‘stonliq', 'Chinoz', 'Qibray', 'Ohangaron', 'Oqqo‘rg‘on', 'Parkent', 'Piskent', 'Quyi Chirchiq', 'Yangiyo‘l', 'Yuqori Chirchiq', 'Zangiota'],
+    'Andijon viloyati': ['Andijon shahri', 'Xonobod shahri', 'Andijon', 'Asaka', 'Baliqchi', 'Bo‘ston', 'Buloqboshi', 'Izboskan', 'Jalolquduq', 'Marhamat', 'Oltinko‘l', 'Paxtaobod', 'Qo‘rg‘ontepa', 'Shahrixon', 'Ulug‘nor', 'Xo‘jaobod'],
+    'Buxoro viloyati': ['Buxoro shahri', 'Kogon shahri', 'Olot', 'Buxoro', 'G‘ijduvon', 'Jondor', 'Kogon', 'Qorako‘l', 'Qorovulbozor', 'Peshku', 'Romitan', 'Shofirkon', 'Vobkent'],
+    'Farg‘ona viloyati': ['Farg‘ona shahri', 'Marg‘ilon shahri', 'Quvasoy shahri', 'Qo‘qon shahri', 'Bag‘dod', 'Beshariq', 'Buvayda', 'Dang‘ara', 'Farg‘ona', 'Furqat', 'Oltiariq', 'Qo‘shtepa', 'Rishton', 'So‘x', 'Toshloq', 'Uchko‘prik', 'O‘zbekiston', 'Yozyovon'],
+    'Jizzax viloyati': ['Jizzax shahri', 'Arnasoy', 'Baxmal', 'Do‘stlik', 'Forish', 'G‘allaorol', 'Mirzacho‘l', 'Paxtakor', 'Sharof Rashidov', 'Yangiobod', 'Zafarobod', 'Zomin'],
+    'Xorazm viloyati': ['Urganch shahri', 'Xiva shahri', 'Bog‘ot', 'Gurlan', 'Hazorasp', 'Qo‘shko‘pir', 'Shovot', 'Tuproqqal‘a', 'Urganch', 'Xiva', 'Yangiariq', 'Yangibozor'],
+    'Namangan viloyati': ['Namangan shahri', 'Chortoq', 'Chust', 'Kosonsoy', 'Mingbuloq', 'Namangan', 'Norin', 'Pop', 'To‘raqo‘rg‘on', 'Uchqo‘rg‘on', 'Uychi', 'Yangi Namangan', 'Yangiqo‘rg‘on'],
+    'Navoiy viloyati': ['Navoiy shahri', 'Zarafshon shahri', 'G‘ozg‘on shahri', 'Karmana', 'Konimex', 'Navbahor', 'Nurota', 'Qiziltepa', 'Tomdi', 'Uchquduq'],
+    'Qashqadaryo viloyati': ['Qarshi shahri', 'Shahrisabz shahri', 'Chiroqchi', 'Dehqonobod', 'G‘uzor', 'Kasbi', 'Kitob', 'Koson', 'Mirishkor', 'Muborak', 'Nishon', 'Qamashi', 'Qarshi', 'Shahrisabz', 'Yakkabog‘'],
+    'Qoraqalpog‘iston Resp.': ['Nukus shahri', 'Amudaryo', 'Beruniy', 'Bo‘zatov', 'Chimboy', 'Ellikqal‘a', 'Kegeyli', 'Mo‘ynoq', 'Nukus', 'Qanliko‘l', 'Qorao‘zak', 'Qo‘ng‘irot', 'Shumanay', 'Taxtako‘pir', 'To‘rtko‘l', 'Xo‘jayli'],
+    'Samarqand viloyati': ['Samarqand shahri', 'Kattaqo‘rg‘on shahri', 'Bulung‘ur', 'Ishtixon', 'Jomboy', 'Kattaqo‘rg‘on', 'Narpay', 'Nurobod', 'Oqdaryo', 'Pastdarg‘om', 'Paxtachi', 'Payariq', 'Qo‘shrabot', 'Samarqand', 'Toyloq', 'Urgut'],
+    'Sirdaryo viloyati': ['Guliston shahri', 'Shirintoy shahri', 'Yangiyer shahri', 'Boyovut', 'Guliston', 'Mirzaobod', 'Oqoltin', 'Sardoba', 'Sayxunobod', 'Sirdaryo', 'Xovos'],
+    'Surxondaryo viloyati': ['Termiz shahri', 'Angor', 'Bandixon', 'Boysun', 'Denov', 'Jarqo‘rg‘on', 'Muzrabot', 'Oltinsoy', 'Qiziriq', 'Qumqo‘rg‘on', 'Sariosiyo', 'Sherobod', 'Sho‘rchi', 'Termiz', 'Uzun']
+  };
+
+  function esc(val) {
+    return String(val ?? '').replace(/[&<>"']/g, m => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[m]));
+  }
+
+  function defaultState() {
+    return {
+      selectedTrack: 'ALL',
+      events: INITIAL_EVENTS.map(ev => ({ ...ev, times: [...ev.times] })),
+      news: INITIAL_NEWS.map(n => ({ ...n })),
+      registrations: [],
+      ideas: [],
+      bookings: []
+    };
+  }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return defaultState();
+      const parsed = JSON.parse(raw);
+      const base = defaultState();
+      return {
+        ...base,
+        ...parsed,
+        events: Array.isArray(parsed.events) && parsed.events.length ? parsed.events : base.events,
+        news: Array.isArray(parsed.news) && parsed.news.length ? parsed.news : base.news,
+        registrations: Array.isArray(parsed.registrations) ? parsed.registrations : [],
+        ideas: Array.isArray(parsed.ideas) ? parsed.ideas : [],
+        bookings: Array.isArray(parsed.bookings) ? parsed.bookings : []
+      };
+    } catch {
+      return defaultState();
+    }
+  }
+
+  let state = loadState();
+
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function switchPage(pageName) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const targetPage = document.getElementById('page-' + pageName);
+    if (targetPage) targetPage.classList.add('active');
+
+    document.querySelectorAll('.nav-item').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.page === pageName);
+    });
+  }
+
+  document.querySelectorAll('.nav-item').forEach(btn => {
+    btn.addEventListener('click', () => switchPage(btn.dataset.page));
+  });
+
+  document.getElementById('heroJoinBtn').addEventListener('click', () => switchPage('register'));
+
+  document.querySelectorAll('#regSubTabs .chip').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('#regSubTabs .chip').forEach(c => c.classList.remove('active'));
+      tab.classList.add('active');
+      const sub = tab.dataset.sub;
+      document.getElementById('eventForm').style.display = sub === 'event' ? 'block' : 'none';
+      document.getElementById('ideaForm').style.display = sub === 'idea' ? 'block' : 'none';
+      document.getElementById('roomForm').style.display = sub === 'room' ? 'block' : 'none';
+    });
+  });
+
+  function fillDistricts(regionSelect, districtSelect) {
+    const districts = REGIONS[regionSelect.value] || [];
+    districtSelect.innerHTML = districts.map(d => `<option value="${esc(d)}">${esc(d)}</option>`).join('');
+  }
+
+  [['evRegion', 'evDistrict'], ['ideaRegion', 'ideaDistrict'], ['rmRegion', 'rmDistrict']].forEach(([rId, dId]) => {
+    const rEl = document.getElementById(rId);
+    const dEl = document.getElementById(dId);
+    rEl.innerHTML = Object.keys(REGIONS).map(r => `<option value="${esc(r)}">${esc(r)}</option>`).join('');
+    fillDistricts(rEl, dEl);
+    rEl.addEventListener('change', () => fillDistricts(rEl, dEl));
+  });
+
+  function populateTrackSelects() {
+    const opts = TRACKS.map(t => `<option value="${esc(t.id)}">${esc(t.id)}</option>`).join('');
+    ['evTrack', 'ideaTrack'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = opts;
+    });
+  }
+
+  function renderTimeOptionsForEvent(ev) {
+    const evTime = document.getElementById('evTime');
+    const times = ev && Array.isArray(ev.times) && ev.times.length ? ev.times : ['14:00 - 15:30'];
+    evTime.innerHTML = times.map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join('');
+  }
+
+  function populateEventOptions(trackId) {
+    const evSelect = document.getElementById('evSelect');
+    const filtered = state.events.filter(ev => !trackId || trackId === 'ALL' || ev.track === trackId);
+    const list = filtered.length ? filtered : state.events;
+
+    evSelect.innerHTML = list.map(ev =>
+      `<option value="${esc(ev.id)}">${esc(ev.title)} (${esc(ev.date)})</option>`
+    ).join('');
+
+    const currentEv = list.find(ev => ev.id === evSelect.value) || list[0];
+    renderTimeOptionsForEvent(currentEv);
+  }
+
+  document.getElementById('evTrack').addEventListener('change', e => populateEventOptions(e.target.value));
+  document.getElementById('evSelect').addEventListener('change', () => {
+    const ev = state.events.find(item => item.id === document.getElementById('evSelect').value);
+    renderTimeOptionsForEvent(ev);
+  });
+
+  function syncTrackSelects(trackId) {
+    const target = trackId && trackId !== 'ALL' ? trackId : TRACKS[0].id;
+    document.getElementById('evTrack').value = target;
+    document.getElementById('ideaTrack').value = target;
+    populateEventOptions(target);
+  }
+
+  function renderFilterBar() {
+    const bar = document.getElementById('filterBar');
+    const items = [{ id: 'ALL', label: 'Barchasi' }, ...TRACKS.map(t => ({ id: t.id, label: t.id }))];
+    bar.innerHTML = items.map(item =>
+      `<button class="chip ${state.selectedTrack === item.id ? 'active' : ''}" type="button" data-track="${esc(item.id)}">${esc(item.label)}</button>`
+    ).join('');
+
+    bar.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        state.selectedTrack = chip.dataset.track;
+        saveState();
+        syncTrackSelects(state.selectedTrack);
+        renderFilterBar();
+        renderHome();
+      });
+    });
+  }
+
+  function renderHome() {
+    const visibleEvents = state.selectedTrack === 'ALL'
+      ? state.events
+      : state.events.filter(ev => ev.track === state.selectedTrack);
+
+    const visibleTracks = state.selectedTrack === 'ALL'
+      ? TRACKS
+      : TRACKS.filter(t => t.id === state.selectedTrack);
+
+    document.getElementById('heroTag').textContent = `YTM 2026 • ${state.events.length} ta faol tadbir`;
+    document.getElementById('heroRegCount').textContent = `${state.registrations.length} ta yosh ishtirokchi ro'yxatdan o'tgan`;
+    document.getElementById('eventsCountLabel').textContent = `${visibleEvents.length} ta tadbir`;
+
+    document.getElementById('tracksList').innerHTML = visibleTracks.map(t => {
+      const selected = state.selectedTrack === t.id;
+      return `
+        <div class="track-card ${selected ? 'selected' : ''}" data-track="${esc(t.id)}">
+          <div class="track-top">
+            <div class="track-badge">${esc(t.icon)}</div>
+            <div class="track-name">${esc(t.id)}</div>
+          </div>
+          <div class="track-desc">${esc(t.desc)}</div>
+        </div>
+      `;
+    }).join('');
+
+    document.querySelectorAll('#tracksList .track-card').forEach(card => {
+      card.addEventListener('click', () => {
+        state.selectedTrack = state.selectedTrack === card.dataset.track ? 'ALL' : card.dataset.track;
+        saveState();
+        syncTrackSelects(state.selectedTrack);
+        renderFilterBar();
+        renderHome();
+      });
+    });
+
+    document.getElementById('eventsList').innerHTML = visibleEvents.length
+      ? visibleEvents.map(ev => `
+          <div class="event-card">
+            <span class="pill-tag">${esc(ev.track)}</span>
+            <div class="event-title">${esc(ev.title)}</div>
+            <div class="event-meta">
+              <span>📅 ${esc(ev.date || 'Tez kunda')}</span>
+              <span>📍 ${esc(ev.location || 'YTM markazi')}</span>
+              <span>💺 ${esc(ev.seats || 30)} joy</span>
+            </div>
+            <button class="btn-orange full join-ev-btn" type="button" data-ev-id="${esc(ev.id)}" data-track="${esc(ev.track)}">Ro'yxatdan o'tish</button>
+          </div>
+        `).join('')
+      : '<div class="info-card"><div class="info-desc">Tanlangan yo‘nalishda hozircha tadbir yo‘q.</div></div>';
+
+    document.querySelectorAll('.join-ev-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.selectedTrack = btn.dataset.track;
+        saveState();
+        document.querySelectorAll('#regSubTabs .chip').forEach(c => c.classList.toggle('active', c.dataset.sub === 'event'));
+        document.getElementById('eventForm').style.display = 'block';
+        document.getElementById('ideaForm').style.display = 'none';
+        document.getElementById('roomForm').style.display = 'none';
+        syncTrackSelects(btn.dataset.track);
+        const evSelect = document.getElementById('evSelect');
+        if (evSelect) {
+          evSelect.value = btn.dataset.evId;
+          evSelect.dispatchEvent(new Event('change'));
+        }
+        renderFilterBar();
+        renderHome();
+        switchPage('register');
+      });
+    });
+
+    document.getElementById('newsList').innerHTML = state.news.map(n => `
+      <div class="info-card">
+        <span class="pill-tag">${esc(n.tag)}</span>
+        <div class="info-title">${esc(n.title)}</div>
+        <div class="info-desc">${esc(n.desc)}</div>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('eventForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const ev = state.events.find(item => item.id === document.getElementById('evSelect').value) || state.events[0];
+    const code = 'YTM-' + Math.floor(1000 + Math.random() * 9000);
+    state.registrations.push({
+      code,
+      name: document.getElementById('evName').value.trim(),
+      phone: document.getElementById('evPhone').value.trim(),
+      region: document.getElementById('evRegion').value,
+      district: document.getElementById('evDistrict').value,
+      track: document.getElementById('evTrack').value,
+      eventTitle: ev ? ev.title : 'Tadbir',
+      time: document.getElementById('evTime').value
+    });
+    saveState();
+    document.getElementById('evMsg').textContent = `Ro'yxatdan o'tdingiz! Chipta kodi: ${code}`;
+    e.target.reset();
+    syncTrackSelects(state.selectedTrack);
+    renderHome();
+    renderTickets();
+  });
+
+  document.getElementById('ideaForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const code = 'ID-' + Math.floor(1000 + Math.random() * 9000);
+    state.ideas.push({
+      code,
+      author: document.getElementById('ideaAuthor').value.trim(),
+      phone: document.getElementById('ideaPhone').value.trim(),
+      region: document.getElementById('ideaRegion').value,
+      district: document.getElementById('ideaDistrict').value,
+      track: document.getElementById('ideaTrack').value,
+      title: document.getElementById('ideaTitle').value.trim(),
+      support: document.getElementById('ideaSupportType').value,
+      desc: document.getElementById('ideaDesc').value.trim()
+    });
+    saveState();
+    document.getElementById('ideaMsg').textContent = `G'oyangiz qabul qilindi! Kod: ${code}`;
+    e.target.reset();
+    syncTrackSelects(state.selectedTrack);
+    renderTickets();
+  });
+
+  document.getElementById('roomForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const code = 'RM-' + Math.floor(1000 + Math.random() * 9000);
+    state.bookings.push({
+      code,
+      name: document.getElementById('rmName').value.trim(),
+      phone: document.getElementById('rmPhone').value.trim(),
+      region: document.getElementById('rmRegion').value,
+      district: document.getElementById('rmDistrict').value,
+      space: document.getElementById('rmSpace').value,
+      date: document.getElementById('rmDate').value,
+      time: document.getElementById('rmSlot').value
+    });
+    saveState();
+    document.getElementById('roomMsg').textContent = `Joy band qilindi! Kod: ${code}`;
+    e.target.reset();
+    renderTickets();
+  });
+
+  function renderTickets() {
+    const all = [
+      ...state.registrations.map(r => ({ type: 'Tadbir chiptasi', code: r.code, title: r.eventTitle, sub: `${r.name} • ${r.region}, ${r.district} • ${r.time}` })),
+      ...state.bookings.map(b => ({ type: 'Xona bandlovi', code: b.code, title: b.space, sub: `${b.name} • ${b.date} (${b.time})` })),
+      ...state.ideas.map(g => ({ type: "G'oya arizasi", code: g.code, title: g.title, sub: `${g.author} • ${g.track} • ${g.support}` }))
+    ];
+    document.getElementById('ticketsCountLabel').textContent = `${all.length} ta`;
+    document.getElementById('ticketsList').innerHTML = all.length
+      ? all.map(item => `
+          <div class="ticket-card">
+            <span class="pill-tag">${esc(item.type)} • ${esc(item.code)}</span>
+            <div class="event-title">${esc(item.title)}</div>
+            <div class="info-desc">${esc(item.sub)}</div>
+          </div>
+        `).join('')
+      : '<div class="info-card"><div class="info-desc">Hozircha chiptalar yoki bandlovlar mavjud emas.</div></div>';
+  }
+              const adminModal = document.getElementById('adminModal');
+  const adminPinCard = document.getElementById('adminPinCard');
+  const adminPanelCard = document.getElementById('adminPanelCard');
+
+  document.getElementById('openAdminBtn').addEventListener('click', () => {
+    adminModal.classList.add('open');
+    adminPinCard.style.display = 'block';
+    adminPanelCard.style.display = 'none';
+    document.getElementById('adminPinInput').value = '';
+    document.getElementById('adminPinErr').textContent = '';
+  });
+
+  const closeAdmin = () => adminModal.classList.remove('open');
+  document.getElementById('closeAdminBtn1').addEventListener('click', closeAdmin);
+  document.getElementById('closeAdminBtn2').addEventListener('click', closeAdmin);
+  adminModal.addEventListener('click', e => {
+    if (e.target === adminModal) closeAdmin();
+  });
+
+  document.getElementById('adminPinSubmit').addEventListener('click', () => {
+    if (document.getElementById('adminPinInput').value === '0708') {
+      adminPinCard.style.display = 'none';
+      adminPanelCard.style.display = 'block';
+      renderAdminPanel();
+    } else {
+      document.getElementById('adminPinErr').textContent = "PIN kod noto'g'ri!";
+    }
+  });
+
+  function addAdminActionBoxes() {
+    if (!adminPanelCard) return;
+
+    if (!document.getElementById('adminAddEventCard')) {
+      const evBox = document.createElement('div');
+      evBox.className = 'form-card';
+      evBox.id = 'adminAddEventCard';
+      evBox.style.marginTop = '12px';
+
+      evBox.innerHTML = `
+        <span class="pill-tag">YANGI TADBIR</span>
+        <div class="event-title">Yangi tadbir qo'shish</div>
+        <div class="field">
+          <label for="newEvTitle">Tadbir nomi</label>
+          <input id="newEvTitle" type="text" placeholder="Masalan: AI va startaplar uchrashuvi" />
+        </div>
+        <div class="field">
+          <label for="newEvTrack">Yo'nalish</label>
+          <select id="newEvTrack">
+            <option value="YTM // TECH">YTM // TECH</option>
+            <option value="YTM // BIZNES">YTM // BIZNES</option>
+            <option value="YTM // KREATIV">YTM // KREATIV</option>
+            <option value="YTM // VOLONTYOR">YTM // VOLONTYOR</option>
+            <option value="YTM // KASB-TIL">YTM // KASB-TIL</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="newEvDate">Sana va vaqt</label>
+          <input id="newEvDate" type="text" placeholder="Masalan: 26-noyabr, 14:00" />
+        </div>
+        <div class="field">
+          <label for="newEvTimes">Vaqt variantlari (vergul bilan)</label>
+          <input id="newEvTimes" type="text" value="14:00 - 15:30, 16:00 - 17:30" />
+        </div>
+        <div class="field">
+          <label for="newEvLoc">Joy / manzil</label>
+          <input id="newEvLoc" type="text" placeholder="Masalan: YTM Markazi, IT Hall" />
+        </div>
+        <div class="field">
+          <label for="newEvSeats">Joylar soni</label>
+          <input id="newEvSeats" type="number" min="1" value="30" />
+        </div>
+        <button class="btn-orange full" id="addEventBtn" type="button">➕ Tadbirni qo'shish</button>
+        <div id="addEventMsg"></div>
+      `;
+
+      adminPanelCard.appendChild(evBox);
+    }
+
+    if (!document.getElementById('adminAddNewsCard')) {
+      const newsBox = document.createElement('div');
+      newsBox.className = 'form-card';
+      newsBox.id = 'adminAddNewsCard';
+      newsBox.style.marginTop = '12px';
+
+      newsBox.innerHTML = `
+        <span class="pill-tag">YANGI LOYIHA / E'LON</span>
+        <div class="event-title">Yangi loyiha yoki e'lon boshlash</div>
+        <div class="field">
+          <label for="newNewsTag">Toifa (teg)</label>
+          <select id="newNewsTag">
+            <option value="LOYIHA">LOYIHA</option>
+            <option value="E'LON">E'LON</option>
+            <option value="IMKONIYAT">IMKONIYAT</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="newNewsTitle">Loyiha yoki ma'lumot sarlavhasi</label>
+          <input id="newNewsTitle" type="text" placeholder="Masalan: Yoshlar inkubatsiya dasturi start oldi" />
+        </div>
+        <div class="field">
+          <label for="newNewsDesc">Qisqacha tavsif</label>
+          <textarea id="newNewsDesc" placeholder="Loyiha yoki muhim ma'lumot mazmuni..."></textarea>
+        </div>
+        <button class="btn-teal" id="addNewsBtn" type="button" style="width:100%;padding:11px;">🚀 Loyiha / E'lonni joylash</button>
+        <div id="addNewsMsg"></div>
+      `;
+
+      adminPanelCard.appendChild(newsBox);
+    }
+  }
+
+  function renderAdminPanel() {
+    document.getElementById('adminStatsText').textContent =
+      `Tadbirlar: ${state.events.length} | Ishtirokchilar: ${state.registrations.length} | G'oyalar: ${state.ideas.length} | Xona bandlovlari: ${state.bookings.length}`;
+
+    const regRows = state.registrations.map(r =>
+      `<tr><td>${esc(r.code)}</td><td>${esc(r.name)}</td><td>${esc(r.region)} / ${esc(r.district)}</td><td>${esc(r.eventTitle)}</td><td>${esc(r.time)}</td></tr>`
+    ).join('') || '<tr><td colspan="5">Ma\'lumot yo\'q</td></tr>';
+
+    const roomRows = state.bookings.map(b =>
+      `<tr><td>${esc(b.code)}</td><td>${esc(b.name)}</td><td>${esc(b.space)}</td><td>${esc(b.date)}</td><td>${esc(b.time)}</td></tr>`
+    ).join('') || '<tr><td colspan="5">Ma\'lumot yo\'q</td></tr>';
+
+    document.getElementById('adminTables').innerHTML = `
+      <div class="sec-head"><div class="sec-title">Tadbir ro'yxati</div></div>
+      <table><thead><tr><th>Kod</th><th>Ism</th><th>Hudud/Tuman</th><th>Tadbir</th><th>Vaqt</th></tr></thead><tbody>${regRows}</tbody></table>
+      <div class="sec-head"><div class="sec-title">Xona bandlovlari</div></div>
+      <table><thead><tr><th>Kod</th><th>Ism</th><th>Xona</th><th>Sana</th><th>Vaqt</th></tr></thead><tbody>${roomRows}</tbody></table>
+    `;
+
+    addAdminActionBoxes();
+  }
+
+  document.addEventListener('click', e => {
+    if (e.target && e.target.id === 'addEventBtn') {
+      const titleEl = document.getElementById('newEvTitle');
+      const trackEl = document.getElementById('newEvTrack');
+      const dateEl = document.getElementById('newEvDate');
+      const timesEl = document.getElementById('newEvTimes');
+      const locEl = document.getElementById('newEvLoc');
+      const seatsEl = document.getElementById('newEvSeats');
+      const msgEl = document.getElementById('addEventMsg');
+
+      const title = (titleEl ? titleEl.value : '').trim();
+      const track = trackEl ? trackEl.value : 'YTM // TECH';
+      const date = (dateEl ? dateEl.value : '').trim() || 'Tez kunda';
+      const rawTimes = (timesEl ? timesEl.value : '').split(',').map(s => s.trim()).filter(Boolean);
+      const times = rawTimes.length ? rawTimes : ['14:00 - 15:30'];
+      const location = (locEl ? locEl.value : '').trim() || 'YTM markazi';
+      const seats = parseInt(seatsEl && seatsEl.value ? seatsEl.value : '30', 10) || 30;
+
+      if (!title) {
+        if (msgEl) {
+          msgEl.className = 'status-err';
+          msgEl.textContent = "Iltimos, tadbir nomini kiriting!";
+        }
+        return;
+      }
+
+      state.events.push({
+        id: 'ev-' + Date.now(),
+        track,
+        title,
+        date,
+        location,
+        seats,
+        times
+      });
+
+      saveState();
+      populateEventOptions(state.selectedTrack);
+      renderHome();
+      renderTickets();
+      renderAdminPanel();
+
+      const updatedMsgEl = document.getElementById('addEventMsg');
+      if (updatedMsgEl) {
+        updatedMsgEl.className = 'status-ok';
+        updatedMsgEl.textContent = "Yangi tadbir qo'shildi va saqlandi!";
+      }
+    }
+
+    if (e.target && e.target.id === 'addNewsBtn') {
+      const tagEl = document.getElementById('newNewsTag');
+      const titleEl = document.getElementById('newNewsTitle');
+      const descEl = document.getElementById('newNewsDesc');
+      const msgEl = document.getElementById('addNewsMsg');
+
+      const tag = tagEl ? tagEl.value : 'LOYIHA';
+      const title = (titleEl ? titleEl.value : '').trim();
+      const desc = (descEl ? descEl.value : '').trim();
+
+      if (!title || !desc) {
+        if (msgEl) {
+          msgEl.className = 'status-err';
+          msgEl.textContent = "Sarlavha va tavsifni to'ldiring!";
+        }
+        return;
+      }
+
+      state.news.unshift({ tag, title, desc });
+      saveState();
+      renderHome();
+      renderAdminPanel();
+
+      const updatedMsgEl = document.getElementById('addNewsMsg');
+      if (updatedMsgEl) {
+        updatedMsgEl.className = 'status-ok';
+        updatedMsgEl.textContent = "Yangi loyiha / e'lon asosiy sahifaga joylandi!";
+      }
+    }
+  });
+
+  document.getElementById('exportCsvBtn').addEventListener('click', () => {
+    const lines = ['Turi,Kod,Ism,Telefon,Hudud,Tuman,Nomi,Vaqt'];
+    state.registrations.forEach(r => {
+      lines.push(`"Tadbir","${r.code}","${r.name}","${r.phone}","${r.region}","${r.district}","${r.eventTitle}","${r.time}"`);
+    });
+    state.ideas.forEach(g => {
+      lines.push(`"G'oya","${g.code}","${g.author}","${g.phone}","${g.region}","${g.district}","${g.title}","${g.support}"`);
+    });
+    state.bookings.forEach(u => {
+      lines.push(`"Xona","${u.code}","${u.name}","${u.phone}","${u.region}","${u.district}","${u.space}","${u.time}"`);
+    });
+    const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ytm_malumotlar.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  document.getElementById('clearDataBtn').addEventListener('click', () => {
+    state = defaultState();
+    saveState();
+    populateTrackSelects();
+    syncTrackSelects(state.selectedTrack);
+    renderFilterBar();
+    renderHome();
+    renderTickets();
+    renderAdminPanel();
+  });
+
+  let deferredPrompt = null;
+  const installAppBtn = document.getElementById('installAppBtn');
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+
+  installAppBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+    } else {
+      alert("Ilovani o'rnatish uchun Chrome menyusidagi (⋮) 'O'rnatish va yorliq yaratish' / 'Install app' bandini bosing.");
+    }
+  });
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
+
+  populateTrackSelects();
+  syncTrackSelects(state.selectedTrack);
+  renderFilterBar();
+  renderHome();
+  renderTickets();
+})();
+</script>
+</body>
+</html>
