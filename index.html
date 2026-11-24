@@ -3,1463 +3,179 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#071a26" />
+  <link rel="manifest" href="manifest.json" />
   <title>YTM — Yoshlar tashabbuslari markazi</title>
   <style>
-    :root {
-      --bg-main: #061621;
-      --bg-card: #0b2232;
-      --bg-card-soft: #102d40;
-      --bg-input: #081c29;
-      --border: #1b3b52;
-      --text: #eef6fc;
-      --muted: #8fa9be;
-      --accent-teal: #00b884;
-      --accent-teal-dark: #009168;
-      --accent-orange: #ff7b1c;
-      --accent-orange-dark: #e2640c;
-      --radius-lg: 18px;
-      --radius-md: 14px;
-      --radius-sm: 10px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-
-    body {
-      background: radial-gradient(circle at top, #0c2b3f 0%, var(--bg-main) 65%);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding-bottom: 84px;
-    }
-
-    .app-shell {
-      width: 100%;
-      max-width: 480px;
-      min-height: 100vh;
-      padding: 14px 14px 24px;
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #00c48c, #007ea7);
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      font-size: 15px;
-      color: #fff;
-      flex-shrink: 0;
-    }
-
-    .brand-title {
-      font-size: 14px;
-      font-weight: 700;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .brand-sub {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .admin-btn {
-      background: var(--bg-card-soft);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .admin-btn.active {
-      background: var(--accent-teal);
-      border-color: var(--accent-teal);
-      color: #04151c;
-    }
-
-    .track-chips {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 6px;
-      margin-bottom: 14px;
-      scrollbar-width: none;
-    }
-
-    .track-chips::-webkit-scrollbar {
-      display: none;
-    }
-
-    .chip {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 7px 13px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .chip.active {
-      background: var(--accent-teal);
-      border-color: var(--accent-teal);
-      color: #03171e;
-    }
-
-    .hero-banner {
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      background: linear-gradient(135deg, #0e3a52 0%, #092130 60%, #153147 100%);
-      border: 1px solid var(--border);
-      padding: 18px;
-      margin-bottom: 18px;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: rgba(0, 184, 132, 0.2);
-      border: 1px solid rgba(0, 184, 132, 0.45);
-      color: #6df2c7;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 999px;
-      margin-bottom: 10px;
-    }
-
-    .hero-title {
-      font-size: 20px;
-      font-weight: 800;
-      line-height: 1.25;
-      margin-bottom: 8px;
-      max-width: 85%;
-    }
-
-    .hero-meta {
-      font-size: 12px;
-      color: #cfe4f5;
-      margin-bottom: 14px;
-    }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 18px 0 10px;
-    }
-
-    .section-title {
-      font-size: 15px;
-      font-weight: 700;
-    }
-
-    .section-note {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 14px;
-      margin-bottom: 12px;
-    }
-
-    .card.clickable {
-      cursor: pointer;
-      transition: border-color 0.15s ease, transform 0.15s ease;
-    }
-
-    .card.clickable:hover,
-    .card.selected-card {
-      border-color: var(--accent-teal);
-    }
-
-    .track-card-top {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .track-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      background: rgba(0, 184, 132, 0.15);
-      color: #48e5b5;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      font-size: 13px;
-    }
-
-    .card-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 5px;
-    }
-
-    .card-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.45;
-      margin-bottom: 10px;
-    }
-
-    .meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      font-size: 12px;
-      color: #c3d9ea;
-      margin-bottom: 12px;
-    }
-
-    .pill {
-      display: inline-block;
-      background: var(--bg-card-soft);
-      border: 1px solid var(--border);
-      color: #7ee8c7;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 9px;
-      border-radius: 999px;
-      margin-bottom: 8px;
-    }
-
-    .btn-orange {
-      background: var(--accent-orange);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius-sm);
-      padding: 11px 16px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .btn-orange:hover {
-      background: var(--accent-orange-dark);
-    }
-
-    .btn-teal {
-      background: var(--accent-teal);
-      color: #03171e;
-      border: none;
-      border-radius: var(--radius-sm);
-      padding: 11px 16px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 9px 12px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .full {
-      width: 100%;
-    }
-
-    .form-group {
-      margin-bottom: 12px;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 6px;
-      font-weight: 600;
-    }
-
-    .form-control {
-      width: 100%;
-      background: var(--bg-input);
-      border: 1px solid var(--border);
-      color: var(--text);
-      border-radius: var(--radius-sm);
-      padding: 11px 12px;
-      font-size: 13px;
-      outline: none;
-    }
-
-    .form-control:focus {
-      border-color: var(--accent-teal);
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .subtabs {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 14px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
-
-    .subtab {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 8px 11px;
-      border-radius: var(--radius-sm);
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .subtab.active {
-      background: var(--bg-card-soft);
-      border-color: var(--accent-teal);
-      color: var(--text);
-    }
-
-    .ticket-box {
-      border: 1px dashed var(--accent-teal);
-      background: rgba(0, 184, 132, 0.07);
-      border-radius: var(--radius-md);
-      padding: 14px;
-      margin-bottom: 12px;
-    }
-
-    .ticket-code {
-      font-size: 16px;
-      font-weight: 800;
-      color: #5cf0c2;
-      margin-bottom: 6px;
-    }
-
-    .toast {
-      position: fixed;
-      top: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #0d3247;
-      border: 1px solid var(--accent-teal);
-      color: #fff;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-      z-index: 999;
-      display: none;
-      max-width: 92%;
-      text-align: center;
-    }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 480px;
-      background: #071b28;
-      border-top: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      padding: 8px 10px;
-      z-index: 100;
-    }
-
-    .nav-btn {
-      background: transparent;
-      border: none;
-      color: var(--muted);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      padding: 6px 8px;
-      border-radius: 12px;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .nav-btn.active {
-      background: var(--accent-teal);
-      color: #03171e;
-    }
-
-    .empty-msg {
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      padding: 18px 10px;
-    }
+    :root { --bg:#04121c; --card:#081e2c; --card2:#0c2638; --input:#071a26; --border:#17364b; --text:#f0f7fc; --muted:#8aa5ba; --teal:#00b583; --orange:#ff7a1a; }
+    * { box-sizing:border-box; margin:0; padding:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+    body { background:#030e16; color:var(--text); min-height:100vh; display:flex; justify-content:center; padding-bottom:86px; }
+    .app-shell { width:100%; max-width:460px; min-height:100vh; background:linear-gradient(180deg,#071d2c 0%,var(--bg) 260px); padding:14px 14px 28px; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px; }
+    .brand { display:flex; align-items:center; gap:10px; min-width:0; }
+    .brand-mark { width:34px;height:34px;border-radius:10px;background:rgba(0,181,131,.14);border:1px solid rgba(0,181,131,.35);display:grid;place-items:center;flex-shrink:0;color:#45eab9;font-weight:800; }
+    .brand-title { font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+    .brand-sub { font-size:11px;color:var(--muted);margin-top:1px; }
+    .admin-btn { background:#0d2738;border:1px solid #204259;color:#e6f2fa;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap; }
+    .admin-btn.active { background:var(--teal);border-color:var(--teal);color:#03171e; }
+    .track-chips,.subtabs { display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px;scrollbar-width:none; }
+    .track-chips::-webkit-scrollbar,.subtabs::-webkit-scrollbar{display:none}
+    .chip,.subtab { background:#0a2030;border:1px solid #18364b;color:#d7e8f5;padding:7px 13px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap; }
+    .chip.active,.subtab.active { background:var(--teal);border-color:var(--teal);color:#03181f; }
+    .subtab { border-radius:10px;background:var(--card);color:var(--muted); }
+    .hero-banner { position:relative;border-radius:20px;overflow:hidden;border:1px solid #1d4057;min-height:192px;padding:16px;margin-bottom:18px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(135deg,#1a5a72,#0b2b3d); }
+    .hero-banner:after { content:"";position:absolute;right:-30px;bottom:-60px;width:210px;height:210px;border:28px solid rgba(77,221,180,.10);border-radius:50%; }
+    .hero-pill { position:relative;z-index:2;align-self:flex-start;background:rgba(6,39,52,.85);border:1px solid rgba(35,196,154,.45);color:#5cf0c2;font-size:11px;font-weight:700;padding:5px 10px;border-radius:999px; }
+    .hero-body { position:relative;z-index:2; }
+    .hero-title { font-size:20px;font-weight:800;line-height:1.24;max-width:260px;margin:14px 0 6px; }
+    .hero-sub { font-size:12px;color:#d4e7f5;margin-bottom:12px; }
+    .hero-bottom-row { display:flex;align-items:center;justify-content:space-between;gap:10px; }
+    .btn-orange,.btn-teal,.btn-outline { border:none;border-radius:10px;padding:10px 15px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px; }
+    .btn-orange { background:var(--orange);color:#fff; }.btn-orange:hover{background:#e56509}.btn-teal{background:var(--teal);color:#031920}.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+    .full{width:100%}.section-head{display:flex;align-items:center;justify-content:space-between;margin:18px 0 10px}.section-title{font-size:15px;font-weight:700}.section-meta,.section-muted{font-size:12px;color:var(--muted)}.section-meta{color:#56dcb2}
+    .card { background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;margin-bottom:11px; }
+    .card.clickable{cursor:pointer;transition:.15s}.card.clickable:hover,.card.selected{border-color:var(--teal);background:var(--card2)}
+    .track-header{display:flex;align-items:center;gap:11px;margin-bottom:8px}.track-badge-box{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;font-weight:800;font-size:12px}
+    .track-name{font-size:13px;font-weight:800}.card-title{font-size:15px;font-weight:700;margin-bottom:6px}.card-desc{font-size:13px;line-height:1.45;color:#9bb4c8;margin-bottom:10px}
+    .event-meta-line{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:12px;color:#9cb5c9;margin-bottom:12px}.pill{display:inline-block;background:rgba(0,181,131,.14);border:1px solid rgba(0,181,131,.35);color:#5df0c3;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:8px}
+    .field-wrap{margin-bottom:12px}.field-label{display:block;font-size:12px;color:#8ea8bd;margin-bottom:6px;font-weight:500}.form-control{width:100%;background:var(--input);border:1px solid #19384d;color:#eef7fc;border-radius:12px;padding:12px 13px;font-size:13px;outline:none}.form-control:focus{border-color:var(--teal)}textarea.form-control{resize:vertical}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .ticket-card{border:1px dashed var(--teal);background:rgba(0,181,131,.07);border-radius:16px;padding:14px;margin-bottom:11px}.ticket-code{font-size:15px;font-weight:800;color:#5df0c3;margin-bottom:5px}
+    .toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:#0b2d42;border:1px solid var(--teal);color:#fff;padding:10px 16px;border-radius:999px;font-size:12px;font-weight:700;z-index:999;display:none;max-width:92%;text-align:center}
+    .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:460px;background:#061824;border-top:1px solid #142f42;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:8px 12px;z-index:100}.nav-btn{background:transparent;border:none;color:#7c97ad;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:7px 6px;border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}.nav-btn.active{background:var(--teal);color:#03171e}.empty-msg{text-align:center;color:var(--muted);font-size:13px;padding:18px 10px}
   </style>
 </head>
 <body>
   <div id="toast" class="toast"></div>
-
   <div class="app-shell">
     <header class="topbar">
       <div class="brand">
-        <div class="brand-logo">YTM</div>
-        <div>
-          <div class="brand-title">YTM — Yoshlar tashabbuslari markazi</div>
-          <div class="brand-sub">Mobil ro'yxatdan o'tish va bron ilovasi</div>
-        </div>
+        <div class="brand-mark">YTM</div>
+        <div><div class="brand-title">YTM — Yoshlar tashabbuslari markazi</div><div class="brand-sub">Mobil ro'yxatdan o'tish ilovasi</div></div>
       </div>
-      <button id="adminToggleBtn" class="admin-btn" type="button">Admin</button>
+      <button id="adminToggleBtn" class="admin-btn" type="button"><span id="adminBtnLabel">Admin</span></button>
     </header>
 
     <div id="trackChips" class="track-chips"></div>
 
-    <!-- ASOSIY SAHIFA -->
     <section id="pageHome">
       <div class="hero-banner">
-        <span class="hero-badge" id="heroBadge">YTM 2026 • Faol tadbirlar</span>
-        <div class="hero-title">Kelajak tashabbuslarini bugundan boshlang</div>
-        <div class="hero-meta" id="heroStats">0 ta yosh ishtirokchi ro'yxatdan o'tgan</div>
-        <div class="hero-actions">
-          <button id="heroJoinBtn" class="btn-orange" type="button">Qatnashish →</button>
-          <span id="heroSelectedTrack" class="section-note">Yo'nalish: Barchasi</span>
-        </div>
+        <span class="hero-pill" id="heroBadge">YTM 2026 • 5 ta faol tadbir</span>
+        <div class="hero-body"><div class="hero-title">Kelajak tashabbuslarini bugundan boshlang</div><div class="hero-sub" id="heroStats">0 ta yosh ishtirokchi ro'yxatdan o'tgan</div><div class="hero-bottom-row"><button id="heroJoinBtn" class="btn-orange" type="button">Qatnashish →</button><span id="heroTrackHint" class="section-muted">Barchasi</span></div></div>
       </div>
-
-      <div class="section-head">
-        <div class="section-title">5 ta asosiy yo'nalish</div>
-        <div class="section-note" id="activeTrackLabel">Barchasi</div>
-      </div>
-      <div id="tracksList"></div>
-
-      <div class="section-head">
-        <div class="section-title">Yaqin tadbirlar</div>
-        <div class="section-note" id="eventsCountLabel">0 ta tadbir</div>
-      </div>
-      <div id="eventsList"></div>
-
-      <div class="section-head">
-        <div class="section-title">Xonalar va laboratoriyalar</div>
-        <div class="section-note">Joy band qilish</div>
-      </div>
-      <div id="roomsPreviewList"></div>
-
-      <div class="section-head">
-        <div class="section-title">Yangiliklar va muhim ma'lumotlar</div>
-        <div class="section-note">Yoshlar uchun</div>
-      </div>
-      <div id="newsHomeList"></div>
+      <div class="section-head"><div class="section-title">5 ta asosiy yo'nalish</div><div class="section-meta" id="tracksCountLabel">5 ta yo'nalish</div></div><div id="tracksList"></div>
+      <div class="section-head"><div class="section-title">Yaqin tadbirlar</div><div class="section-muted" id="eventsCountLabel">5 ta tadbir</div></div><div id="eventsList"></div>
+      <div class="section-head"><div class="section-title">Xonalar va laboratoriyalar</div><div class="section-muted">IT • Biznes • Til • Kasb</div></div><div id="roomsList"></div>
+      <div class="section-head"><div class="section-title">Yangiliklar va muhim ma'lumotlar</div><div class="section-muted">Yoshlar uchun</div></div><div id="newsHomeList"></div>
     </section>
 
-    <!-- RO'YXAT / BAND QILISH / G'OYA / YANGILIKLAR SAHIFASI -->
-    <section id="pageRegister" style="display:none;">
+    <section id="pageRegister" style="display:none">
       <div class="subtabs">
-        <button class="subtab active" data-subtab="event" type="button">Tadbir</button>
-        <button class="subtab" data-subtab="room" type="button">Xona/Lab</button>
-        <button class="subtab" data-subtab="idea" type="button">G'oya</button>
-        <button class="subtab" data-subtab="info" type="button">Yangilik & Ma'lumot</button>
+        <button class="subtab active" data-subtab="event" type="button">Tadbirga yozilish</button><button class="subtab" data-subtab="room" type="button">Xona & Lab</button><button class="subtab" data-subtab="idea" type="button">G'oya</button><button class="subtab" data-subtab="info" type="button">Yangilik & Ma'lumot</button>
       </div>
 
-      <!-- 1. TADBIRGA RO'YXATDAN O'TISH -->
       <form id="eventForm" class="card">
-        <div class="card-title">Tadbirga ro'yxatdan o'tish</div>
-        <div class="card-desc">Yo'nalish, tadbir va vaqtni hamda hududingizni tanlang.</div>
-
-        <div class="form-group">
-          <label class="form-label" for="evFullName">Ism va familiya</label>
-          <input id="evFullName" class="form-control" type="text" placeholder="Masalan: Azizbek Karimov" required />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="evPhone">Telefon raqam</label>
-          <input id="evPhone" class="form-control" type="tel" placeholder="+998 90 123 45 67" required />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="evTrackSelect">Yo'nalish</label>
-          <select id="evTrackSelect" class="form-control"></select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="evEventSelect">Tadbir va vaqt</label>
-          <select id="evEventSelect" class="form-control"></select>
-        </div>
-
-        <div class="grid-2">
-          <div class="form-group">
-            <label class="form-label" for="evRegionSelect">Hudud (14 ta)</label>
-            <select id="evRegionSelect" class="form-control"></select>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="evDistrictSelect">Tuman / shahar</label>
-            <select id="evDistrictSelect" class="form-control"></select>
-          </div>
-        </div>
-
-        <button class="btn-orange full" type="submit">Ro'yxatdan o'tish va chipta olish</button>
+        <div class="card-title">Tadbirga ro'yxatdan o'tish</div><div class="card-desc">Yo'nalish, tadbir, vaqt va hududingizni tanlang.</div>
+        <div class="field-wrap"><label class="field-label" for="evFullName">Ism va familiya</label><input id="evFullName" class="form-control" required placeholder="Ism va familiya" /></div>
+        <div class="field-wrap"><label class="field-label" for="evPhone">Telefon raqam</label><input id="evPhone" class="form-control" type="tel" required placeholder="+998 90 123 45 67" /></div>
+        <div class="field-wrap"><label class="field-label" for="evTrackSelect">Yo'nalish</label><select id="evTrackSelect" class="form-control"></select></div>
+        <div class="field-wrap"><label class="field-label" for="evEventSelect">Tadbir va vaqt</label><select id="evEventSelect" class="form-control"></select></div>
+        <div class="grid-2"><div class="field-wrap"><label class="field-label" for="evRegionSelect">Hudud</label><select id="evRegionSelect" class="form-control"></select></div><div class="field-wrap"><label class="field-label" for="evDistrictSelect">Tuman / shahar</label><select id="evDistrictSelect" class="form-control"></select></div></div>
+        <button class="btn-orange full" type="submit">🎟️ Ro'yxatdan o'tish va chipta olish</button>
       </form>
 
-      <!-- 2. XONA, LABORATORIYA, IT, BIZNES, TIL VA KASB XONALARIDAN JOY BAND QILISH -->
-      <form id="roomForm" class="card" style="display:none;">
-        <div class="card-title">Xona va laboratoriyadan joy band qilish</div>
-        <div class="card-desc">Xona, laboratoriya, IT, biznes trening, til yoki kasbga o'qitish xonasini tanlang.</div>
-
-        <div class="form-group">
-          <label class="form-label" for="rmUserName">Ism va familiya</label>
-          <input id="rmUserName" class="form-control" type="text" placeholder="Ism familiyangiz" required />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="rmPhone">Telefon raqam</label>
-          <input id="rmPhone" class="form-control" type="tel" placeholder="+998 91 234 56 78" required />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="rmRoomSelect">Xona / Laboratoriya</label>
-          <select id="rmRoomSelect" class="form-control"></select>
-        </div>
-
-        <div class="grid-2">
-          <div class="form-group">
-            <label class="form-label" for="rmDate">Sana</label>
-            <input id="rmDate" class="form-control" type="date" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="rmSlot">Vaqt oralig'i</label>
-            <select id="rmSlot" class="form-control">
-              <option value="09:00 - 11:00">09:00 - 11:00</option>
-              <option value="11:30 - 13:30">11:30 - 13:30</option>
-              <option value="14:00 - 16:00">14:00 - 16:00</option>
-              <option value="16:30 - 18:30">16:30 - 18:30</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="form-group">
-            <label class="form-label" for="rmRegionSelect">Hudud</label>
-            <select id="rmRegionSelect" class="form-control"></select>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="rmDistrictSelect">Tuman / shahar</label>
-            <select id="rmDistrictSelect" class="form-control"></select>
-          </div>
-        </div>
-
+      <form id="roomForm" class="card" style="display:none">
+        <div class="card-title">Xona va laboratoriyadan joy band qilish</div><div class="card-desc">IT, laboratoriya, biznes, til yoki kasbga o'qitish xonasini tanlang.</div>
+        <div class="field-wrap"><label class="field-label" for="rmUserName">Ism va familiya</label><input id="rmUserName" class="form-control" required /></div>
+        <div class="field-wrap"><label class="field-label" for="rmPhone">Telefon raqam</label><input id="rmPhone" class="form-control" type="tel" required /></div>
+        <div class="field-wrap"><label class="field-label" for="rmRoomSelect">Xona / Laboratoriya</label><select id="rmRoomSelect" class="form-control"></select></div>
+        <div class="grid-2"><div class="field-wrap"><label class="field-label" for="rmDate">Sana</label><input id="rmDate" class="form-control" type="date" required /></div><div class="field-wrap"><label class="field-label" for="rmSlot">Vaqt</label><select id="rmSlot" class="form-control"><option>09:00 - 11:00</option><option>11:30 - 13:30</option><option>14:00 - 16:00</option><option>16:30 - 18:30</option></select></div></div>
+        <div class="grid-2"><div class="field-wrap"><label class="field-label" for="rmRegionSelect">Hudud</label><select id="rmRegionSelect" class="form-control"></select></div><div class="field-wrap"><label class="field-label" for="rmDistrictSelect">Tuman / shahar</label><select id="rmDistrictSelect" class="form-control"></select></div></div>
         <button class="btn-teal full" type="submit">Joyni band qilish</button>
       </form>
 
-      <!-- 3. G'OYALARNI QO'LLAB-QUVVATLASH -->
-      <form id="ideaForm" class="card" style="display:none;">
-        <div class="card-title">G'oyani qo'llab-quvvatlashga yuborish</div>
-        <div class="card-desc">Startap, ijtimoiy loyiha yoki innovatsion tashabbusingizni yuboring.</div>
-
-        <div class="form-group">
-          <label class="form-label" for="ideaAuthor">Muallif (Ism familiya)</label>
-          <input id="ideaAuthor" class="form-control" type="text" placeholder="Ism familiyangiz" required />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="ideaTrack">Yo'nalish</label>
-          <select id="ideaTrack" class="form-control"></select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="ideaTitle">G'oya nomi</label>
-          <input id="ideaTitle" class="form-control" type="text" placeholder="Loyiha yoki g'oya sarlavhasi" required />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="ideaDesc">Qisqacha tavsif va maqsad</label>
-          <textarea id="ideaDesc" class="form-control" rows="3" placeholder="G'oya nimani hal qiladi va qanday natija beradi?" required></textarea>
-        </div>
-
+      <form id="ideaForm" class="card" style="display:none">
+        <div class="card-title">G'oyani qo'llab-quvvatlashga yuborish</div><div class="card-desc">Startap, ijtimoiy yoki innovatsion tashabbus g'oyangizni yuboring.</div>
+        <div class="field-wrap"><label class="field-label" for="ideaAuthor">Muallif</label><input id="ideaAuthor" class="form-control" required /></div>
+        <div class="field-wrap"><label class="field-label" for="ideaTrack">Yo'nalish</label><select id="ideaTrack" class="form-control"></select></div>
+        <div class="field-wrap"><label class="field-label" for="ideaTitle">G'oya nomi</label><input id="ideaTitle" class="form-control" required /></div>
+        <div class="field-wrap"><label class="field-label" for="ideaDesc">Qisqacha tavsif</label><textarea id="ideaDesc" class="form-control" rows="3" required></textarea></div>
         <button class="btn-orange full" type="submit">G'oyani yuborish</button>
       </form>
 
-      <!-- 4. YANGILIKLAR VA YOSHLARGA OID MUHIM MA'LUMOTLAR -->
-      <div id="infoPanel" style="display:none;">
-        <div class="section-head">
-          <div class="section-title">Yangiliklar</div>
-          <div class="section-note">YTM yangiliklari</div>
-        </div>
-        <div id="newsFullList"></div>
-
-        <div class="section-head">
-          <div class="section-title">Yoshlarga oid muhim ma'lumotlar</div>
-          <div class="section-note">Imkoniyatlar</div>
-        </div>
-        <div id="youthInfoList"></div>
-      </div>
+      <div id="infoPanel" style="display:none"><div class="section-head"><div class="section-title">Yangiliklar</div><div class="section-muted">YTM yangiliklari</div></div><div id="newsFullList"></div><div class="section-head"><div class="section-title">Yoshlarga oid ma'lumotlar</div><div class="section-muted">Imkoniyatlar</div></div><div id="youthInfoList"></div></div>
     </section>
 
-    <!-- CHIPTALAR VA BRONLAR SAHIFASI -->
-    <section id="pageTickets" style="display:none;">
-      <div class="section-head">
-        <div class="section-title">Mening chiptalarim va band qilingan joylar</div>
-        <div class="section-note" id="ticketsCount">0 ta</div>
-      </div>
-      <div id="ticketsList"></div>
-
-      <div class="section-head">
-        <div class="section-title">Yuborilgan g'oyalar</div>
-        <div class="section-note" id="ideasCount">0 ta</div>
-      </div>
-      <div id="ideasList"></div>
+    <section id="pageTickets" style="display:none">
+      <div class="section-head"><div class="section-title">Mening chiptalarim va bronlar</div><div class="section-muted" id="ticketsCount">0 ta</div></div><div id="ticketsList"></div>
+      <div class="section-head"><div class="section-title">Yuborilgan g'oyalar</div><div class="section-muted" id="ideasCount">0 ta</div></div><div id="ideasList"></div>
     </section>
 
-    <!-- ADMIN PANELI -->
-    <section id="pageAdmin" style="display:none;">
-      <div class="card">
-        <div class="card-title">Admin boshqaruv paneli</div>
-        <div class="card-desc">Yangi tadbir va loyihalar boshlang, faol loyihalarni nazorat qiling.</div>
-        <button id="adminLogoutBtn" class="btn-outline" type="button">Admin rejimidan chiqish</button>
-      </div>
-
+    <section id="pageAdmin" style="display:none">
+      <div class="card"><div class="card-title">Admin boshqaruv paneli</div><div class="card-desc">Yangi tadbirlar va loyihalar boshlang.</div><button id="adminLogoutBtn" class="btn-outline" type="button">Admin rejimidan chiqish</button></div>
       <form id="adminEventForm" class="card">
-        <div class="card-title">Yangi tadbir boshlash</div>
-        <div class="form-group">
-          <label class="form-label" for="admEvTrack">Yo'nalish</label>
-          <select id="admEvTrack" class="form-control"></select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="admEvTitle">Tadbir nomi</label>
-          <input id="admEvTitle" class="form-control" type="text" placeholder="Masalan: AI va Python amaliy uchrashuvi" required />
-        </div>
-        <div class="grid-2">
-          <div class="form-group">
-            <label class="form-label" for="admEvDate">Sana va vaqt</label>
-            <input id="admEvDate" class="form-control" type="text" placeholder="30-noyabr, 15:00" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="admEvSeats">Joylar soni</label>
-            <input id="admEvSeats" class="form-control" type="number" min="1" value="30" required />
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="admEvLocation">Manzil / xona</label>
-          <input id="admEvLocation" class="form-control" type="text" placeholder="YTM Markazi, IT zal" required />
-        </div>
+        <div class="card-title">Yangi tadbir e'lon qilish</div>
+        <div class="field-wrap"><label class="field-label" for="admEvTrack">Yo'nalish</label><select id="admEvTrack" class="form-control"></select></div>
+        <div class="field-wrap"><label class="field-label" for="admEvTitle">Tadbir nomi</label><input id="admEvTitle" class="form-control" required /></div>
+        <div class="grid-2"><div class="field-wrap"><label class="field-label" for="admEvDate">Sana va vaqt</label><input id="admEvDate" class="form-control" placeholder="30-noyabr, 15:00" required /></div><div class="field-wrap"><label class="field-label" for="admEvSeats">Joylar soni</label><input id="admEvSeats" class="form-control" type="number" min="1" value="30" required /></div></div>
+        <div class="field-wrap"><label class="field-label" for="admEvLocation">Manzil / xona</label><input id="admEvLocation" class="form-control" required /></div>
         <button class="btn-orange full" type="submit">Tadbirni e'lon qilish</button>
       </form>
-
       <form id="adminProjectForm" class="card">
-        <div class="card  <script>
-    const TRACKS = [
-      {
-        id: "YTM//TECH",
-        short: "TECH",
-        desc: "Raqamli texnologiyalar, dasturlash, sun'iy intellekt va muhandislik tashabbuslari."
-      },
-      {
-        id: "YTM//BIZNES",
-        short: "BIZ",
-        desc: "Tadbirkorlik ko'nikmalari, startaplar, moliyaviy savodxonlik va biznes loyihalar."
-      },
-      {
-        id: "YTM//KREATIV",
-        short: "KRE",
-        desc: "Ijodiy industriya, dizayn, media, kontent yaratish va madaniy loyihalar."
-      },
-      {
-        id: "YTM//VOLONTYOR",
-        short: "VOL",
-        desc: "Ko'ngilli harakatlar, ekologiya, ijtimoiy yordam va jamoat tashabbuslari."
-      },
-      {
-        id: "YTM//KASB_TIL",
-        short: "TIL",
-        desc: "Xorijiy tillar, zamonaviy kasblarga o'qitish, laboratoriyalar va amaliy kurslar."
-      }
+        <div class="card-title">Yangi loyiha qo'shish</div><div class="field-wrap"><label class="field-label" for="admPrTrack">Yo'nalish</label><select id="admPrTrack" class="form-control"></select></div>
+        <div class="field-wrap"><label class="field-label" for="admPrTitle">Loyiha nomi</label><input id="admPrTitle" class="form-control" required /></div>
+        <div class="field-wrap"><label class="field-label" for="admPrDesc">Loyiha tavsifi</label><textarea id="admPrDesc" class="form-control" rows="3" required></textarea></div>
+        <button class="btn-teal full" type="submit">Loyihani qo'shish</button>
+      </form>
+      <div class="section-head"><div class="section-title">Faol loyihalar</div><div class="section-muted" id="projectsCount">0 ta</div></div><div id="adminProjectsList"></div>
+    </section>
+
+    <nav class="bottom-nav"><button class="nav-btn active" data-nav="pageHome" type="button"><span>⌂</span><span>Bosh sahifa</span></button><button class="nav-btn" data-nav="pageRegister" type="button"><span>＋</span><span>Ro'yxatdan o'tish</span></button><button class="nav-btn" data-nav="pageTickets" type="button"><span>🎟</span><span>Chiptalar</span></button></nav>
+  </div>
+
+  <script>
+    const TRACKS=[
+      {id:"YTM//TECH",symbol:"〰",bg:"#123244",color:"#38e8b0",desc:"Raqamli texnologiyalar, sun'iy intellekt, dasturlash, robototexnika va texnik loyihalar."},
+      {id:"YTM//BIZNES",symbol:"↗",bg:"#3d2214",color:"#ff7b1c",desc:"Tadbirkorlik, startap, biznes-reja, moliyaviy savodxonlik va amaliy treninglar."},
+      {id:"YTM//KREATIV",symbol:"•",bg:"#102a3d",color:"#29d3b8",desc:"Dizayn, media, kontent yaratish, brending va madaniy tashabbuslar."},
+      {id:"YTM//VOLONTYOR",symbol:"♡",bg:"#103229",color:"#38d989",desc:"Ko'ngilli harakatlar, ekologiya, ijtimoiy ko'mak va jamoaviy loyihalar."},
+      {id:"YTM//KASB_TIL",symbol:"✦",bg:"#1a2844",color:"#63a4ff",desc:"Xorijiy tillar, zamonaviy kasblar, laboratoriyalar va amaliy mashg'ulotlar."}
     ];
-
-    const REGIONS_DISTRICTS = {
-      "Qoraqalpog'iston Respublikasi": [
-        "Nukus shahri", "Amudaryo tumani", "Beruniy tumani", "Chimboy tumani",
-        "Ellikqal'a tumani", "Kegeyli tumani", "Mo'ynoq tumani", "Nukus tumani",
-        "Qanliko'l tumani", "Qo'ng'irot tumani", "Qorao'zak tumani", "Shumanay tumani",
-        "Taxtako'pir tumani", "To'rtko'l tumani", "Xo'jayli tumani", "Taxiatosh tumani",
-        "Bo'zatov tumani"
-      ],
-      "Andijon viloyati": [
-        "Andijon shahri", "Xonobod shahri", "Andijon tumani", "Asaka tumani",
-        "Baliqchi tumani", "Bo'ston tumani", "Buloqboshi tumani", "Izboskan tumani",
-        "Jalolquduq tumani", "Marhamat tumani", "Oltinko'l tumani", "Paxtaobod tumani",
-        "Qo'rg'ontepa tumani", "Shahrixon tumani", "Ulug'nor tumani", "Xo'jaobod tumani"
-      ],
-      "Buxoro viloyati": [
-        "Buxoro shahri", "Kogon shahri", "Buxoro tumani", "G'ijduvon tumani",
-        "Jondor tumani", "Kogon tumani", "Olot tumani", "Peshku tumani",
-        "Qorako'l tumani", "Qorovulbozor tumani", "Romitan tumani", "Shofirkon tumani",
-        "Vobkent tumani"
-      ],
-      "Farg'ona viloyati": [
-        "Farg'ona shahri", "Marg'ilon shahri", "Qo'qon shahri", "Quvasoy shahri",
-        "Bag'dod tumani", "Beshariq tumani", "Buvayda tumani", "Dang'ara tumani",
-        "Farg'ona tumani", "Furqat tumani", "Oltiariq tumani", "Qo'shtepa tumani",
-        "Quva tumani", "Rishton tumani", "So'x tumani", "Toshloq tumani",
-        "Uchko'prik tumani", "Yozyovon tumani"
-      ],
-      "Jizzax viloyati": [
-        "Jizzax shahri", "Arnasoy tumani", "Baxmal tumani", "Do'stlik tumani",
-        "Forish tumani", "G'allaorol tumani", "Mirzacho'l tumani", "Paxtakor tumani",
-        "Yangiobod tumani", "Zafarobod tumani", "Zarbdor tumani", "Zomin tumani"
-      ],
-      "Xorazm viloyati": [
-        "Urganch shahri", "Xiva shahri", "Bog'ot tumani", "Gurlan tumani",
-        "Qo'shko'pir tumani", "Shovot tumani", "Tuproqqal'a tumani", "Urganch tumani",
-        "Xazorasp tumani", "Xiva tumani", "Yangiariq tumani", "Yangibozor tumani"
-      ],
-      "Namangan viloyati": [
-        "Namangan shahri", "Chortoq tumani", "Chust tumani", "Kosonsoy tumani",
-        "Mingbuloq tumani", "Namangan tumani", "Norin tumani", "Pop tumani",
-        "To'raqo'rg'on tumani", "Uchqo'rg'on tumani", "Uychi tumani", "Yangiqo'rg'on tumani",
-        "Davlatobod tumani", "Yangi Namangan tumani"
-      ],
-      "Navoiy viloyati": [
-        "Navoiy shahri", "Zarafshon shahri", "G'ozg'on shahri", "Karmana tumani",
-        "Konimex tumani", "Navbahor tumani", "Nurota tumani", "Qiziltepa tumani",
-        "Tomdi tumani", "Uchquduq tumani", "Xatirchi tumani"
-      ],
-      "Qashqadaryo viloyati": [
-        "Qarshi shahri", "Shahrisabz shahri", "Chiroqchi tumani", "Dehqonobod tumani",
-        "G'uzor tumani", "Kasbi tumani", "Kitob tumani", "Koson tumani",
-        "Mirishkor tumani", "Muborak tumani", "Nishon tumani", "Qamashi tumani",
-        "Qarshi tumani", "Shahrisabz tumani", "Yakkabog' tumani", "Ko'kdala tumani"
-      ],
-      "Samarqand viloyati": [
-        "Samarqand shahri", "Kattaqo'rg'on shahri", "Bulung'ur tumani", "Ishtixon tumani",
-        "Jomboy tumani", "Kattaqo'rg'on tumani", "Narpay tumani", "Nurobod tumani",
-        "Oqdaryo tumani", "Pastdarg'om tumani", "Paxtachi tumani", "Payariq tumani",
-        "Qo'shrabot tumani", "Samarqand tumani", "Toyloq tumani", "Urgut tumani"
-      ],
-      "Sirdaryo viloyati": [
-        "Guliston shahri", "Shirin shahri", "Yangiyer shahri", "Boyovut tumani",
-        "Guliston tumani", "Mirzaobod tumani", "Oqoltin tumani", "Sardoba tumani",
-        "Sayxunobod tumani", "Sirdaryo tumani", "Xovos tumani"
-      ],
-      "Surxondaryo viloyati": [
-        "Termiz shahri", "Angor tumani", "Bandixon tumani", "Boysun tumani",
-        "Denov tumani", "Jarqo'rg'on tumani", "Muzrabot tumani", "Oltinsoy tumani",
-        "Qiziriq tumani", "Qumqo'rg'on tumani", "Sariosiyo tumani", "Sherobod tumani",
-        "Sho'rchi tumani", "Termiz tumani", "Uzun tumani"
-      ],
-      "Toshkent viloyati": [
-        "Nurafshon shahri", "Angren shahri", "Bekobod shahri", "Chirchiq shahri",
-        "Ohangaron shahri", "Olmaliq shahri", "Yangiyo'l shahri", "Bekobod tumani",
-        "Bo'ka tumani", "Bo'stonliq tumani", "Chinoz tumani", "O'rtachirchiq tumani",
-        "Ohangaron tumani", "Parkent tumani", "Piskent tumani", "Qibray tumani",
-        "Quyichirchiq tumani", "Toshkent tumani", "Yangiyo'l tumani", "Yuqorichirchiq tumani",
-        "Zangiota tumani"
-      ],
-      "Toshkent shahri": [
-        "Bektemir tumani", "Chilonzor tumani", "Hamza (Yashnobod) tumani",
-        "Mirobod tumani", "Mirzo Ulug'bek tumani", "Olmazor tumani",
-        "Sergeli tumani", "Shayxontohur tumani", "Uchtepa tumani",
-        "Yakkasaroy tumani", "Yangihayot tumani"
-      ]
-    };
-
-    const INITIAL_EVENTS = [
-      {
-        id: "ev-1",
-        track: "YTM//TECH",
-        title: "Sun'iy intellekt va amaliy loyihalar",
-        date: "26-noyabr, 14:00",
-        location: "YTM Markazi, IT Laboratoriya",
-        seats: 30
-      },
-      {
-        id: "ev-2",
-        track: "YTM//BIZNES",
-        title: "Startap g'oyadan birinchi mijozgacha",
-        date: "27-noyabr, 16:00",
-        location: "YTM Markazi, Biznes Trening Zali",
-        seats: 25
-      },
-      {
-        id: "ev-3",
-        track: "YTM//KREATIV",
-        title: "Vizual dizayn va brending mahorat darsi",
-        date: "29-noyabr, 15:00",
-        location: "YTM Markazi, Kreativ Studiya",
-        seats: 20
-      },
-      {
-        id: "ev-4",
-        track: "YTM//VOLONTYOR",
-        title: "Yashil makon va yoshlar eko-aksiya",
-        date: "1-dekabr, 10:00",
-        location: "YTM Markazi, Ko'ngillilar markazi",
-        seats: 40
-      },
-      {
-        id: "ev-5",
-        track: "YTM//KASB_TIL",
-        title: "Ingliz tili (IELTS) va zamonaviy kasblar ochiq darsi",
-        date: "2-dekabr, 11:00",
-        location: "YTM Markazi, Til va kasb xonasi",
-        seats: 24
-      }
-    ];
-
-    const INITIAL_ROOMS = [
-      {
-        id: "rm-it",
-        category: "IT xona",
-        title: "IT va dasturlash xonasi (20 ta kompyuter)",
-        location: "1-qavat, 101-xona",
-        seats: 20
-      },
-      {
-        id: "rm-lab",
-        category: "Laboratoriya",
-        title: "Robototexnika va muhandislik laboratoriyasi",
-        location: "1-qavat, 104-xona",
-        seats: 16
-      },
-      {
-        id: "rm-biz",
-        category: "Biznes trening",
-        title: "Biznes trening va pitch-sessiyalar xonasi",
-        location: "2-qavat, 202-xona",
-        seats: 30
-      },
-      {
-        id: "rm-lang",
-        category: "Til o'qitish",
-        title: "Xorijiy tillar va media-nutq xonasi",
-        location: "2-qavat, 205-xona",
-        seats: 18
-      },
-      {
-        id: "rm-craft",
-        category: "Kasbga o'qitish",
-        title: "Amaliy kasbga o'qitish va hunarmandchilik xonasi",
-        location: "3-qavat, 301-xona",
-        seats: 22
-      }
-    ];
-
-    const INITIAL_NEWS = [
-      {
-        id: "n-1",
-        tag: "YANGILIK",
-        title: "YTM markazlarida yangi mavsum ro'yxati boshlandi",
-        desc: "Barcha 14 hudud yoshlari uchun bepul mahorat darslari, laboratoriya va xonalardan foydalanish imkoniyati ochildi."
-      },
-      {
-        id: "n-2",
-        tag: "G'OYALAR",
-        title: "Yoshlar startap va ijtimoiy g'oyalari qabul qilinmoqda",
-        desc: "Eng dolzarb va amaliy g'oyalar mentorlik va loyiha ko'rinishida qo'llab-quvvatlanadi."
-      }
-    ];
-
-    const YOUTH_INFO = [
-      {
-        id: "yi-1",
-        tag: "MUHIM MA'LUMOT",
-        title: "Xona va laboratoriyadan qanday foydalaniladi?",
-        desc: "Sana, vaqt va hududni tanlab joy band qiling. Chipta kodi orqali markazga kirishda ro'yxatdan o'tasiz."
-      },
-      {
-        id: "yi-2",
-        tag: "IMKONIYAT",
-        title: "Til, IT va kasb xonalarida amaliy mashg'ulotlar",
-        desc: "Mustaqil ishlash, jamoaviy loyiha tayyorlash va ustozlar bilan maslahatlashish uchun doimiy grafik ishlaydi."
-      }
-    ];
-
-    const INITIAL_PROJECTS = [
-      {
-        id: "pr-1",
-        track: "YTM//TECH",
-        title: "Hududiy IT va AI klublari",
-        desc: "Tuman va shahar yoshlari uchun dasturlash va sun'iy intellekt bo'yicha amaliy guruhlar."
-      },
-      {
-        id: "pr-2",
-        track: "YTM//BIZNES",
-        title: "Yosh tadbirkor maktabi",
-        desc: "G'oyani biznes-rejaga aylantirish va taqdimot tayyorlash dasturi."
-      }
-    ];
-              const STORAGE_KEY = "ytm_app_state_v2";
-    const ADMIN_PASSCODE = "0708";
-
-    function defaultState() {
-      return {
-        selectedTrack: "ALL",
-        activePage: "pageHome",
-        activeSubtab: "event",
-        isAdmin: false,
-        events: [...INITIAL_EVENTS],
-        rooms: [...INITIAL_ROOMS],
-        news: [...INITIAL_NEWS],
-        projects: [...INITIAL_PROJECTS],
-        registrations: [],
-        roomBookings: [],
-        ideas: [],
-        bookings: []
-      };
-    }
-
-    let state = loadState();
-
-    function loadState() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return defaultState();
-        const parsed = JSON.parse(raw);
-        return {
-          ...defaultState(),
-          ...parsed,
-          events: Array.isArray(parsed.events) && parsed.events.length ? parsed.events : [...INITIAL_EVENTS],
-          rooms: Array.isArray(parsed.rooms) && parsed.rooms.length ? parsed.rooms : [...INITIAL_ROOMS],
-          news: Array.isArray(parsed.news) && parsed.news.length ? parsed.news : [...INITIAL_NEWS],
-          projects: Array.isArray(parsed.projects) && parsed.projects.length ? parsed.projects : [...INITIAL_PROJECTS],
-          registrations: Array.isArray(parsed.registrations) ? parsed.registrations : [],
-          roomBookings: Array.isArray(parsed.roomBookings) ? parsed.roomBookings : [],
-          ideas: Array.isArray(parsed.ideas) ? parsed.ideas : [],
-          bookings: Array.isArray(parsed.bookings) ? parsed.bookings : []
-        };
-      } catch (e) {
-        return defaultState();
-      }
-    }
-
-    function saveState() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      } catch (e) {
-        // localStorage cheklovi bo'lsa ham ilova ishlaydi
-      }
-    }
-
-    function esc(val) {
-      return String(val ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-    }
-
-    function showToast(msg) {
-      const el = document.getElementById("toast");
-      el.textContent = msg;
-      el.style.display = "block";
-      clearTimeout(showToast._timer);
-      showToast._timer = setTimeout(() => {
-        el.style.display = "none";
-      }, 2600);
-    }
-
-    // seats.js bilan avtomatik ishlash funksiyasi
-    function getRemainingSeats(item, kind = "event") {
-      if (window.YtmSeats && typeof window.YtmSeats.getRemaining === "function") {
-        try {
-          const val = window.YtmSeats.getRemaining(item, state);
-          if (typeof val === "number" && !Number.isNaN(val)) {
-            return Math.max(0, val);
-          }
-        } catch (e) {
-          // zaxira hisobga o'tiladi
-        }
-      }
-
-      const total = Number(item.seats || 30);
-      if (kind === "room") {
-        const used = state.roomBookings.filter((b) => b.roomId === item.id).length;
-        return Math.max(0, total - used);
-      }
-
-      const bookedFromState = state.bookings.filter(
-        (b) => b.eventId === item.id || b.eventTitle === item.title
-      ).length;
-      const bookedFromRegs = state.registrations.filter(
-        (r) => r.eventId === item.id || r.eventTitle === item.title
-      ).length;
-      const used = Math.max(bookedFromState, bookedFromRegs);
-      return Math.max(0, total - used);
-    }
-
-    function recordSeatBooking(item, kind = "event") {
-      if (!Array.isArray(state.bookings)) state.bookings = [];
-      state.bookings.push({
-        kind,
-        eventId: item.id,
-        eventTitle: item.title,
-        at: new Date().toISOString()
-      });
-
-      if (window.YtmSeats && typeof window.YtmSeats.addBooking === "function") {
-        try {
-          window.YtmSeats.addBooking(item.id, item.title, kind);
-        } catch (e) {
-          // xatolik bo'lsa ham state.bookings saqlanadi
-        }
-      }
-    }
-
-    function switchPage(pageId) {
-      state.activePage = pageId;
-      document.getElementById("pageHome").style.display = pageId === "pageHome" ? "block" : "none";
-      document.getElementById("pageRegister").style.display = pageId === "pageRegister" ? "block" : "none";
-      document.getElementById("pageTickets").style.display = pageId === "pageTickets" ? "block" : "none";
-      document.getElementById("pageAdmin").style.display = pageId === "pageAdmin" ? "block" : "none";
-
-      document.querySelectorAll(".nav-btn").forEach((btn) => {
-        btn.classList.toggle("active", btn.dataset.nav === pageId);
-      });
-      saveState();
-      renderAll();
-    }
-
-    function switchSubtab(subtab) {
-      state.activeSubtab = subtab;
-      document.querySelectorAll(".subtab").forEach((btn) => {
-        btn.classList.toggle("active", btn.dataset.subtab === subtab);
-      });
-      document.getElementById("eventForm").style.display = subtab === "event" ? "block" : "none";
-      document.getElementById("roomForm").style.display = subtab === "room" ? "block" : "none";
-      document.getElementById("ideaForm").style.display = subtab === "idea" ? "block" : "none";
-      document.getElementById("infoPanel").style.display = subtab === "info" ? "block" : "none";
-      saveState();
-    }
-
-    function populateDistricts(regionSelectId, districtSelectId, preferredDistrict = "") {
-      const regionSel = document.getElementById(regionSelectId);
-      const districtSel = document.getElementById(districtSelectId);
-      const region = regionSel.value;
-      const list = REGIONS_DISTRICTS[region] || [];
-
-      districtSel.innerHTML = list
-        .map((d) => `<option value="${esc(d)}">${esc(d)}</option>`)
-        .join("");
-
-      if (preferredDistrict && list.includes(preferredDistrict)) {
-        districtSel.value = preferredDistrict;
-      }
-    }
-
-    function populateSelects() {
-      const trackOptions = TRACKS.map(
-        (t) => `<option value="${esc(t.id)}">${esc(t.id)}</option>`
-      ).join("");
-
-      ["evTrackSelect", "ideaTrack", "admEvTrack", "admPrTrack"].forEach((id) => {
-        const el = document.getElementById(id);
-        const prev = el.value;
-        el.innerHTML = trackOptions;
-        if (state.selectedTrack !== "ALL" && TRACKS.some((t) => t.id === state.selectedTrack)) {
-          el.value = state.selectedTrack;
-        } else if (prev && TRACKS.some((t) => t.id === prev)) {
-          el.value = prev;
-        }
-      });
-
-      populateEventSelect();
-
-      const roomSel = document.getElementById("rmRoomSelect");
-      const prevRoom = roomSel.value;
-      roomSel.innerHTML = state.rooms
-        .map((r) => `<option value="${esc(r.id)}">${esc(r.title)} (${getRemainingSeats(r, "room")} joy)</option>`)
-        .join("");
-      if (prevRoom && state.rooms.some((r) => r.id === prevRoom)) {
-        roomSel.value = prevRoom;
-      }
-
-      const regionNames = Object.keys(REGIONS_DISTRICTS);
-      ["evRegionSelect", "rmRegionSelect"].forEach((regId, idx) => {
-        const distId = idx === 0 ? "evDistrictSelect" : "rmDistrictSelect";
-        const regEl = document.getElementById(regId);
-        const prevReg = regEl.value;
-        const prevDist = document.getElementById(distId).value;
-        if (!regEl.options.length) {
-          regEl.innerHTML = regionNames
-            .map((r) => `<option value="${esc(r)}">${esc(r)}</option>`)
-            .join("");
-          regEl.value = "Toshkent shahri";
-        } else if (prevReg && REGIONS_DISTRICTS[prevReg]) {
-          regEl.value = prevReg;
-        }
-        populateDistricts(regId, distId, prevDist);
-      });
-    }
-
-    function populateEventSelect(preselectEventId = "") {
-      const trackVal = document.getElementById("evTrackSelect").value;
-      const filtered = state.events.filter((e) => e.track === trackVal);
-      const list = filtered.length ? filtered : state.events;
-      const evSel = document.getElementById("evEventSelect");
-
-      evSel.innerHTML = list
-        .map((ev) => {
-          const rem = getRemainingSeats(ev, "event");
-          return `<option value="${esc(ev.id)}">${esc(ev.title)} — ${esc(ev.date)} (${rem} joy)</option>`;
-        })
-        .join("");
-
-      if (preselectEventId && list.some((e) => e.id === preselectEventId)) {
-        evSel.value = preselectEventId;
-      }
-    }
-
-    function renderChips() {
-      const chipsEl = document.getElementById("trackChips");
-      const allActive = state.selectedTrack === "ALL";
-      let html = `<button class="chip ${allActive ? "active" : ""}" data-track="ALL" type="button">Barchasi</button>`;
-      html += TRACKS.map(
-        (t) => `<button class="chip ${state.selectedTrack === t.id ? "active" : ""}" data-track="${esc(t.id)}" type="button">${esc(t.id)}</button>`
-      ).join("");
-      chipsEl.innerHTML = html;
-
-      chipsEl.querySelectorAll(".chip").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          state.selectedTrack = btn.dataset.track;
-          saveState();
-          renderAll();
-        });
-      });
-    }
-
-    function renderHome() {
-      const totalRegs = state.registrations.length;
-      const activeEvents = state.selectedTrack === "ALL"
-        ? state.events
-        : state.events.filter((e) => e.track === state.selectedTrack);
-
-      document.getElementById("heroBadge").textContent = `YTM 2026 • ${activeEvents.length} ta faol tadbir`;
-      document.getElementById("heroStats").textContent = `${totalRegs} ta yosh ishtirokchi ro'yxatdan o'tgan`;
-      document.getElementById("heroSelectedTrack").textContent = `Yo'nalish: ${state.selectedTrack === "ALL" ? "Barchasi" : state.selectedTrack}`;
-      document.getElementById("activeTrackLabel").textContent = state.selectedTrack === "ALL" ? "Barchasi" : state.selectedTrack;
-      document.getElementById("eventsCountLabel").textContent = `${activeEvents.length} ta tadbir`;
-
-      const tracksEl = document.getElementById("tracksList");
-      const visibleTracks = state.selectedTrack === "ALL"
-        ? TRACKS
-        : TRACKS.filter((t) => t.id === state.selectedTrack);
-
-      tracksEl.innerHTML = visibleTracks
-        .map(
-          (t) => `
-          <div class="card clickable ${state.selectedTrack === t.id ? "selected-card" : ""}" data-select-track="${esc(t.id)}">
-            <div class="track-card-top">
-              <div class="track-icon">${esc(t.short)}</div>
-              <div class="card-title" style="margin:0;">${esc(t.id)}</div>
-            </div>
-            <div class="card-desc" style="margin:0;">${esc(t.desc)}</div>
-          </div>`
-        )
-        .join("");
-
-      tracksEl.querySelectorAll("[data-select-track]").forEach((card) => {
-        card.addEventListener("click", () => {
-          const tId = card.dataset.selectTrack;
-          state.selectedTrack = state.selectedTrack === tId ? "ALL" : tId;
-          saveState();
-          renderAll();
-        });
-      });
-
-      const eventsEl = document.getElementById("eventsList");
-      if (!activeEvents.length) {
-        eventsEl.innerHTML = `<div class="empty-msg">Tanlangan yo'nalish bo'yicha hozircha tadbir yo'q.</div>`;
-      } else {
-        eventsEl.innerHTML = activeEvents
-          .map((ev) => {
-            const rem = getRemainingSeats(ev, "event");
-            return `
-              <div class="card">
-                <span class="pill">${esc(ev.track)}</span>
-                <div class="card-title">${esc(ev.title)}</div>
-                <div class="meta-row">
-                  <span>📅 ${esc(ev.date)}</span>
-                  <span>📍 ${esc(ev.location)}</span>
-                  <span>🪑 ${rem} joy</span>
-                </div>
-                <button class="btn-orange full join-ev-btn" data-ev-id="${esc(ev.id)}" data-ev-track="${esc(ev.track)}" type="button">
-                  Ro'yxatdan o'tish
-                </button>
-              </div>`;
-          })
-          .join("");
-      }
-
-      eventsEl.querySelectorAll(".join-ev-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const evId = btn.dataset.evId;
-          const evTrack = btn.dataset.evTrack;
-          switchPage("pageRegister");
-          switchSubtab("event");
-          document.getElementById("evTrackSelect").value = evTrack;
-          populateEventSelect(evId);
-        });
-      });
-
-      const roomsEl = document.getElementById("roomsPreviewList");
-      roomsEl.innerHTML = state.rooms
-        .map((rm) => {
-          const rem = getRemainingSeats(rm, "room");
-          return `
-            <div class="card">
-              <span class="pill">${esc(rm.category)}</span>
-              <div class="card-title">${esc(rm.title)}</div>
-              <div class="meta-row">
-                <span>📍 ${esc(rm.location)}</span>
-                <span>🪑 ${rem} bo'sh joy</span>
-              </div>
-              <button class="btn-teal full book-rm-btn" data-rm-id="${esc(rm.id)}" type="button">
-                Joy band qilish
-              </button>
-            </div>`;
-        })
-        .join("");
-
-      roomsEl.querySelectorAll(".book-rm-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          switchPage("pageRegister");
-          switchSubtab("room");
-          document.getElementById("rmRoomSelect").value = btn.dataset.rmId;
-        });
-      });
-
-      const newsHomeEl = document.getElementById("newsHomeList");
-      newsHomeEl.innerHTML = state.news
-        .slice(0, 3)
-        .map(
-          (n) => `
-          <div class="card">
-            <span class="pill">${esc(n.tag)}</span>
-            <div class="card-title">${esc(n.title)}</div>
-            <div class="card-desc" style="margin:0;">${esc(n.desc)}</div>
-          </div>`
-        )
-        .join("");
-    }
-
-    function renderInfoSection() {
-      document.getElementById("newsFullList").innerHTML = state.news
-        .map(
-          (n) => `
-          <div class="card">
-            <span class="pill">${esc(n.tag)}</span>
-            <div class="card-title">${esc(n.title)}</div>
-            <div class="card-desc" style="margin:0;">${esc(n.desc)}</div>
-          </div>`
-        )
-        .join("");
-
-      document.getElementById("youthInfoList").innerHTML = YOUTH_INFO
-        .map(
-          (item) => `
-          <div class="card">
-            <span class="pill">${esc(item.tag)}</span>
-            <div class="card-title">${esc(item.title)}</div>
-            <div class="card-desc" style="margin:0;">${esc(item.desc)}</div>
-          </div>`
-        )
-        .join("");
-    }
-
-    function renderTicketsAndIdeas() {
-      const totalItems = state.registrations.length + state.roomBookings.length;
-      document.getElementById("ticketsCount").textContent = `${totalItems} ta`;
-
-      const ticketsEl = document.getElementById("ticketsList");
-      const evTicketsHtml = state.registrations.map(
-        (r) => `
-        <div class="ticket-box">
-          <div class="ticket-code">🎟️ ${esc(r.code)}</div>
-          <div class="card-title">${esc(r.eventTitle)}</div>
-          <div class="meta-row" style="margin:0;">
-            <span>👤 ${esc(r.fullName)}</span>
-            <span>📞 ${esc(r.phone)}</span>
-            <span>📍 ${esc(r.region)}, ${esc(r.district)}</span>
-          </div>
-        </div>`
-      );
-
-      const rmTicketsHtml = state.roomBookings.map(
-        (b) => `
-        <div class="ticket-box">
-          <div class="ticket-code">🏢 ${esc(b.code)}</div>
-          <div class="card-title">${esc(b.roomTitle)}</div>
-          <div class="meta-row" style="margin:0;">
-            <span>📅 ${esc(b.date)} (${esc(b.slot)})</span>
-            <span>👤 ${esc(b.userName)}</span>
-            <span>📍 ${esc(b.region)}, ${esc(b.district)}</span>
-          </div>
-        </div>`
-      );
-
-      const combined = [...evTicketsHtml, ...rmTicketsHtml];
-      ticketsEl.innerHTML = combined.length
-        ? combined.join("")
-        : `<div class="empty-msg">Hozircha chipta yoki band qilingan joy mavjud emas.</div>`;
-
-      document.getElementById("ideasCount").textContent = `${state.ideas.length} ta`;
-      document.getElementById("ideasList").innerHTML = state.ideas.length
-        ? state.ideas
-            .map(
-              (idItem) => `
-              <div class="card">
-                <span class="pill">${esc(idItem.track)}</span>
-                <div class="card-title">${esc(idItem.title)}</div>
-                <div class="card-desc">${esc(idItem.desc)}</div>
-                <div class="section-note">Muallif: ${esc(idItem.author)}</div>
-              </div>`
-            )
-            .join("")
-        : `<div class="empty-msg">Hali g'oya yuborilmagan.</div>`;
-    }
-
-    function renderAdminProjects() {
-      document.getElementById("projectsCount").textContent = `${state.projects.length} ta`;
-      document.getElementById("adminProjectsList").innerHTML = state.projects
-        .map(
-          (p) => `
-          <div class="card">
-            <span class="pill">${esc(p.track)}</span>
-            <div class="card-title">${esc(p.title)}</div>
-            <div class="card-desc" style="margin:0;">${esc(p.desc)}</div>
-          </div>`
-        )
-        .join("");
-    }
-
-    function renderAll() {
-      const adminBtn = document.getElementById("adminToggleBtn");
-      adminBtn.classList.toggle("active", state.isAdmin);
-      adminBtn.textContent = state.isAdmin ? "Admin (Faol)" : "Admin";
-
-      populateSelects();
-      renderChips();
-      renderHome();
-      renderInfoSection();
-      renderTicketsAndIdeas();
-      renderAdminProjects();
-    }
-
-    document.getElementById("heroJoinBtn").addEventListener("click", () => {
-      switchPage("pageRegister");
-      switchSubtab("event");
-    });
-
-    document.querySelectorAll(".nav-btn").forEach((btn) => {
-      btn.addEventListener("click", () => switchPage(btn.dataset.nav));
-    });
-
-    document.querySelectorAll(".subtab").forEach((btn) => {
-      btn.addEventListener("click", () => switchSubtab(btn.dataset.subtab));
-    });
-
-    document.getElementById("evTrackSelect").addEventListener("change", () => populateEventSelect());
-    document.getElementById("evRegionSelect").addEventListener("change", () =>
-      populateDistricts("evRegionSelect", "evDistrictSelect")
-    );
-    document.getElementById("rmRegionSelect").addEventListener("change", () =>
-      populateDistricts("rmRegionSelect", "rmDistrictSelect")
-    );
-
-    document.getElementById("eventForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const evId = document.getElementById("evEventSelect").value;
-      const ev = state.events.find((item) => item.id === evId) || state.events[0];
-      if (!ev) return;
-
-      const rem = getRemainingSeats(ev, "event");
-      if (rem <= 0) {
-        showToast("Ushbu tadbirda bo'sh joy qolmagan!");
-        return;
-      }
-
-      const fullName = document.getElementById("evFullName").value.trim();
-      const phone = document.getElementById("evPhone").value.trim();
-      const region = document.getElementById("evRegionSelect").value;
-      const district = document.getElementById("evDistrictSelect").value;
-      const code = "YTM-" + Math.floor(10000 + Math.random() * 90000);
-
-      state.registrations.unshift({
-        code,
-        fullName,
-        phone,
-        track: ev.track,
-        eventId: ev.id,
-        eventTitle: `${ev.title} (${ev.date})`,
-        region,
-        district
-      });
-
-      recordSeatBooking(ev, "event");
-      saveState();
-      e.target.reset();
-      populateSelects();
-      renderAll();
-      switchPage("pageTickets");
-      showToast(`Ro'yxatdan o'tdingiz! Chipta: ${code}`);
-    });
-
-    document.getElementById("roomForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const rmId = document.getElementById("rmRoomSelect").value;
-      const rm = state.rooms.find((item) => item.id === rmId) || state.rooms[0];
-      if (!rm) return;
-
-      const rem = getRemainingSeats(rm, "room");
-      if (rem <= 0) {
-        showToast("Ushbu xonada hozircha bo'sh joy qolmagan!");
-        return;
-      }
-
-      const userName = document.getElementById("rmUserName").value.trim(
+    const REGIONS={"Qoraqalpog'iston Respublikasi":["Nukus shahri","Amudaryo tumani","Beruniy tumani","Chimboy tumani","Ellikqal'a tumani","Kegeyli tumani","Mo'ynoq tumani","Qanliko'l tumani","Qo'ng'irot tumani","Qorao'zak tumani","Shumanay tumani","Taxtako'pir tumani","To'rtko'l tumani","Xo'jayli tumani","Bo'zatov tumani"],"Andijon viloyati":["Andijon shahri","Asaka tumani","Baliqchi tumani","Bo'ston tumani","Izboskan tumani","Jalolquduq tumani","Paxtaobod tumani","Shahrixon tumani","Xonobod shahri"],"Buxoro viloyati":["Buxoro shahri","Kogon shahri","G'ijduvon tumani","Jondor tumani","Olot tumani","Peshku tumani","Qorako'l tumani","Romitan tumani","Shofirkon tumani","Vobkent tumani"],"Farg'ona viloyati":["Farg'ona shahri","Marg'ilon shahri","Qo'qon shahri","Quvasoy shahri","Bag'dod tumani","Beshariq tumani","Dang'ara tumani","Oltiariq tumani","Rishton tumani","Yozyovon tumani"],"Jizzax viloyati":["Jizzax shahri","Arnasoy tumani","Baxmal tumani","Do'stlik tumani","Forish tumani","G'allaorol tumani","Paxtakor tumani","Zomin tumani"],"Xorazm viloyati":["Urganch shahri","Xiva shahri","Bog'ot tumani","Gurlan tumani","Qo'shko'pir tumani","Shovot tumani","Urganch tumani","Xiva tumani","Yangiariq tumani"],"Namangan viloyati":["Namangan shahri","Chortoq tumani","Chust tumani","Kosonsoy tumani","Norin tumani","Pop tumani","To'raqo'rg'on tumani","Uychi tumani","Yangiqo'rg'on tumani"],"Navoiy viloyati":["Navoiy shahri","Zarafshon shahri","Karmana tumani","Konimex tumani","Navbahor tumani","Nurota tumani","Qiziltepa tumani","Uchquduq tumani","Xatirchi tumani"],"Qashqadaryo viloyati":["Qarshi shahri","Shahrisabz shahri","Chiroqchi tumani","G'uzor tumani","Kasbi tumani","Kitob tumani","Koson tumani","Nishon tumani","Qamashi tumani","Yakkabog' tumani"],"Samarqand viloyati":["Samarqand shahri","Kattaqo'rg'on shahri","Bulung'ur tumani","Ishtixon tumani","Jomboy tumani","Narpay tumani","Oqdaryo tumani","Paxtachi tumani","Payariq tumani","Urgut tumani"],"Sirdaryo viloyati":["Guliston shahri","Shirin shahri","Yangiyer shahri","Boyovut tumani","Guliston tumani","Mirzaobod tumani","Oqoltin tumani","Sirdaryo tumani","Xovos tumani"],"Surxondaryo viloyati":["Termiz shahri","Angor tumani","Boysun tumani","Denov tumani","Jarqo'rg'on tumani","Muzrabot tumani","Sariosiyo tumani","Sherobod tumani","Uzun tumani"],"Toshkent viloyati":["Nurafshon shahri","Angren shahri","Bekobod shahri","Chirchiq shahri","Olmaliq shahri","Parkent tumani","Piskent tumani","Qibray tumani","Toshkent tumani","Yangiyo'l tumani","Zangiota tumani"],"Toshkent shahri":["Bektemir tumani","Chilonzor tumani","Yashnobod tumani","Mirobod tumani","Mirzo Ulug'bek tumani","Olmazor tumani","Sergeli tumani","Shayxontohur tumani","Uchtepa tumani","Yakkasaroy tumani","Yangihayot tumani"]};
+    const INITIAL_EVENTS=[{id:"ev-1",track:"YTM//TECH",title:"Sun'iy intellekt va amaliy loyihalar",date:"26-noyabr, 14:00",location:"YTM Markazi, IT Laboratoriya",seats:30},{id:"ev-2",track:"YTM//BIZNES",title:"Startap g'oyadan birinchi mijozgacha",date:"27-noyabr, 16:00",location:"YTM Markazi, Biznes Trening Zali",seats:25},{id:"ev-3",track:"YTM//KREATIV",title:"Vizual dizayn va brending mahorat darsi",date:"29-noyabr, 15:00",location:"YTM Markazi, Studiya",seats:20},{id:"ev-4",track:"YTM//VOLONTYOR",title:"Ko'ngilli yoshlar va ekologiya forumi",date:"1-dekabr, 10:30",location:"YTM Markazi, Konferens zal",seats:40},{id:"ev-5",track:"YTM//KASB_TIL",title:"Xorijiy tillar va kasbga o'qitish ochiq eshiklari",date:"2-dekabr, 11:30",location:"YTM Markazi, Til va kasb xonasi",seats:24}];
+    const INITIAL_ROOMS=[{id:"rm-it",category:"IT xona",title:"IT va dasturlash xonasi",location:"1-qavat, IT zal",seats:20},{id:"rm-lab",category:"Laboratoriya",title:"Texnik va muhandislik laboratoriyasi",location:"1-qavat, Lab-01",seats:16},{id:"rm-biz",category:"Biznes trening",title:"Biznes trening va startap xonasi",location:"2-qavat, Biznes zal",seats:28},{id:"rm-lang",category:"Til o'qitish",title:"Xorijiy tillar o'quv xonasi",location:"2-qavat, Til xonasi",seats:18},{id:"rm-craft",category:"Kasbga o'qitish",title:"Kasbga o'qitish va amaliyot xonasi",location:"3-qavat, Kasb xonasi",seats:22}];
+    const INITIAL_NEWS=[{id:"n-1",tag:"YANGILIK",title:"YTM markazlarida ro'yxatdan o'tish faol",desc:"Barcha 14 hudud yoshlari tadbirlar, laboratoriyalar va o'quv xonalaridan foydalanishi mumkin."},{id:"n-2",tag:"G'OYALAR",title:"Yoshlar g'oyalari qo'llab-quvvatlanadi",desc:"Amaliy g'oyalar va tashabbuslar mentorlar ko'magida loyihalarga aylantiriladi."}];
+    const YOUTH_INFO=[{id:"yi-1",tag:"MUHIM MA'LUMOT",title:"Chipta va xona band qilish tartibi",desc:"Ro'yxatdan o'tgach, unikal chipta yoki bron kodi saqlanadi."},{id:"yi-2",tag:"MUHIM MA'LUMOT",title:"IT, biznes, til va kasb imkoniyatlari",desc:"Xonalarda belgilangan vaqt oralig'ida mustaqil va guruhli mashg'ulotlar o'tkaziladi."}];
+    const INITIAL_PROJECTS=[{id:"pr-1",track:"YTM//TECH",title:"Hududiy IT va AI tashabbuslari",desc:"Yosh dasturchilar va texnologik guruhlar uchun amaliy loyihalar."}];
+    const STORAGE_KEY="ytm_ui_state_v3", ADMIN_PASSCODE="0708";
+    function defaultState(){return {selectedTrack:"ALL",activePage:"pageHome",activeSubtab:"event",isAdmin:false,events:[...INITIAL_EVENTS],rooms:[...INITIAL_ROOMS],news:[...INITIAL_NEWS],projects:[...INITIAL_PROJECTS],registrations:[],roomBookings:[],ideas:[],bookings:[]};}
+    let state=loadState(); window.state=state;
+    function loadState(){try{const p=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null");if(!p)return defaultState();return {...defaultState(),...p,events:Array.isArray(p.events)?p.events:[...INITIAL_EVENTS],rooms:Array.isArray(p.rooms)?p.rooms:[...INITIAL_ROOMS],news:Array.isArray(p.news)?p.news:[...INITIAL_NEWS],projects:Array.isArray(p.projects)?p.projects:[...INITIAL_PROJECTS],registrations:Array.isArray(p.registrations)?p.registrations:[],roomBookings:Array.isArray(p.roomBookings)?p.roomBookings:[],ideas:Array.isArray(p.ideas)?p.ideas:[],bookings:Array.isArray(p.bookings)?p.bookings:[]};}catch(e){return defaultState();}}
+    function saveState(){window.state=state;try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}}
+    function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");}
+    function showToast(msg){const e=document.getElementById("toast");e.textContent=msg;e.style.display="block";clearTimeout(showToast.t);showToast.t=setTimeout(()=>e.style.display="none",2600);}
+    function remaining(item,kind="event") { const total=Number(item.seats||30); if(kind==="room")return Math.max(0,total-state.roomBookings.filter(b=>b.roomId===item.id).length); const used=state.bookings.filter(b=>b.eventId===item.id||b.eventTitle===item.title).length; const regs=state.registrations.filter(r=>r.eventId===item.id||r.eventTitle===item.title).length; return Math.max(0,total-Math.max(used,regs)); }
+    function switchPage(id){state.activePage=id;["pageHome","pageRegister","pageTickets","pageAdmin"].forEach(p=>document.getElementById(p).style.display=p===id?"block":"none");document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.nav===id));saveState();renderAll();}
+    function switchSubtab(id){state.activeSubtab=id;document.querySelectorAll(".subtab").forEach(b=>b.classList.toggle("active",b.dataset.subtab===id));document.getElementById("eventForm").style.display=id==="event"?"block":"none";document.getElementById("roomForm").style.display=id==="room"?"block":"none";document.getElementById("ideaForm").style.display=id==="idea"?"block":"none";document.getElementById("infoPanel").style.display=id==="info"?"block":"none";saveState();}
+    function populateDistrict(regionId,districtId,preferred=""){const r=document.getElementById(regionId),d=document.getElementById(districtId),list=REGIONS[r.value]||[];d.innerHTML=list.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");if(preferred&&list.includes(preferred))d.value=preferred;}
+    function populateSelects(){const opts=TRACKS.map(t=>`<option value="${esc(t.id)}">${esc(t.id)}</option>`).join("");["evTrackSelect","ideaTrack","admEvTrack","admPrTrack"].forEach(id=>{const e=document.getElementById(id),prev=e.value;e.innerHTML=opts;if(prev&&TRACKS.some(t=>t.id===prev))e.value=prev;else if(state.selectedTrack!=="ALL")e.value=state.selectedTrack;});populateEventSelect();const rs=document.getElementById("rmRoomSelect"),prev=rs.value;rs.innerHTML=state.rooms.map(r=>`<option value="${esc(r.id)}">${esc(r.title)} (${remaining(r,"room")} joy)</option>`).join("");if(prev&&state.rooms.some(r=>r.id===prev))rs.value=prev;[ ["evRegionSelect","evDistrictSelect"],["rmRegionSelect","rmDistrictSelect"] ].forEach(([ri,di])=>{const r=document.getElementById(ri),d=document.getElementById(di),pr=r.value,pd=d.value;if(!r.options.length){r.innerHTML=Object.keys(REGIONS).map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");r.value="Toshkent shahri";}else if(REGIONS[pr])r.value=pr;populateDistrict(ri,di,pd);});}
+    function populateEventSelect(selected=""){const tr=document.getElementByById("evTrackSelect").value,matches=state.events.filter(e=>e.track===tr),list=matches.length?matches:state.events,s=document.getElementById("evEventSelect");s.innerHTML=list.map(e=>`<option value="${esc(e.id)}">${esc(e.title)} (${esc(e.date)}) — ${remaining(e)} joy</option>`).join("");if(selected&&list.some(e=>e.id===selected))s.value=selected;}
+    function renderChips(){const el=document.getElementById("trackChips");el.innerHTML=`<button class="chip ${state.selectedTrack==="ALL"?"active":""}" data-track="ALL">Barchasi</button>`+TRACKS.map(t=>`<button class="chip ${state.selectedTrack===t.id?"active":""}" data-track="${esc(t.id)}">${esc(t.id)}</button>`).join("");el.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{state.selectedTrack=b.dataset.track;saveState();renderAll();});}
+    function renderHome(){const visible=state.selectedTrack==="ALL"?state.events:state.events.filter(e=>e.track===state.selectedTrack);document.getElementById("heroBadge").textContent=`YTM 2026 • ${visible.length} ta faol tadbir`;document.getElementById("heroStats").textContent=`${state.registrations.length} ta yosh ishtirokchi ro'yxatdan o'tgan`;document.getElementById("heroTrackHint").textContent=state.selectedTrack==="ALL"?"Barchasi":state.selectedTrack;document.getElementById("eventsCountLabel").textContent=`${visible.length} ta tadbir`;const vt=state.selectedTrack==="ALL"?TRACKS:TRACKS.filter(t=>t.id===state.selectedTrack);document.getElementById("tracksCountLabel").textContent=`${vt.length} ta yo'nalish`;const tl=document.getElementById("tracksList");tl.innerHTML=vt.map(t=>`<div class="card clickable ${state.selectedTrack===t.id?"selected":""}" data-track-card="${esc(t.id)}"><div class="track-header"><div class="track-badge-box" style="background:${t.bg};color:${t.color}">${esc(t.symbol)}</div><div class="track-name">${esc(t.id)}</div></div><div class="card-desc" style="margin:0">${esc(t.desc)}</div></div>`).join("");tl.querySelectorAll("[data-track-card]").forEach(c=>c.onclick=()=>{const id=c.dataset.trackCard;state.selectedTrack=state.selectedTrack===id?"ALL":id;saveState();renderAll();});document.getElementById("eventsList").innerHTML=visible.length?visible.map(ev=>`<div class="card"><div class="card-title">${esc(ev.title)}</div><div class="event-meta-line"><span>📅 ${esc(ev.date)} • 🪑 ${remaining(ev)} joy</span><span>📍 ${esc(ev.location)}</span></div><button class="btn-orange full join-ev-btn" data-id="${esc(ev.id)}" data-track="${esc(ev.track)}">Ro'yxatdan o'tish</button></div>`).join(""):`<div class="empty-msg">Tanlangan yo'nalish bo'yicha tadbir topilmadi.</div>`;document.querySelectorAll(".join-ev-btn").forEach(b=>b.onclick=()=>{switchPage("pageRegister");switchSubtab("event");document.getElementById("evTrackSelect").value=b.dataset.track;populateEventSelect(b.dataset.id);});document.getElementById("roomsList").innerHTML=state.rooms.map(r=>`<div class="card"><span class="pill">${esc(r.category)}</span><div class="card-title">${esc(r.title)}</div><div class="event-meta-line"><span>📍 ${esc(r.location)}</span><span>🪑 ${remaining(r,"room")} bo'sh joy</span></div><button class="btn-teal full book-rm-btn" data-id="${esc(r.id)}">Joy band qilish</button></div>`).join("");document.querySelectorAll(".book-rm-btn").forEach(b=>b.onclick=()=>{switchPage("pageRegister");switchSubtab("room");document.getElementById("rmRoomSelect").value=b.dataset.id;});document.getElementById("newsHomeList").innerHTML=state.news.slice(0,3).map(n=>`<div class="card"><span class="pill">${esc(n.tag)}</span><div class="card-title">${esc(n.title)}</div><div class="card-desc" style="margin:0">${esc(n.desc)}</div></div>`).join("");}
+    function renderInfo(){document.getElementById("newsFullList").innerHTML=state.news.map(n=>`<div class="card"><span class="pill">${esc(n.tag)}</span><div class="card-title">${esc(n.title)}</div><div class="card-desc" style="margin:0">${esc(n.desc)}</div></div>`).join("");document.getElementById("youthInfoList").innerHTML=YOUTH_INFO.map(n=>`<div class="card"><span class="pill">${esc(n.tag)}</span><div class="card-title">${esc(n.title)}</div><div class="card-desc" style="margin:0">${esc(n.desc)}</div></div>`).join("");}
+    function renderTickets(){const ev=state.registrations.map(r=>`<div class="ticket-card"><div class="ticket-code">🎟️ ${esc(r.code)}</div><div class="card-title">${esc(r.eventTitle)}</div><div class="event-meta-line" style="margin:0"><span>👤 ${esc(r.fullName)} • 📞 ${esc(r.phone)}</span><span>📍 ${esc(r.region)}, ${esc(r.district)}</span></div></div>`),rm=state.roomBookings.map(b=>`<div class="ticket-card"><div class="ticket-code">🏢 ${esc(b.code)}</div><div class="card-title">${esc(b.roomTitle)}</div><div class="event-meta-line" style="margin:0"><span>👤 ${esc(b.userName)} • 📅 ${esc(b.date)} (${esc(b.slot)})</span><span>📍 ${esc(b.region)}, ${esc(b.district)}</span></div></div>`);document.getElementById("ticketsCount").textContent=`${ev.length+rm.length} ta`;document.getElementById("ticketsList").innerHTML=ev.length+rm.length?[...ev,...rm].join(""):`<div class="empty-msg">Hozircha chipta yoki bron mavjud emas.</div>`;document.getElementById("ideasCount").textContent=`${state.ideas.length} ta`;document.getElementById("ideasList").innerHTML=state.ideas.length?state.ideas.map(i=>`<div class="card"><span class="pill">${esc(i.track)}</span><div class="card-title">${esc(i.title)}</div><div class="card-desc">${esc(i.desc)}</div><div class="section-muted">Muallif: ${esc(i.author)}</div></div>`).join(""):`<div class="empty-msg">Hali g'oya yuborilmagan.</div>`;}
+    function renderAdmin(){document.getElementById("projectsCount").textContent=`${state.projects.length} ta`;document.getElementById("adminProjectsList").innerHTML=state.projects.map(p=>`<div class="card"><span class="pill">${esc(p.track)}</span><div class="card-title">${esc(p.title)}</div><div class="card-desc" style="margin:0">${esc(p.desc)}</div></div>`).join("");}
+    function renderAll(){document.getElementById("adminToggleBtn").classList.toggle("active",state.isAdmin);document.getElementById("adminBtnLabel").textContent=state.isAdmin?"Admin • Faol":"Admin";populateSelects();renderChips();renderHome();renderInfo();renderTickets();renderAdmin();}
+    document.getElementById("heroJoinBtn").onclick=()=>{switchPage("pageRegister");switchSubtab("event");};document.querySelectorAll(".nav-btn").forEach(b=>b.onclick=()=>switchPage(b.dataset.nav));document.querySelectorAll(".subtab").forEach(b=>b.onclick=()=>switchSubtab(b.dataset.subtab));document.getElementById("evTrackSelect").onchange=()=>populateEventSelect();document.getElementById("evRegionSelect").onchange=()=>populateDistrict("evRegionSelect","evDistrictSelect");document.getElementById("rmRegionSelect").onchange=()=>populateDistrict("rmRegionSelect","rmDistrictSelect");
+    document.getElementById("eventForm").onsubmit=e=>{e.preventDefault();const ev=state.events.find(x=>x.id===document.getElementById("evEventSelect").value)||state.events[0];if(!ev)return;if(remaining(ev)<=0)return showToast("Ushbu tadbirda bo'sh joy qolmagan!");const code="YTM-"+Math.floor(10000+Math.random()*90000);state.registrations.unshift({code,fullName:document.getElementById("evFullName").value.trim(),phone:document.getElementById("evPhone").value.trim(),track:ev.track,eventId:ev.id,eventTitle:`${ev.title} (${ev.date})`,region:document.getElementById("evRegionSelect").value,district:document.getElementById("evDistrictSelect").value});state.bookings.push({kind:"event",eventId:ev.id,eventTitle:ev.title,at:new Date().toISOString()});saveState();e.target.reset();renderAll();switchPage("pageTickets");showToast(`Ro'yxatdan o'tdingiz! Chipta: ${code}`);};
+    document.getElementById("roomForm").onsubmit=e=>{e.preventDefault();const rm=state.rooms.find(x=>x.id===document.getElementById("rmRoomSelect").value)||state.rooms[0];if(!rm)return;if(remaining(rm,"room")<=0)return showToast("Ushbu xonada bo'sh joy qolmagan!");const code="ROOM-"+Math.floor(1000+Math.random()*9000);state.roomBookings.unshift({code,userName:document.getElementById("rmUserName").value.trim(),phone:document.getElementById("rmPhone").value.trim(),roomId:rm.id,roomTitle:rm.title,date:document.getElementById("rmDate").value,slot:document.getElementById("rmSlot").value,region:document.getElementById("rmRegionSelect").value,district:document.getElementById("rmDistrictSelect").value});saveState();e.target.reset();renderAll();switchPage("pageTickets");showToast(`Joy band qilindi! Kod: ${code}`);};
+    document.getElementById("ideaForm").onsubmit=e=>{e.preventDefault();state.ideas.unshift({author:document.getElementById("ideaAuthor").value.trim(),track:document.getElementById("ideaTrack").value,title:document.getElementById("ideaTitle").value.trim(),desc:document.getElementById("ideaDesc").value.trim()});saveState();e.target.reset();renderAll();switchPage("pageTickets");showToast("G'oyangiz yuborildi!");};
+    document.getElementById("adminToggleBtn").onclick=()=>{if(state.isAdmin)return switchPage("pageAdmin");const pass=prompt("Admin parolini kiriting:");if(pass===null)return;if(pass===ADMIN_PASSCODE){state.isAdmin=true;saveState();switchPage("pageAdmin");showToast("Admin rejimiga kirdingiz");}else showToast("Parol noto'g'ri!");};
+    document.getElementById("adminLogoutBtn").onclick=()=>{state.isAdmin=false;saveState();switchPage("pageHome");showToast("Admin rejimidan chiqildi");};
+    document.getElementById("adminEventForm").onsubmit=e=>{e.preventDefault();if(!state.isAdmin)return showToast("Avval admin paroli bilan kiring!");state.events.unshift({id:"ev-"+Date.now(),track:document.getElementById("admEvTrack").value,title:document.getElementById("admEvTitle").value.trim(),date:document.getElementById("admEvDate").value.trim(),seats:Math.max(1,Number(document.getElementById("admEvSeats").value||30)),location:document.getElementById("admEvLocation").value.trim()});saveState();e.target.reset();document.getElementById("admEvSeats").value=30;renderAll();showToast("Yangi tadbir boshlandi!");};
+    document.getElementById("adminProjectForm").onsubmit=e=>{e.preventDefault();if(!state.isAdmin)return showToast("Avval admin paroli bilan kiring!");const title=document.getElementById("admPrTitle").value.trim(),desc=document.getElementById("admPrDesc").value.trim(),track=document.getElementById("admPrTrack").value;state.projects.unshift({id:"pr-"+Date.now(),track,title,desc});state.news.unshift({id:"n-"+Date.now(),tag:"YANGI LOYIHA",title:`Yangi loyiha boshlandi: ${title}`,desc});saveState();e.target.reset();renderAll();showToast("Yangi loyiha boshlandi!");};
+    if("serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{});
+    switchPage(state.activePage||"pageHome");switchSubtab(state.activeSubtab||"event");renderAll();
+  </script>
+  <script src="seats.js"></script>
+</body>
+</html>
