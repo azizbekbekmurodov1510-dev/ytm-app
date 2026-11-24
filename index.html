@@ -68,7 +68,12 @@
     {id:'ev-3',track:'YTM // KREATIV',title:'Vizual dizayn va brending mahorat darsi',date:'29-noyabr',times:['11:00 - 13:00','15:00 - 17:00'],place:'YTM Markazi, studiya'},
     {id:'ev-4',track:'YTM // VOLONTYOR',title:'Yashil hudud va jamoaviy volontyorlik forumi',date:'30-noyabr',times:['09:30 - 11:30','14:00 - 16:00'],place:'YTM Markazi, anjumanlar zali'},
     {id:'ev-5',track:'YTM // KASB-TIL',title:'Zamonaviy kasblar va til klubi ochiq darsi',date:'02-dekabr',times:['10:00 - 12:00','14:30 - 16:30'],place:'YTM Markazi, til va kasb xonasi'}
-  ];
+,const EVENTS=[
+  {id:'ev-1',track:'YTM // TECH',title:'Sun’iy...'},
+  // ... ev-2, ev-3, ev-4, ev-5 ...[span_5](start_span)[span_5](end_span)
+  {id:'ev-6',track:'YTM // BIZNES',title:'Loyiha boshqaruvi va nutq madaniyati',date:'2026-12-05',time:'15:00',location:'YTM asosiy zali',seats:40}
+];
+      
   const NEWS=[
     {tag:'YANGILIK',title:'Hududiy YTM markazlarida yangi o‘quv va mentorlik mavsumi',desc:'Yoshlar g‘oyalari bilan qatnashishi, laboratoriyalardan foydalanishi va mentorlardan maslahat olishi mumkin.'},
     {tag:'G‘OYALAR QO‘LLABI',title:'Tashabbuslarga mentorlik va inkubatsiya ko‘magi',desc:'Texnologiya, biznes, ijod va ijtimoiy sohadagi g‘oyalar ekspertlar tomonidan ko‘rib chiqiladi.'},
@@ -124,7 +129,109 @@
   $('adminPinInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('adminPinSubmit').click()});
   function renderAdminPanel(){ $('adminStatsText').textContent=`Ishtirokchilar: ${state.registrations.length} | G‘oyalar: ${state.ideas.length} | Xona bandlovlari: ${state.bookings.length}`;const reg=state.registrations.map(r=>`<tr><td>${esc(r.code)}</td><td>${esc(r.name)}</td><td>${esc(r.phone)}</td><td>${esc(r.region)} / ${esc(r.district)}</td><td>${esc(r.track)}</td><td>${esc(r.eventTitle)}</td><td>${esc(r.date)} ${esc(r.time)}</td></tr>`).join('')||'<tr><td colspan="7">Ma’lumot yo‘q</td></tr>';const ideas=state.ideas.map(g=>`<tr><td>${esc(g.code)}</td><td>${esc(g.author)}</td><td>${esc(g.phone)}</td><td>${esc(g.region)} / ${esc(g.district)}</td><td>${esc(g.track)}</td><td>${esc(g.title)} — ${esc(g.desc)}</td></tr>`).join('')||'<tr><td colspan="6">Ma’lumot yo‘q</td></tr>';const rooms=state.bookings.map(b=>`<tr><td>${esc(b.code)}</td><td>${esc(b.name)}</td><td>${esc(b.phone)}</td><td>${esc(b.region)} / ${esc(b.district)}</td><td>${esc(b.space)}</td><td>${esc(b.date)}</td><td>${esc(b.time)}</td></tr>`).join('')||'<tr><td colspan="7">Ma’lumot yo‘q</td></tr>'; $('adminTables').innerHTML=`<div class="sec-head"><div class="sec-title">Tadbir ro‘yxati</div></div><table><thead><tr><th>Kod</th><th>Ism</th><th>Telefon</th><th>Hudud</th><th>Yo‘nalish</th><th>Tadbir</th><th>Sana / vaqt</th></tr></thead><tbody>${reg}</tbody></table><div class="sec-head"><div class="sec-title">Yuborilgan g‘oyalar</div></div><table><thead><tr><th>Kod</th><th>Muallif</th><th>Telefon</th><th>Hudud</th><th>Yo‘nalish</th><th>G‘oya</th></tr></thead><tbody>${ideas}</tbody></table><div class="sec-head"><div class="sec-title">Xona bandlovlari</div></div><table><thead><tr><th>Kod</th><th>Ism</th><th>Telefon</th><th>Hudud</th><th>Xona</th><th>Sana</th><th>Vaqt</th></tr></thead><tbody>${rooms}</tbody></table>`}
   function csvCell(value){let text=String(value??'');if(/^[=+\-@\t\r]/.test(text))text="'"+text;return '"'+text.replace(/"/g,'""')+'"'}
-  $('exportCsvBtn').addEventListener('click',()=>{const rows=[['Tur','Kod','Sana','Ism','Telefon','Hudud','Tuman','Yo‘nalish/Xona','Tadbir/G‘oya/Mazmun','Vaqt']];state.registrations.forEach(r=>rows.push(['Tadbir',r.code,r.date,r.name,r.phone,r.region,r.district,r.track,r.eventTitle,`${r.time} • ${r.place}`]));state.ideas.forEach(g=>rows.push(['G‘oya',g.code,g.createdAt,g.author,g.phone,g.region,g.district,g.track,`${g.title}: ${g.desc}`,g.support]));state.bookings.forEach(b=>rows.push(['Xona',b.code,b.date,b.name,b.phone,b.region,b.district,b.space,b.time,b.createdAt]));const blob=new Blob(['\uFEFF'+rows.map(row=>row.map(csvCell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='ytm_malumotlar.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+  $('exportCsvBtn').addEventListener('click',()=>{const rows=[['Tur','Kod','Sana','Ism','Telefon','Hudud','Tuman','Yo‘nalish/Xona','Tadbir/G‘oya/Mazmun','Vaqt']];state.registrations.forEach(r=>rows.push(['Tadbir',r.code,r.date,r.name,r.phone,r.region,r.district,r.track,r.eventTitle,`${r.time} • ${r.place}`]));state.ideas.forEach(g=>rows.push(['G‘oya',g.code,g.createdAt,g.author,g.phone,g.region,g.district,g.track,`${g.title}: ${g.desc}`,g.support]));state.bookings.forEach(b=>rows.push(['Xona',b.code,b.date,b.name,b.phone,b.region,b.district,b.space,b.time,b.createdAt]));const blob=new Blob(['\uFEFF'+rows.map(row=>row.map(csvCell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='ytm_malumotlar.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}function ensureAdminAddEventForm() {
+  if (!adminPanelCard || $('adminAddEventBox')) return;
+
+  const box = document.createElement('div');
+  box.id = 'adminAddEventBox';
+  box.style.marginTop = '16px';
+  box.style.paddingTop = '14px';
+  box.style.borderTop = '1px solid #e5e7eb';
+
+  box.innerHTML = `
+    <h4>Yangi tadbir qo‘shish</h4>
+    <div class="field">
+      <label for="newEvTitle">Tadbir nomi</label>
+      <input id="newEvTitle" type="text" placeholder="Masalan: Loyiha boshqaruvi seminari" />
+    </div>
+    <div class="field">
+      <label for="newEvTrack">Yo‘nalish</label>
+      <select id="newEvTrack">
+        <option value="YTM // TECH">YTM // TECH</option>
+        <option value="YTM // BIZNES">YTM // BIZNES</option>
+        <option value="YTM // KREATIV">YTM // KREATIV</option>
+        <option value="YTM // VOLONTYOR">YTM // VOLONTYOR</option>
+        <option value="YTM // KASB-TIL">YTM // KASB-TIL</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="newEvDate">Sana va vaqt</label>
+      <input id="newEvDate" type="text" placeholder="Masalan: 2026-12-05, 15:00" />
+    </div>
+    <div class="field">
+      <label for="newEvLoc">Joy / manzil</label>
+      <input id="newEvLoc" type="text" placeholder="Masalan: YTM asosiy zali" />
+    </div>
+    <div class="field">
+      <label for="newEvSeats">Joylar soni</label>
+      <input id="newEvSeats" type="number" min="1" value="30" />
+    </div>
+    <button id="addEventBtn" type="button">Tadbirni qo‘shish</button>
+    <p id="addEventMsg" style="margin-top:8px;font-size:13px;"></p>
+  `;
+
+  adminPanelCard.appendChild(box);
+}
+
+function refreshEventsUI() {
+  if (typeof renderHome === 'function') renderHome();
+  if (typeof renderTickets === 'function') renderTickets();
+  if (typeof populateEventSelect === 'function') populateEventSelect();
+  if (typeof renderAdminPanel === 'function') renderAdminPanel();
+  ensureAdminAddEventForm();
+}
+
+const origRenderAdminPanel = typeof renderAdminPanel === 'function' ? renderAdminPanel : null;
+if (origRenderAdminPanel) {
+  renderAdminPanel = function () {
+    origRenderAdminPanel();
+    ensureAdminAddEventForm();
+  };
+}
+
+document.addEventListener('click', (e) => {
+  if (e.target && e.target.id === 'addEventBtn') {
+    const title = ($('newEvTitle')?.value || '').trim();
+    const track = $('newEvTrack')?.value || 'YTM // TECH';
+    const dateTime = ($('newEvDate')?.value || '').trim();
+    const location = ($('newEvLoc')?.value || '').trim();
+    const seats = parseInt($('newEvSeats')?.value || '30', 10) || 30;
+    const msg = $('addEventMsg');
+
+    if (!title) {
+      if (msg) msg.textContent = "Iltimos, tadbir nomini kiriting!";
+      return;
+    }
+
+    const newEvent = {
+      id: 'ev-' + Date.now(),
+      track,
+      title,
+      date: dateTime,
+      location,
+      seats
+    };
+
+    if (!Array.isArray(state.events)) {
+      state.events = Array.isArray(EVENTS) ? [...EVENTS] : [];
+    }
+    state.events.push(newEvent);
+
+    if (typeof saveState === 'function') {
+      saveState();
+    } else {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    $('newEvTitle').value = '';
+    if ($('newEvDate')) $('newEvDate').value = '';
+    if ($('newEvLoc')) $('newEvLoc').value = '';
+    if (msg) msg.textContent = "Yangi tadbir qo‘shildi!";
+
+    refreshEventsUI();
+  }
+});
+    
   $('clearDataBtn').addEventListener('click',()=>{if(!confirm('Barcha arizalar, g‘oyalar va bandlovlar o‘chirilsinmi?'))return;state=freshState();saveState();renderHome();renderTickets();renderAdminPanel()});
   let deferredPrompt=null;const installBtn=$('installAppBtn');window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e});installBtn.addEventListener('click',async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null}else alert('Ilovani o‘rnatish uchun brauzer menyusidagi “Ilovani o‘rnatish” bandini tanlang.')});
   if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
