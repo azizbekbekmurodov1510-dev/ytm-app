@@ -652,14 +652,13 @@
             <div class="event-meta">
               <span>📅 ${esc(ev.date || 'Tez kunda')}</span>
               <span>📍 ${esc(ev.location || 'YTM markazi')}</span>
-              <span>💺 ${esc(ev.seats || 30)} joy</span>
-            </div>
+              <span>🪑 ${window.YtmSeats ? YtmSeats.getRemaining(ev) : (ev.seats || 30)} joy</span>
+              </div>
             <button class="btn-orange full join-ev-btn" type="button" data-ev-id="${esc(ev.id)}" data-track="${esc(ev.track)}">Ro'yxatdan o'tish</button>
           </div>
         `).join('')
       : '<div class="info-card"><div class="info-desc">Tanlangan yo‘nalishda hozircha tadbir yo‘q.</div></div>';
-
-    document.querySelectorAll('.join-ev-btn').forEach(btn => {
+ document.querySelectorAll('.join-ev-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         state.selectedTrack = btn.dataset.track;
         saveState();
@@ -678,17 +677,15 @@
         switchPage('register');
       });
     });
-
-    document.getElementById('newsList').innerHTML = state.news.map(n => `
+ document.getElementById('newsList').innerHTML = state.news.map(n => `
       <div class="info-card">
         <span class="pill-tag">${esc(n.tag)}</span>
         <div class="info-title">${esc(n.title)}</div>
         <div class="info-desc">${esc(n.desc)}</div>
       </div>
     `).join('');
-  }
-
-  document.getElementById('eventForm').addEventListener('submit', e => {
+  
+    document.getElementById('eventForm').addEventListener('submit', e => {
     e.preventDefault();
     const ev = state.events.find(item => item.id === document.getElementById('evSelect').value) || state.events[0];
     const code = 'YTM-' + Math.floor(1000 + Math.random() * 9000);
@@ -1041,5 +1038,6 @@
   renderTickets();
 })();
 </script>
-</body>
+  <script src="seats.js"></script>
+  </body>
 </html>
